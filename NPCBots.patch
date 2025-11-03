@@ -100439,7 +100439,7 @@ index ba9bbca063..f3c6c97eb9 100644
              sLFGMgr->LeaveLfg(group->GetGUID());
              group->Disband();
 diff --git a/src/server/game/Entities/Creature/Creature.cpp b/src/server/game/Entities/Creature/Creature.cpp
-index efa1c3216f..aa98dcf043 100644
+index cf2ee4acc5..b24ed7a6df 100644
 --- a/src/server/game/Entities/Creature/Creature.cpp
 +++ b/src/server/game/Entities/Creature/Creature.cpp
 @@ -57,6 +57,13 @@
@@ -100480,7 +100480,7 @@ index efa1c3216f..aa98dcf043 100644
      if (getDeathState() != CORPSE)
          return;
  
-@@ -663,6 +680,29 @@ void Creature::SetPhaseMask(uint32 newPhaseMask, bool update)
+@@ -662,6 +679,29 @@ void Creature::SetPhaseMask(uint32 newPhaseMask, bool update)
  
  void Creature::Update(uint32 diff)
  {
@@ -100510,7 +100510,7 @@ index efa1c3216f..aa98dcf043 100644
      if (IsAIEnabled() && m_triggerJustAppeared && m_deathState != DEAD)
      {
          if (m_respawnCompatibilityMode && m_vehicleKit)
-@@ -685,6 +725,10 @@ void Creature::Update(uint32 diff)
+@@ -684,6 +724,10 @@ void Creature::Update(uint32 diff)
              break;
          case DEAD:
          {
@@ -100521,7 +100521,7 @@ index efa1c3216f..aa98dcf043 100644
              if (!m_respawnCompatibilityMode)
              {
                  TC_LOG_ERROR("entities.unit", "Creature {} in wrong state: DEAD (3)", GetGUID().ToString());
-@@ -750,8 +794,21 @@ void Creature::Update(uint32 diff)
+@@ -749,8 +793,21 @@ void Creature::Update(uint32 diff)
                  else
                      m_groupLootTimer -= diff;
              }
@@ -100543,7 +100543,7 @@ index efa1c3216f..aa98dcf043 100644
                  RemoveCorpse(false);
                  TC_LOG_DEBUG("entities.unit", "Removing corpse... {} ", GetEntry());
              }
-@@ -763,6 +820,9 @@ void Creature::Update(uint32 diff)
+@@ -762,6 +819,9 @@ void Creature::Update(uint32 diff)
  
              // creature can be dead after Unit::Update call
              // CORPSE/DEAD state will processed at next tick (in other case death timer will be updated unexpectedly)
@@ -100553,7 +100553,7 @@ index efa1c3216f..aa98dcf043 100644
              if (!IsAlive())
                  break;
  
-@@ -816,6 +876,11 @@ void Creature::Update(uint32 diff)
+@@ -815,6 +875,11 @@ void Creature::Update(uint32 diff)
  
              Unit::AIUpdateTick(diff);
  
@@ -100565,7 +100565,7 @@ index efa1c3216f..aa98dcf043 100644
              // creature can be dead after UpdateAI call
              // CORPSE/DEAD state will processed at next tick (in other case death timer will be updated unexpectedly)
              if (!IsAlive())
-@@ -1001,6 +1066,11 @@ bool Creature::AIM_Create(CreatureAI* ai /*= nullptr*/)
+@@ -1000,6 +1065,11 @@ bool Creature::AIM_Create(CreatureAI* ai /*= nullptr*/)
  {
      Motion_Initialize();
  
@@ -100577,7 +100577,7 @@ index efa1c3216f..aa98dcf043 100644
      SetAI(ai ? ai : FactorySelector::SelectAI(this));
  
      return true;
-@@ -1275,7 +1345,16 @@ void Creature::SetLootRecipient(Unit* unit, bool withGroup)
+@@ -1271,7 +1341,16 @@ void Creature::SetLootRecipient(Unit* unit, bool withGroup)
      if (unit->GetTypeId() != TYPEID_PLAYER && !unit->IsVehicle())
          return;
  
@@ -100594,7 +100594,7 @@ index efa1c3216f..aa98dcf043 100644
      if (!player)                                             // normal creature, no player involved
          return;
  
-@@ -1288,6 +1367,11 @@ void Creature::SetLootRecipient(Unit* unit, bool withGroup)
+@@ -1284,6 +1363,11 @@ void Creature::SetLootRecipient(Unit* unit, bool withGroup)
      else
          m_lootRecipientGroup = ObjectGuid::Empty;
  
@@ -100606,7 +100606,7 @@ index efa1c3216f..aa98dcf043 100644
      SetDynamicFlag(UNIT_DYNFLAG_TAPPED);
  }
  
-@@ -1306,6 +1390,11 @@ bool Creature::isTappedBy(Player const* player) const
+@@ -1302,6 +1386,11 @@ bool Creature::isTappedBy(Player const* player) const
  
  void Creature::SaveToDB()
  {
@@ -100618,7 +100618,7 @@ index efa1c3216f..aa98dcf043 100644
      // this should only be used when the creature has already been loaded
      // preferably after adding to map, because mapid may not be valid otherwise
      CreatureData const* data = sObjectMgr->GetCreatureData(m_spawnId);
-@@ -1321,6 +1410,11 @@ void Creature::SaveToDB()
+@@ -1317,6 +1406,11 @@ void Creature::SaveToDB()
  
  void Creature::SaveToDB(uint32 mapid, uint8 spawnMask, uint32 phaseMask)
  {
@@ -100630,7 +100630,7 @@ index efa1c3216f..aa98dcf043 100644
      // update in loaded data
      if (!m_spawnId)
          m_spawnId = sObjectMgr->GenerateCreatureSpawnId();
-@@ -1634,6 +1728,11 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
+@@ -1630,6 +1724,11 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
          return false;
      }
  
@@ -100642,7 +100642,7 @@ index efa1c3216f..aa98dcf043 100644
      m_spawnId = spawnId;
  
      m_respawnCompatibilityMode = ((data->spawnGroupData->flags & SPAWNGROUP_FLAG_COMPATIBILITY_MODE) != 0);
-@@ -1649,6 +1748,11 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
+@@ -1645,6 +1744,11 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
  
      m_deathState = ALIVE;
  
@@ -100654,7 +100654,7 @@ index efa1c3216f..aa98dcf043 100644
      m_respawnTime = GetMap()->GetCreatureRespawnTime(m_spawnId);
  
      if (!m_respawnTime && !map->IsSpawnGroupActive(data->spawnGroupData->groupId))
-@@ -1698,6 +1802,24 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
+@@ -1694,6 +1798,24 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
  
      m_stringIds[AsUnderlyingType(StringIdType::Spawn)] = &data->StringId;
  
@@ -100679,7 +100679,7 @@ index efa1c3216f..aa98dcf043 100644
      if (addToMap && !GetMap()->AddToMap(this))
          return false;
      return true;
-@@ -1711,6 +1833,11 @@ void Creature::SetCanDualWield(bool value)
+@@ -1707,6 +1829,11 @@ void Creature::SetCanDualWield(bool value)
  
  void Creature::LoadEquipment(int8 id, bool force /*= true*/)
  {
@@ -100691,7 +100691,7 @@ index efa1c3216f..aa98dcf043 100644
      if (id == 0)
      {
          if (force)
-@@ -1857,6 +1984,11 @@ bool Creature::IsInvisibleDueToDespawn() const
+@@ -1853,6 +1980,11 @@ bool Creature::IsInvisibleDueToDespawn() const
      if (IsAlive() || isDying() || m_corpseRemoveTime > GameTime::GetGameTime())
          return false;
  
@@ -100703,7 +100703,7 @@ index efa1c3216f..aa98dcf043 100644
      return true;
  }
  
-@@ -1874,9 +2006,18 @@ bool Creature::CanStartAttack(Unit const* who, bool force) const
+@@ -1870,9 +2002,18 @@ bool Creature::CanStartAttack(Unit const* who, bool force) const
          return false;
  
      // This set of checks is should be done only for creatures
@@ -100722,7 +100722,7 @@ index efa1c3216f..aa98dcf043 100644
  
      // Do not attack non-combat pets
      if (who->GetTypeId() == TYPEID_UNIT && who->GetCreatureType() == CREATURE_TYPE_NON_COMBAT_PET)
-@@ -2062,6 +2203,11 @@ void Creature::setDeathState(DeathState s)
+@@ -2058,6 +2199,11 @@ void Creature::setDeathState(DeathState s)
  
  void Creature::Respawn(bool force)
  {
@@ -100734,7 +100734,7 @@ index efa1c3216f..aa98dcf043 100644
      if (force)
      {
          if (IsAlive())
-@@ -2125,6 +2271,11 @@ void Creature::Respawn(bool force)
+@@ -2121,6 +2267,11 @@ void Creature::Respawn(bool force)
  
  void Creature::ForcedDespawn(uint32 timeMSToDespawn, Seconds forceRespawnTimer)
  {
@@ -100746,7 +100746,7 @@ index efa1c3216f..aa98dcf043 100644
      if (timeMSToDespawn)
      {
          m_Events.AddEvent(new ForcedDespawnDelayEvent(*this, forceRespawnTimer), m_Events.CalculateTime(Milliseconds(timeMSToDespawn)));
-@@ -2392,6 +2543,11 @@ bool Creature::CanAssistTo(Unit const* u, Unit const* enemy, bool checkfaction /
+@@ -2388,6 +2539,11 @@ bool Creature::CanAssistTo(Unit const* u, Unit const* enemy, bool checkfaction /
      if (!GetCharmerOrOwnerGUID().IsEmpty())
          return false;
  
@@ -100758,7 +100758,7 @@ index efa1c3216f..aa98dcf043 100644
      // only from same creature faction
      if (checkfaction)
      {
-@@ -2451,6 +2607,12 @@ void Creature::SaveRespawnTime(uint32 forceDelay)
+@@ -2447,6 +2603,12 @@ void Creature::SaveRespawnTime(uint32 forceDelay)
          ri.type = SPAWN_TYPE_CREATURE;
          ri.spawnId = m_spawnId;
          ri.respawnTime = m_respawnTime;
@@ -100771,7 +100771,7 @@ index efa1c3216f..aa98dcf043 100644
          GetMap()->SaveRespawnInfoDB(ri);
          return;
      }
-@@ -2600,6 +2762,16 @@ void Creature::SendZoneUnderAttackMessage(Player* attacker)
+@@ -2588,6 +2750,16 @@ void Creature::SendZoneUnderAttackMessage(Player* attacker)
  
  uint32 Creature::GetShieldBlockValue() const                  //dunno mob block value
  {
@@ -100788,7 +100788,7 @@ index efa1c3216f..aa98dcf043 100644
      return (GetLevel()/2 + uint32(GetStat(STAT_STRENGTH)/20));
  }
  
-@@ -2658,6 +2830,17 @@ void Creature::UpdateMovementFlags()
+@@ -2646,6 +2818,17 @@ void Creature::UpdateMovementFlags()
      if (IsMovedByClient())
          return;
  
@@ -100806,7 +100806,7 @@ index efa1c3216f..aa98dcf043 100644
      // Creatures with CREATURE_FLAG_EXTRA_NO_MOVE_FLAGS_UPDATE should control MovementFlags in your own scripts
      if (GetCreatureTemplate()->flags_extra & CREATURE_FLAG_EXTRA_NO_MOVE_FLAGS_UPDATE)
          return;
-@@ -2708,6 +2891,11 @@ bool Creature::CanSwim() const
+@@ -2696,6 +2879,11 @@ bool Creature::CanSwim() const
      if (IsPet())
          return true;
  
@@ -100818,7 +100818,7 @@ index efa1c3216f..aa98dcf043 100644
      return false;
  }
  
-@@ -2732,6 +2920,11 @@ void Creature::RefreshCanSwimFlag(bool recheck)
+@@ -2720,6 +2908,11 @@ void Creature::RefreshCanSwimFlag(bool recheck)
  
  void Creature::AllLootRemovedFromCorpse()
  {
@@ -100830,7 +100830,7 @@ index efa1c3216f..aa98dcf043 100644
      if (loot.loot_type != LOOT_SKINNING && !IsPet() && GetCreatureTemplate()->SkinLootId && hasLootRecipient())
          if (LootTemplates_Skinning.HaveLootFor(GetCreatureTemplate()->SkinLootId))
              SetUnitFlag(UNIT_FLAG_SKINNABLE);
-@@ -3151,6 +3344,15 @@ void Creature::SetDisplayId(uint32 modelId)
+@@ -3021,6 +3214,15 @@ void Creature::SetDisplayId(uint32 modelId)
          SetBoundingRadius((IsPet() ? 1.0f : minfo->bounding_radius) * GetObjectScale());
          SetCombatReach((IsPet() ? DEFAULT_PLAYER_COMBAT_REACH : minfo->combat_reach) * GetObjectScale());
      }
@@ -100846,7 +100846,7 @@ index efa1c3216f..aa98dcf043 100644
  }
  
  void Creature::SetTarget(ObjectGuid guid)
-@@ -3250,6 +3452,13 @@ void Creature::ReleaseSpellFocus(Spell const* focusSpell, bool withDelay)
+@@ -3120,6 +3322,13 @@ void Creature::ReleaseSpellFocus(Spell const* focusSpell, bool withDelay)
          if (!HasUnitFlag2(UNIT_FLAG2_CANNOT_TURN))
              ReacquireSpellFocusTarget();
      }
@@ -100860,7 +100860,7 @@ index efa1c3216f..aa98dcf043 100644
      else // don't allow re-target right away to prevent visual bugs
          _spellFocusInfo.Delay = withDelay ? 1000 : 1;
  
-@@ -3425,3 +3634,388 @@ void Creature::ExitVehicle(Position const* /*exitPosition*/)
+@@ -3295,3 +3504,388 @@ void Creature::ExitVehicle(Position const* /*exitPosition*/)
      if (isInVehicle && IsAlive())
          SetHomePosition(GetPosition());
  }
@@ -101250,7 +101250,7 @@ index efa1c3216f..aa98dcf043 100644
 +}
 +//END NPCBOT
 diff --git a/src/server/game/Entities/Creature/Creature.h b/src/server/game/Entities/Creature/Creature.h
-index 85823112dd..c2fc3ba9c2 100644
+index e8c5a3e78e..93f1b6060d 100644
 --- a/src/server/game/Entities/Creature/Creature.h
 +++ b/src/server/game/Entities/Creature/Creature.h
 @@ -28,6 +28,12 @@
@@ -101266,7 +101266,7 @@ index 85823112dd..c2fc3ba9c2 100644
  class CreatureAI;
  class CreatureGroup;
  class Group;
-@@ -378,6 +384,86 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
+@@ -370,6 +376,86 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
  
          void ExitVehicle(Position const* exitPosition = nullptr) override;
  
@@ -101353,7 +101353,7 @@ index 85823112dd..c2fc3ba9c2 100644
      protected:
          bool CreateFromProto(ObjectGuid::LowType guidlow, uint32 entry, CreatureData const* data = nullptr, uint32 vehId = 0);
          bool InitEntry(uint32 entry, CreatureData const* data = nullptr);
-@@ -434,6 +520,11 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
+@@ -426,6 +512,11 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
          bool CanAlwaysSee(WorldObject const* obj) const override;
  
      private:
@@ -102179,7 +102179,7 @@ index 65b9fffc0f..458f769707 100644
          player->GiveXP(xp, _victim, _groupRate);
          if (Pet* pet = player->GetPet())
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 456353f801..d6e98f8753 100644
+index afb6a1f770..3cdb6104ce 100644
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -107,6 +107,11 @@
@@ -102508,7 +102508,7 @@ index 456353f801..d6e98f8753 100644
              return false;
      }
 diff --git a/src/server/game/Entities/Player/Player.h b/src/server/game/Entities/Player/Player.h
-index dd7d0cf12d..1b9005c4f3 100644
+index 4d8b0d01f2..6191294db5 100644
 --- a/src/server/game/Entities/Player/Player.h
 +++ b/src/server/game/Entities/Player/Player.h
 @@ -82,6 +82,10 @@ enum ItemClass : uint8;
@@ -102522,7 +102522,7 @@ index dd7d0cf12d..1b9005c4f3 100644
  typedef std::deque<Mail*> PlayerMails;
  
  #define PLAYER_MAX_SKILLS                       128
-@@ -2270,6 +2274,18 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
+@@ -2265,6 +2269,18 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
  
          std::string GetDebugInfo() const override;
  
@@ -102541,7 +102541,7 @@ index dd7d0cf12d..1b9005c4f3 100644
      protected:
          // Gamemaster whisper whitelist
          GuidList WhisperList;
-@@ -2517,6 +2533,14 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
+@@ -2512,6 +2528,14 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
          TimeTracker m_groupUpdateTimer;
  
      private:
@@ -102694,7 +102694,7 @@ index eb2a81d628..9580bc02a5 100644
          }
      }
 diff --git a/src/server/game/Entities/Unit/Unit.cpp b/src/server/game/Entities/Unit/Unit.cpp
-index acf02eabc0..6763cb082c 100644
+index 8a1ce0ec78..bf75b8de60 100644
 --- a/src/server/game/Entities/Unit/Unit.cpp
 +++ b/src/server/game/Entities/Unit/Unit.cpp
 @@ -84,6 +84,10 @@
@@ -103252,7 +103252,7 @@ index acf02eabc0..6763cb082c 100644
      else
          return const_cast<Player*>(ToPlayer());
  }
-@@ -6194,6 +6496,14 @@ void Unit::SetCharm(Unit* charm, bool apply)
+@@ -6188,6 +6490,14 @@ void Unit::SetCharm(Unit* charm, bool apply)
  
              player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_HIGHEST_HEAL_CAST, addhealth);
          }
@@ -103267,7 +103267,7 @@ index acf02eabc0..6763cb082c 100644
      }
  
      if (Player* player = victim->ToPlayer())
-@@ -6309,13 +6619,23 @@ Unit* Unit::GetNextRandomRaidMemberOrPet(float radius)
+@@ -6303,13 +6613,23 @@ Unit* Unit::GetNextRandomRaidMemberOrPet(float radius)
      else if (GetTypeId() == TYPEID_UNIT && IsPet())
          player = GetOwner()->ToPlayer();
  
@@ -103291,7 +103291,7 @@ index acf02eabc0..6763cb082c 100644
          if (player != this)
              return IsWithinDistInMap(player, radius) ? player : nullptr;
          Unit* pet = GetGuardianPet();
-@@ -6343,6 +6663,17 @@ Unit* Unit::GetNextRandomRaidMemberOrPet(float radius)
+@@ -6337,6 +6657,17 @@ Unit* Unit::GetNextRandomRaidMemberOrPet(float radius)
                  nearMembers.push_back(pet);
          }
  
@@ -103309,7 +103309,7 @@ index acf02eabc0..6763cb082c 100644
      if (nearMembers.empty())
          return nullptr;
  
-@@ -6437,7 +6768,13 @@ void Unit::SendEnergizeSpellLog(Unit* victim, uint32 spellId, int32 damage, Powe
+@@ -6431,7 +6762,13 @@ void Unit::SendEnergizeSpellLog(Unit* victim, uint32 spellId, int32 damage, Powe
  void Unit::EnergizeBySpell(Unit* victim, uint32 spellId, int32 damage, Powers powerType)
  {
      if (SpellInfo const* info = sSpellMgr->GetSpellInfo(spellId))
@@ -103323,7 +103323,7 @@ index acf02eabc0..6763cb082c 100644
  }
  
  void Unit::EnergizeBySpell(Unit* victim, SpellInfo const* spellInfo, int32 damage, Powers powerType)
-@@ -6608,6 +6945,11 @@ float Unit::SpellDamagePctDone(Unit* victim, SpellInfo const* spellProto, Damage
+@@ -6602,6 +6939,11 @@ float Unit::SpellDamagePctDone(Unit* victim, SpellInfo const* spellProto, Damage
      // Done total percent damage auras
      float DoneTotalMod = 1.0f;
  
@@ -103335,7 +103335,7 @@ index acf02eabc0..6763cb082c 100644
      // Pet damage?
      if (GetTypeId() == TYPEID_UNIT && !IsPet())
          DoneTotalMod *= ToCreature()->GetSpellDamageMod(ToCreature()->GetCreatureTemplate()->rank);
-@@ -6949,6 +7291,11 @@ uint32 Unit::SpellDamageBonusTaken(Unit* caster, SpellInfo const* spellProto, ui
+@@ -6943,6 +7285,11 @@ uint32 Unit::SpellDamageBonusTaken(Unit* caster, SpellInfo const* spellProto, ui
          // multiplicative bonus, for example Dispersion + Shadowform (0.10*0.85=0.085)
          TakenTotalMod *= GetTotalAuraMultiplierByMiscMask(SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN, spellProto->GetSchoolMask());
  
@@ -103347,7 +103347,7 @@ index acf02eabc0..6763cb082c 100644
          // From caster spells
          if (caster)
          {
-@@ -6985,6 +7332,11 @@ int32 Unit::SpellBaseDamageBonusDone(SpellSchoolMask schoolMask) const
+@@ -6979,6 +7326,11 @@ int32 Unit::SpellBaseDamageBonusDone(SpellSchoolMask schoolMask) const
  {
      int32 DoneAdvertisedBenefit = GetTotalAuraModifierByMiscMask(SPELL_AURA_MOD_DAMAGE_DONE, schoolMask);
  
@@ -103359,7 +103359,7 @@ index acf02eabc0..6763cb082c 100644
      if (GetTypeId() == TYPEID_PLAYER)
      {
          // Base value
-@@ -7013,6 +7365,9 @@ float Unit::SpellCritChanceDone(SpellInfo const* spellInfo, SpellSchoolMask scho
+@@ -7007,6 +7359,9 @@ float Unit::SpellCritChanceDone(SpellInfo const* spellInfo, SpellSchoolMask scho
  {
      //! Mobs can't crit with spells. (Except player controlled)
      if (GetTypeId() == TYPEID_UNIT && !GetSpellModOwner())
@@ -103369,7 +103369,7 @@ index acf02eabc0..6763cb082c 100644
          return 0.0f;
  
      // not critting spell
-@@ -7248,6 +7603,11 @@ float Unit::SpellCritChanceTaken(Unit const* caster, SpellInfo const* spellInfo,
+@@ -7242,6 +7597,11 @@ float Unit::SpellCritChanceTaken(Unit const* caster, SpellInfo const* spellInfo,
          });
      }
  
@@ -103381,7 +103381,7 @@ index acf02eabc0..6763cb082c 100644
      return std::max(crit_chance, 0.0f);
  }
  
-@@ -7469,6 +7829,11 @@ uint32 Unit::SpellHealingBonusDone(Unit* victim, SpellInfo const* spellProto, ui
+@@ -7463,6 +7823,11 @@ uint32 Unit::SpellHealingBonusDone(Unit* victim, SpellInfo const* spellProto, ui
      if (Player* modOwner = GetSpellModOwner())
          modOwner->ApplySpellMod(spellProto->Id, damagetype == DOT ? SPELLMOD_DOT : SPELLMOD_DAMAGE, heal);
  
@@ -103393,7 +103393,7 @@ index acf02eabc0..6763cb082c 100644
      return uint32(std::max(heal, 0.0f));
  }
  
-@@ -7609,6 +7974,11 @@ int32 Unit::SpellBaseHealingBonusDone(SpellSchoolMask schoolMask) const
+@@ -7603,6 +7968,11 @@ int32 Unit::SpellBaseHealingBonusDone(SpellSchoolMask schoolMask) const
          return false;
      });
  
@@ -103405,7 +103405,7 @@ index acf02eabc0..6763cb082c 100644
      // Healing bonus of spirit, intellect and strength
      if (GetTypeId() == TYPEID_PLAYER)
      {
-@@ -8051,6 +8421,11 @@ uint32 Unit::MeleeDamageBonusTaken(Unit* attacker, uint32 pdamage, WeaponAttackT
+@@ -8045,6 +8415,11 @@ uint32 Unit::MeleeDamageBonusTaken(Unit* attacker, uint32 pdamage, WeaponAttackT
      // ..taken
      TakenTotalMod *= GetTotalAuraMultiplierByMiscMask(SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN, attacker->GetMeleeDamageSchoolMask());
  
@@ -103417,7 +103417,7 @@ index acf02eabc0..6763cb082c 100644
      // .. taken pct (special attacks)
      if (spellProto)
      {
-@@ -8185,6 +8560,25 @@ void Unit::Mount(uint32 mount, uint32 VehicleId, uint32 creatureEntry)
+@@ -8179,6 +8554,25 @@ void Unit::Mount(uint32 mount, uint32 VehicleId, uint32 creatureEntry)
  
      SetUnitFlag(UNIT_FLAG_MOUNT);
  
@@ -103443,7 +103443,7 @@ index acf02eabc0..6763cb082c 100644
      if (Player* player = ToPlayer())
      {
          // mount as a vehicle
-@@ -8244,6 +8638,19 @@ void Unit::Dismount()
+@@ -8238,6 +8632,19 @@ void Unit::Dismount()
      SendMessageToSet(&data, true);
  
      // dismount as a vehicle
@@ -103463,7 +103463,7 @@ index acf02eabc0..6763cb082c 100644
      if (GetTypeId() == TYPEID_PLAYER && GetVehicleKit())
      {
          // Send other players that we are no longer a vehicle
-@@ -8325,6 +8732,14 @@ void Unit::SetImmuneToPC(bool apply, bool keepCombat)
+@@ -8319,6 +8726,14 @@ void Unit::SetImmuneToPC(bool apply, bool keepCombat)
              for (auto const& pair : m_combatManager.GetPvPCombatRefs())
                  if (pair.second->GetOther(this)->HasUnitFlag(UNIT_FLAG_PLAYER_CONTROLLED))
                      toEnd.push_back(pair.second);
@@ -103478,7 +103478,7 @@ index acf02eabc0..6763cb082c 100644
              for (CombatReference* ref : toEnd)
                  ref->EndCombat();
          }
-@@ -8348,6 +8763,9 @@ void Unit::SetImmuneToNPC(bool apply, bool keepCombat)
+@@ -8342,6 +8757,9 @@ void Unit::SetImmuneToNPC(bool apply, bool keepCombat)
              for (auto const& pair : m_combatManager.GetPvPCombatRefs())
                  if (!pair.second->GetOther(this)->HasUnitFlag(UNIT_FLAG_PLAYER_CONTROLLED))
                      toEnd.push_back(pair.second);
@@ -103488,7 +103488,7 @@ index acf02eabc0..6763cb082c 100644
              for (CombatReference* ref : toEnd)
                  ref->EndCombat();
          }
-@@ -8488,6 +8906,11 @@ bool Unit::IsAlwaysVisibleFor(WorldObject const* seer) const
+@@ -8482,6 +8900,11 @@ bool Unit::IsAlwaysVisibleFor(WorldObject const* seer) const
                  if (ownerPlayer->IsGroupVisibleFor(seerPlayer))
                      return true;
  
@@ -103500,7 +103500,7 @@ index acf02eabc0..6763cb082c 100644
      return false;
  }
  
-@@ -8641,6 +9064,20 @@ void Unit::UpdateSpeed(UnitMoveType mtype)
+@@ -8635,6 +9058,20 @@ void Unit::UpdateSpeed(UnitMoveType mtype)
                  }
              }
          }
@@ -103521,7 +103521,7 @@ index acf02eabc0..6763cb082c 100644
      }
  
      // Apply strongest slow aura mod to speed
-@@ -8799,7 +9236,45 @@ void Unit::AtTargetAttacked(Unit* target, bool canInitialAggro)
+@@ -8793,7 +9230,45 @@ void Unit::AtTargetAttacked(Unit* target, bool canInitialAggro)
          myPlayerOwner->UpdatePvP(true);
          myPlayerOwner->SetContestedPvP(targetPlayerOwner);
          myPlayerOwner->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_ENTER_PVP_COMBAT);
@@ -103567,7 +103567,7 @@ index acf02eabc0..6763cb082c 100644
  }
  
  void Unit::UpdatePetCombatState()
-@@ -8866,6 +9341,12 @@ bool Unit::ApplyDiminishingToDuration(SpellInfo const* auraSpellInfo, bool trigg
+@@ -8860,6 +9335,12 @@ bool Unit::ApplyDiminishingToDuration(SpellInfo const* auraSpellInfo, bool trigg
  
          if (target->IsAffectedByDiminishingReturns() && source->GetTypeId() == TYPEID_PLAYER)
              duration = limitDuration;
@@ -103580,7 +103580,7 @@ index acf02eabc0..6763cb082c 100644
      }
  
      float mod = 1.0f;
-@@ -8942,6 +9423,17 @@ uint32 Unit::GetCreatureType() const
+@@ -8936,6 +9417,17 @@ uint32 Unit::GetCreatureType() const
              return raceEntry->CreatureType;
          }
      }
@@ -103598,7 +103598,7 @@ index acf02eabc0..6763cb082c 100644
      else
          return ToCreature()->GetCreatureTemplate()->type;
  }
-@@ -9328,6 +9820,11 @@ float Unit::GetWeaponDamageRange(WeaponAttackType attType, WeaponDamageRange typ
+@@ -9322,6 +9814,11 @@ float Unit::GetWeaponDamageRange(WeaponAttackType attType, WeaponDamageRange typ
  
  bool Unit::CanFreeMove() const
  {
@@ -103610,7 +103610,7 @@ index acf02eabc0..6763cb082c 100644
      return !HasUnitState(UNIT_STATE_CONFUSED | UNIT_STATE_FLEEING | UNIT_STATE_IN_FLIGHT |
          UNIT_STATE_ROOT | UNIT_STATE_STUNNED | UNIT_STATE_DISTRACTED);
  }
-@@ -9347,6 +9844,13 @@ void Unit::SetLevel(uint8 lvl, bool sendUpdate/* = true*/)
+@@ -9341,6 +9838,13 @@ void Unit::SetLevel(uint8 lvl, bool sendUpdate/* = true*/)
  
          sCharacterCache->UpdateCharacterLevel(GetGUID(), lvl);
      }
@@ -103624,7 +103624,7 @@ index acf02eabc0..6763cb082c 100644
  }
  
  void Unit::SetHealth(uint32 val)
-@@ -9379,6 +9883,22 @@ void Unit::SetHealth(uint32 val)
+@@ -9373,6 +9877,22 @@ void Unit::SetHealth(uint32 val)
                  owner->ToPlayer()->SetGroupUpdateFlag(GROUP_UPDATE_FLAG_PET_CUR_HP);
          }
      }
@@ -103647,7 +103647,7 @@ index acf02eabc0..6763cb082c 100644
  }
  
  void Unit::SetMaxHealth(uint32 val)
-@@ -9404,6 +9924,22 @@ void Unit::SetMaxHealth(uint32 val)
+@@ -9398,6 +9918,22 @@ void Unit::SetMaxHealth(uint32 val)
                  owner->ToPlayer()->SetGroupUpdateFlag(GROUP_UPDATE_FLAG_PET_MAX_HP);
          }
      }
@@ -103670,7 +103670,7 @@ index acf02eabc0..6763cb082c 100644
  
      if (val < health)
          SetHealth(val);
-@@ -9448,6 +9984,22 @@ void Unit::SetPower(Powers power, uint32 val, bool withPowerUpdate /*= true*/, b
+@@ -9442,6 +9978,22 @@ void Unit::SetPower(Powers power, uint32 val, bool withPowerUpdate /*= true*/, b
          if (pet->getPetType() == HUNTER_PET && power == POWER_HAPPINESS)
              pet->UpdateDamagePhysical(BASE_ATTACK);
      }
@@ -103693,7 +103693,7 @@ index acf02eabc0..6763cb082c 100644
  }
  
  void Unit::SetMaxPower(Powers power, uint32 val)
-@@ -9470,6 +10022,22 @@ void Unit::SetMaxPower(Powers power, uint32 val)
+@@ -9464,6 +10016,22 @@ void Unit::SetMaxPower(Powers power, uint32 val)
                  owner->ToPlayer()->SetGroupUpdateFlag(GROUP_UPDATE_FLAG_PET_MAX_POWER);
          }
      }
@@ -103716,7 +103716,7 @@ index acf02eabc0..6763cb082c 100644
  
      if (val < cur_power)
          SetPower(power, val);
-@@ -10128,6 +10696,13 @@ void Unit::ProcSkillsAndReactives(bool isVictim, Unit* procTarget, uint32 typeMa
+@@ -10122,6 +10690,13 @@ void Unit::ProcSkillsAndReactives(bool isVictim, Unit* procTarget, uint32 typeMa
                      ModifyAuraState(AURA_STATE_DEFENSE, true);
                      StartReactiveTimer(REACTIVE_DEFENSE);
                  }
@@ -103730,7 +103730,7 @@ index acf02eabc0..6763cb082c 100644
              }
              else // For attacker
              {
-@@ -10142,6 +10717,15 @@ void Unit::ProcSkillsAndReactives(bool isVictim, Unit* procTarget, uint32 typeMa
+@@ -10136,6 +10711,15 @@ void Unit::ProcSkillsAndReactives(bool isVictim, Unit* procTarget, uint32 typeMa
                      AddComboPoints(procTarget, 1);
                      StartReactiveTimer(REACTIVE_WOLVERINE_BITE);
                  }
@@ -103746,7 +103746,7 @@ index acf02eabc0..6763cb082c 100644
              }
          }
      }
-@@ -10510,6 +11094,13 @@ void Unit::SendComboPoints()
+@@ -10504,6 +11088,13 @@ void Unit::SendComboPoints()
      Player* owner = nullptr;
      if (ownerGuid.IsPlayer())
          owner = ObjectAccessor::GetPlayer(*this, ownerGuid);
@@ -103760,7 +103760,7 @@ index acf02eabc0..6763cb082c 100644
      if (movingMe || owner)
      {
          WorldPacket data;
-@@ -10530,6 +11121,32 @@ void Unit::ClearComboPointHolders()
+@@ -10524,6 +11115,32 @@ void Unit::ClearComboPointHolders()
          (*m_ComboPointHolders.begin())->ClearComboPoints(); // this also removes it from m_comboPointHolders
  }
  
@@ -103793,7 +103793,7 @@ index acf02eabc0..6763cb082c 100644
  void Unit::ClearAllReactives()
  {
      for (uint8 i = 0; i < MAX_REACTIVE; ++i)
-@@ -10659,6 +11276,9 @@ uint32 Unit::GetCastingTimeForBonus(SpellInfo const* spellProto, DamageEffectTyp
+@@ -10653,6 +11270,9 @@ uint32 Unit::GetCastingTimeForBonus(SpellInfo const* spellProto, DamageEffectTyp
  {
      // Not apply this to creature cast spells with casttime == 0
      if (CastingTime == 0 && GetTypeId() == TYPEID_UNIT && !IsPet())
@@ -103803,7 +103803,7 @@ index acf02eabc0..6763cb082c 100644
          return 3500;
  
      if (CastingTime > 7000) CastingTime = 7000;
-@@ -10772,6 +11392,28 @@ void Unit::UpdateAuraForGroup(uint8 slot)
+@@ -10766,6 +11386,28 @@ void Unit::UpdateAuraForGroup(uint8 slot)
              }
          }
      }
@@ -103832,7 +103832,7 @@ index acf02eabc0..6763cb082c 100644
  }
  
  void Unit::SetCantProc(bool apply)
-@@ -10937,6 +11579,11 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
+@@ -10931,6 +11573,11 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
  
      // find player: owner of controlled `this` or `this` itself maybe
      Player* player = nullptr;
@@ -103844,7 +103844,7 @@ index acf02eabc0..6763cb082c 100644
      if (attacker)
          player = attacker->GetCharmerOrOwnerPlayerOrPlayerItself();
  
-@@ -11035,6 +11682,11 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
+@@ -11029,6 +11676,11 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
              if (creature->GetLootMode() > 0)
                  loot->generateMoneyLoot(creature->GetCreatureTemplate()->mingold, creature->GetCreatureTemplate()->maxgold);
  
@@ -103856,7 +103856,7 @@ index acf02eabc0..6763cb082c 100644
              if (group)
              {
                  if (hasLooterGuid)
-@@ -11051,6 +11703,11 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
+@@ -11045,6 +11697,11 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
          player->RewardPlayerAndGroupAtKill(victim, false);
      }
  
@@ -103868,7 +103868,7 @@ index acf02eabc0..6763cb082c 100644
      // Do KILL and KILLED procs. KILL proc is called only for the unit who landed the killing blow (and its owner - for pets and totems) regardless of who tapped the victim
      if (attacker && (attacker->IsPet() || attacker->IsTotem()))
      {
-@@ -11118,6 +11775,12 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
+@@ -11112,6 +11769,12 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
          // at original death (not at SpiritOfRedemtionTalent timeout)
          plrVictim->SetPvPDeath(player != nullptr);
  
@@ -103881,7 +103881,7 @@ index acf02eabc0..6763cb082c 100644
          // only if not player and not controlled by player pet. And not at BG
          if ((durabilityLoss && !player && !victim->ToPlayer()->InBattleground()) || (player && sWorld->getBoolConfig(CONFIG_DURABILITY_LOSS_IN_PVP)))
          {
-@@ -11220,6 +11883,10 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
+@@ -11214,6 +11877,10 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
          {
              if (Player* playerVictim = victim->ToPlayer())
                  bg->HandleKillPlayer(playerVictim, player);
@@ -103892,7 +103892,7 @@ index acf02eabc0..6763cb082c 100644
              else
                  bg->HandleKillUnit(victim->ToCreature(), player);
          }
-@@ -11248,6 +11915,14 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
+@@ -11242,6 +11909,14 @@ bool Unit::InitTamedPet(Pet* pet, uint8 level, uint32 spell_id)
          {
              if (Player* killed = victim->ToPlayer())
                  sScriptMgr->OnPlayerKilledByCreature(killerCre, killed);
@@ -103907,7 +103907,7 @@ index acf02eabc0..6763cb082c 100644
          }
      }
  }
-@@ -11869,6 +12544,17 @@ bool Unit::IsInPartyWith(Unit const* unit) const
+@@ -11870,6 +12545,17 @@ bool Unit::IsInPartyWith(Unit const* unit) const
          (u1->GetTypeId() == TYPEID_PLAYER && u2->GetTypeId() == TYPEID_UNIT && u2->ToCreature()->GetCreatureTemplate()->type_flags & CREATURE_TYPE_FLAG_TREAT_AS_RAID_UNIT))
          return true;
  
@@ -103925,7 +103925,7 @@ index acf02eabc0..6763cb082c 100644
      return u1->GetTypeId() == TYPEID_UNIT && u2->GetTypeId() == TYPEID_UNIT && u1->GetFaction() == u2->GetFaction();
  }
  
-@@ -11887,6 +12573,16 @@ bool Unit::IsInRaidWith(Unit const* unit) const
+@@ -11888,6 +12574,16 @@ bool Unit::IsInRaidWith(Unit const* unit) const
      else if ((u2->GetTypeId() == TYPEID_PLAYER && u1->GetTypeId() == TYPEID_UNIT && u1->ToCreature()->GetCreatureTemplate()->type_flags & CREATURE_TYPE_FLAG_TREAT_AS_RAID_UNIT) ||
              (u1->GetTypeId() == TYPEID_PLAYER && u2->GetTypeId() == TYPEID_UNIT && u2->ToCreature()->GetCreatureTemplate()->type_flags & CREATURE_TYPE_FLAG_TREAT_AS_RAID_UNIT))
          return true;
@@ -103942,7 +103942,7 @@ index acf02eabc0..6763cb082c 100644
  
      return u1->GetTypeId() == TYPEID_UNIT && u2->GetTypeId() == TYPEID_UNIT && u1->GetFaction() == u2->GetFaction();
  }
-@@ -11898,9 +12594,21 @@ void Unit::GetPartyMembers(std::list<Unit*> &TagUnitMap)
+@@ -11899,9 +12595,21 @@ void Unit::GetPartyMembers(std::list<Unit*> &TagUnitMap)
      if (owner->GetTypeId() == TYPEID_PLAYER)
          group = owner->ToPlayer()->GetGroup();
  
@@ -103964,7 +103964,7 @@ index acf02eabc0..6763cb082c 100644
  
          for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
          {
-@@ -11917,6 +12625,14 @@ void Unit::GetPartyMembers(std::list<Unit*> &TagUnitMap)
+@@ -11918,6 +12626,14 @@ void Unit::GetPartyMembers(std::list<Unit*> &TagUnitMap)
                          TagUnitMap.push_back(pet);
              }
          }
@@ -103979,7 +103979,7 @@ index acf02eabc0..6763cb082c 100644
      }
      else
      {
-@@ -11925,6 +12641,18 @@ void Unit::GetPartyMembers(std::list<Unit*> &TagUnitMap)
+@@ -11926,6 +12642,18 @@ void Unit::GetPartyMembers(std::list<Unit*> &TagUnitMap)
          if (Guardian* pet = owner->GetGuardianPet())
              if ((pet == this || IsInMap(pet)) && pet->IsAlive())
                  TagUnitMap.push_back(pet);
@@ -103998,7 +103998,7 @@ index acf02eabc0..6763cb082c 100644
      }
  }
  
-@@ -11953,6 +12681,10 @@ Aura* Unit::AddAura(uint32 spellId, Unit* target)
+@@ -11954,6 +12682,10 @@ Aura* Unit::AddAura(uint32 spellId, Unit* target)
      if (!spellInfo)
          return nullptr;
  
@@ -104009,7 +104009,7 @@ index acf02eabc0..6763cb082c 100644
      return AddAura(spellInfo, MAX_EFFECT_MASK, target);
  }
  
-@@ -12009,6 +12741,11 @@ void Unit::SendPlaySpellVisualKit(uint32 id, uint32 type) const
+@@ -12010,6 +12742,11 @@ void Unit::SendPlaySpellVisualKit(uint32 id, uint32 type) const
  
  bool Unit::CanApplyResilience() const
  {
@@ -104021,7 +104021,7 @@ index acf02eabc0..6763cb082c 100644
      return !IsVehicle() && GetOwnerGUID().IsPlayer();
  }
  
-@@ -12085,12 +12822,27 @@ int32 Unit::CalculateAOEAvoidance(int32 damage, uint32 schoolMask, ObjectGuid co
+@@ -12086,12 +12823,27 @@ int32 Unit::CalculateAOEAvoidance(int32 damage, uint32 schoolMask, ObjectGuid co
  float Unit::MeleeSpellMissChance(Unit const* victim, WeaponAttackType attType, int32 skillDiff, uint32 spellId) const
  {
      SpellInfo const* spellInfo = spellId ? sSpellMgr->GetSpellInfo(spellId) : nullptr;
@@ -104049,7 +104049,7 @@ index acf02eabc0..6763cb082c 100644
      // Check if dual wielding, add additional miss penalty - when mainhand has on next swing spell, offhand doesnt suffer penalty
      if (!spellId && haveOffhandWeapon() && attType != RANGED_ATTACK && !m_currentSpells[CURRENT_MELEE_SPELL])
          missChance += 19.0f;
-@@ -12147,6 +12899,11 @@ void Unit::SetPhaseMask(uint32 newPhaseMask, bool update)
+@@ -12148,6 +12900,11 @@ void Unit::SetPhaseMask(uint32 newPhaseMask, bool update)
              if ((*itr)->GetTypeId() == TYPEID_UNIT)
                  (*itr)->SetPhaseMask(newPhaseMask, true);
  
@@ -104061,7 +104061,7 @@ index acf02eabc0..6763cb082c 100644
          for (uint8 i = 0; i < MAX_SUMMON_SLOT; ++i)
              if (!m_SummonSlot[i].IsEmpty())
                  if (Creature* summon = GetMap()->GetCreature(m_SummonSlot[i]))
-@@ -12205,6 +12962,10 @@ float Unit::GetCombatRatingReduction(CombatRating cr) const
+@@ -12206,6 +12963,10 @@ float Unit::GetCombatRatingReduction(CombatRating cr) const
  {
      if (Player const* player = ToPlayer())
          return player->GetRatingBonusValue(cr);
@@ -104072,7 +104072,7 @@ index acf02eabc0..6763cb082c 100644
      // Player's pet get resilience from owner
      else if (IsPet() && GetOwner())
          if (Player* owner = GetOwner()->ToPlayer())
-@@ -12410,6 +13171,183 @@ uint32 Unit::GetModelForForm(ShapeshiftForm form, uint32 spellId) const
+@@ -12411,6 +13172,183 @@ uint32 Unit::GetModelForForm(ShapeshiftForm form, uint32 spellId) const
                  break;
          }
      }
@@ -104256,7 +104256,7 @@ index acf02eabc0..6763cb082c 100644
  
      uint32 modelid = 0;
      SpellShapeshiftFormEntry const* formEntry = sSpellShapeshiftFormStore.LookupEntry(form);
-@@ -12909,6 +13847,11 @@ bool Unit::UpdatePosition(float x, float y, float z, float orientation, bool tel
+@@ -12910,6 +13848,11 @@ bool Unit::UpdatePosition(float x, float y, float z, float orientation, bool tel
  
      UpdatePositionData();
  
@@ -104268,7 +104268,7 @@ index acf02eabc0..6763cb082c 100644
      _positionUpdateInfo.Relocated = relocated;
      _positionUpdateInfo.Turned = turn;
  
-@@ -13099,6 +14042,19 @@ void Unit::StopAttackFaction(uint32 faction_id)
+@@ -13100,6 +14043,19 @@ void Unit::StopAttackFaction(uint32 faction_id)
  
      for (Unit* minion : m_Controlled)
          minion->StopAttackFaction(faction_id);
@@ -104288,7 +104288,7 @@ index acf02eabc0..6763cb082c 100644
  }
  
  void Unit::OutDebugInfo() const
-@@ -13422,6 +14378,10 @@ void Unit::BuildValuesUpdate(uint8 updateType, ByteBuffer* data, Player const* t
+@@ -13601,6 +14557,10 @@ void Unit::BuildValuesUpdate(uint8 updateType, ByteBuffer* data, Player const* t
  
      if (plr && plr->IsInSameRaidWith(target))
          visibleFlag |= UF_FLAG_PARTY_MEMBER;
@@ -104299,7 +104299,7 @@ index acf02eabc0..6763cb082c 100644
  
      Creature const* creature = ToCreature();
      for (uint16 index = 0; index < m_valuesCount; ++index)
-@@ -13546,6 +14506,24 @@ void Unit::BuildValuesUpdate(uint8 updateType, ByteBuffer* data, Player const* t
+@@ -13725,6 +14685,24 @@ void Unit::BuildValuesUpdate(uint8 updateType, ByteBuffer* data, Player const* t
                      else
                          fieldBuffer << m_uint32Values[index];
                  }
@@ -104325,7 +104325,7 @@ index acf02eabc0..6763cb082c 100644
                      fieldBuffer << m_uint32Values[index];
              }
 diff --git a/src/server/game/Entities/Unit/Unit.h b/src/server/game/Entities/Unit/Unit.h
-index 8f4ed233ab..4bbf5a0d49 100644
+index f22c050002..1ab62277b3 100644
 --- a/src/server/game/Entities/Unit/Unit.h
 +++ b/src/server/game/Entities/Unit/Unit.h
 @@ -317,7 +317,7 @@ struct PlayerMovementPendingChange
@@ -106100,10 +106100,10 @@ index 4fdae221e4..be832140f1 100644
      float max_height = -Movement::computeFallElevation(moveTimeHalf, false, -speedZ);
  
 diff --git a/src/server/game/Movement/MovementGenerators/FollowMovementGenerator.cpp b/src/server/game/Movement/MovementGenerators/FollowMovementGenerator.cpp
-index ee789dc97d..46ec459508 100644
+index 6a66c7ddb9..8cd31b197d 100644
 --- a/src/server/game/Movement/MovementGenerators/FollowMovementGenerator.cpp
 +++ b/src/server/game/Movement/MovementGenerators/FollowMovementGenerator.cpp
-@@ -198,4 +198,16 @@ void FollowMovementGenerator::UpdatePetSpeed(Unit* owner)
+@@ -195,4 +195,16 @@ void FollowMovementGenerator::UpdatePetSpeed(Unit* owner)
              oPet->UpdateSpeed(MOVE_SWIM);
          }
      }
