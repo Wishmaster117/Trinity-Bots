@@ -96866,7 +96866,7 @@ index 1aaf613cda..29021bbe01 100644
          void UpdateArenaWorldState();
  
 diff --git a/src/server/game/Battlegrounds/Battleground.cpp b/src/server/game/Battlegrounds/Battleground.cpp
-index ceca3109b0..8776f9379f 100644
+index 402275b5cf..3d25368439 100644
 --- a/src/server/game/Battlegrounds/Battleground.cpp
 +++ b/src/server/game/Battlegrounds/Battleground.cpp
 @@ -43,6 +43,12 @@
@@ -97356,7 +97356,7 @@ index ceca3109b0..8776f9379f 100644
              Player* player = ObjectAccessor::FindPlayer(*itr);
              if (!player)
                  continue;
-@@ -1702,6 +2027,55 @@ void Battleground::HandleKillPlayer(Player* victim, Player* killer)
+@@ -1701,6 +2026,55 @@ void Battleground::HandleKillPlayer(Player* victim, Player* killer)
              if (creditedPlayer->GetTeam() == killer->GetTeam() && creditedPlayer->IsAtGroupRewardDistance(victim))
                  UpdatePlayerScore(creditedPlayer, SCORE_HONORABLE_KILLS, 1);
          }
@@ -97412,7 +97412,7 @@ index ceca3109b0..8776f9379f 100644
      }
  
      if (!isArena())
-@@ -1711,6 +2085,100 @@ void Battleground::HandleKillPlayer(Player* victim, Player* killer)
+@@ -1710,6 +2084,100 @@ void Battleground::HandleKillPlayer(Player* victim, Player* killer)
          RewardXPAtKill(killer, victim);
      }
  }
@@ -97513,7 +97513,7 @@ index ceca3109b0..8776f9379f 100644
  
  // Return the player's team based on battlegroundplayer info
  // Used in same faction arena matches mainly
-@@ -1729,6 +2197,14 @@ uint32 Battleground::GetOtherTeam(uint32 teamId) const
+@@ -1728,6 +2196,14 @@ uint32 Battleground::GetOtherTeam(uint32 teamId) const
  
  bool Battleground::IsPlayerInBattleground(ObjectGuid guid) const
  {
@@ -97528,7 +97528,7 @@ index ceca3109b0..8776f9379f 100644
      BattlegroundPlayerMap::const_iterator itr = m_Players.find(guid);
      if (itr != m_Players.end())
          return true;
-@@ -1756,6 +2232,17 @@ void Battleground::PlayerAddedToBGCheckIfBGIsRunning(Player* player)
+@@ -1755,6 +2231,17 @@ void Battleground::PlayerAddedToBGCheckIfBGIsRunning(Player* player)
  uint32 Battleground::GetAlivePlayersCountByTeam(uint32 Team) const
  {
      int count = 0;
@@ -97546,7 +97546,7 @@ index ceca3109b0..8776f9379f 100644
      for (BattlegroundPlayerMap::const_iterator itr = m_Players.begin(); itr != m_Players.end(); ++itr)
      {
          if (itr->second.Team == Team)
-@@ -1798,6 +2285,13 @@ WorldSafeLocsEntry const* Battleground::GetClosestGraveyard(Player* player)
+@@ -1797,6 +2284,13 @@ WorldSafeLocsEntry const* Battleground::GetClosestGraveyard(Player* player)
      return sObjectMgr->GetClosestGraveyard(player->GetPositionX(), player->GetPositionY(), player->GetPositionZ(), player->GetMapId(), player->GetTeam(), player);
  }
  
@@ -97560,7 +97560,7 @@ index ceca3109b0..8776f9379f 100644
  void Battleground::StartTimedAchievement(AchievementCriteriaTimedTypes type, uint32 entry)
  {
      for (BattlegroundPlayerMap::const_iterator itr = GetPlayers().begin(); itr != GetPlayers().end(); ++itr)
-@@ -1817,6 +2311,74 @@ void Battleground::RewardXPAtKill(Player* killer, Player* victim)
+@@ -1816,6 +2310,74 @@ void Battleground::RewardXPAtKill(Player* killer, Player* victim)
          killer->RewardPlayerAndGroupAtKill(victim, true);
  }
  
@@ -100439,7 +100439,7 @@ index ba9bbca063..f3c6c97eb9 100644
              sLFGMgr->LeaveLfg(group->GetGUID());
              group->Disband();
 diff --git a/src/server/game/Entities/Creature/Creature.cpp b/src/server/game/Entities/Creature/Creature.cpp
-index cf2ee4acc5..b24ed7a6df 100644
+index 7a91c578cd..1ea0add940 100644
 --- a/src/server/game/Entities/Creature/Creature.cpp
 +++ b/src/server/game/Entities/Creature/Creature.cpp
 @@ -57,6 +57,13 @@
@@ -100480,7 +100480,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      if (getDeathState() != CORPSE)
          return;
  
-@@ -662,6 +679,29 @@ void Creature::SetPhaseMask(uint32 newPhaseMask, bool update)
+@@ -669,6 +686,29 @@ void Creature::SetPhaseMask(uint32 newPhaseMask, bool update)
  
  void Creature::Update(uint32 diff)
  {
@@ -100510,7 +100510,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      if (IsAIEnabled() && m_triggerJustAppeared && m_deathState != DEAD)
      {
          if (m_respawnCompatibilityMode && m_vehicleKit)
-@@ -684,6 +724,10 @@ void Creature::Update(uint32 diff)
+@@ -691,6 +731,10 @@ void Creature::Update(uint32 diff)
              break;
          case DEAD:
          {
@@ -100521,7 +100521,7 @@ index cf2ee4acc5..b24ed7a6df 100644
              if (!m_respawnCompatibilityMode)
              {
                  TC_LOG_ERROR("entities.unit", "Creature {} in wrong state: DEAD (3)", GetGUID().ToString());
-@@ -749,8 +793,21 @@ void Creature::Update(uint32 diff)
+@@ -756,8 +800,21 @@ void Creature::Update(uint32 diff)
                  else
                      m_groupLootTimer -= diff;
              }
@@ -100543,7 +100543,7 @@ index cf2ee4acc5..b24ed7a6df 100644
                  RemoveCorpse(false);
                  TC_LOG_DEBUG("entities.unit", "Removing corpse... {} ", GetEntry());
              }
-@@ -762,6 +819,9 @@ void Creature::Update(uint32 diff)
+@@ -769,6 +826,9 @@ void Creature::Update(uint32 diff)
  
              // creature can be dead after Unit::Update call
              // CORPSE/DEAD state will processed at next tick (in other case death timer will be updated unexpectedly)
@@ -100553,7 +100553,7 @@ index cf2ee4acc5..b24ed7a6df 100644
              if (!IsAlive())
                  break;
  
-@@ -815,6 +875,11 @@ void Creature::Update(uint32 diff)
+@@ -822,6 +882,11 @@ void Creature::Update(uint32 diff)
  
              Unit::AIUpdateTick(diff);
  
@@ -100565,7 +100565,7 @@ index cf2ee4acc5..b24ed7a6df 100644
              // creature can be dead after UpdateAI call
              // CORPSE/DEAD state will processed at next tick (in other case death timer will be updated unexpectedly)
              if (!IsAlive())
-@@ -1000,6 +1065,11 @@ bool Creature::AIM_Create(CreatureAI* ai /*= nullptr*/)
+@@ -1007,6 +1072,11 @@ bool Creature::AIM_Create(CreatureAI* ai /*= nullptr*/)
  {
      Motion_Initialize();
  
@@ -100577,7 +100577,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      SetAI(ai ? ai : FactorySelector::SelectAI(this));
  
      return true;
-@@ -1271,7 +1341,16 @@ void Creature::SetLootRecipient(Unit* unit, bool withGroup)
+@@ -1278,7 +1348,16 @@ void Creature::SetLootRecipient(Unit* unit, bool withGroup)
      if (unit->GetTypeId() != TYPEID_PLAYER && !unit->IsVehicle())
          return;
  
@@ -100594,7 +100594,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      if (!player)                                             // normal creature, no player involved
          return;
  
-@@ -1284,6 +1363,11 @@ void Creature::SetLootRecipient(Unit* unit, bool withGroup)
+@@ -1291,6 +1370,11 @@ void Creature::SetLootRecipient(Unit* unit, bool withGroup)
      else
          m_lootRecipientGroup = ObjectGuid::Empty;
  
@@ -100606,7 +100606,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      SetDynamicFlag(UNIT_DYNFLAG_TAPPED);
  }
  
-@@ -1302,6 +1386,11 @@ bool Creature::isTappedBy(Player const* player) const
+@@ -1309,6 +1393,11 @@ bool Creature::isTappedBy(Player const* player) const
  
  void Creature::SaveToDB()
  {
@@ -100618,7 +100618,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      // this should only be used when the creature has already been loaded
      // preferably after adding to map, because mapid may not be valid otherwise
      CreatureData const* data = sObjectMgr->GetCreatureData(m_spawnId);
-@@ -1317,6 +1406,11 @@ void Creature::SaveToDB()
+@@ -1324,6 +1413,11 @@ void Creature::SaveToDB()
  
  void Creature::SaveToDB(uint32 mapid, uint8 spawnMask, uint32 phaseMask)
  {
@@ -100630,7 +100630,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      // update in loaded data
      if (!m_spawnId)
          m_spawnId = sObjectMgr->GenerateCreatureSpawnId();
-@@ -1630,6 +1724,11 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
+@@ -1637,6 +1731,11 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
          return false;
      }
  
@@ -100642,7 +100642,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      m_spawnId = spawnId;
  
      m_respawnCompatibilityMode = ((data->spawnGroupData->flags & SPAWNGROUP_FLAG_COMPATIBILITY_MODE) != 0);
-@@ -1645,6 +1744,11 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
+@@ -1652,6 +1751,11 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
  
      m_deathState = ALIVE;
  
@@ -100654,7 +100654,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      m_respawnTime = GetMap()->GetCreatureRespawnTime(m_spawnId);
  
      if (!m_respawnTime && !map->IsSpawnGroupActive(data->spawnGroupData->groupId))
-@@ -1694,6 +1798,24 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
+@@ -1701,6 +1805,24 @@ bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap,
  
      m_stringIds[AsUnderlyingType(StringIdType::Spawn)] = &data->StringId;
  
@@ -100679,7 +100679,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      if (addToMap && !GetMap()->AddToMap(this))
          return false;
      return true;
-@@ -1707,6 +1829,11 @@ void Creature::SetCanDualWield(bool value)
+@@ -1714,6 +1836,11 @@ void Creature::SetCanDualWield(bool value)
  
  void Creature::LoadEquipment(int8 id, bool force /*= true*/)
  {
@@ -100691,7 +100691,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      if (id == 0)
      {
          if (force)
-@@ -1853,6 +1980,11 @@ bool Creature::IsInvisibleDueToDespawn() const
+@@ -1860,6 +1987,11 @@ bool Creature::IsInvisibleDueToDespawn() const
      if (IsAlive() || isDying() || m_corpseRemoveTime > GameTime::GetGameTime())
          return false;
  
@@ -100703,7 +100703,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      return true;
  }
  
-@@ -1870,9 +2002,18 @@ bool Creature::CanStartAttack(Unit const* who, bool force) const
+@@ -1877,9 +2009,18 @@ bool Creature::CanStartAttack(Unit const* who, bool force) const
          return false;
  
      // This set of checks is should be done only for creatures
@@ -100722,7 +100722,7 @@ index cf2ee4acc5..b24ed7a6df 100644
  
      // Do not attack non-combat pets
      if (who->GetTypeId() == TYPEID_UNIT && who->GetCreatureType() == CREATURE_TYPE_NON_COMBAT_PET)
-@@ -2058,6 +2199,11 @@ void Creature::setDeathState(DeathState s)
+@@ -2065,6 +2206,11 @@ void Creature::setDeathState(DeathState s)
  
  void Creature::Respawn(bool force)
  {
@@ -100734,7 +100734,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      if (force)
      {
          if (IsAlive())
-@@ -2121,6 +2267,11 @@ void Creature::Respawn(bool force)
+@@ -2128,6 +2274,11 @@ void Creature::Respawn(bool force)
  
  void Creature::ForcedDespawn(uint32 timeMSToDespawn, Seconds forceRespawnTimer)
  {
@@ -100746,7 +100746,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      if (timeMSToDespawn)
      {
          m_Events.AddEvent(new ForcedDespawnDelayEvent(*this, forceRespawnTimer), m_Events.CalculateTime(Milliseconds(timeMSToDespawn)));
-@@ -2388,6 +2539,11 @@ bool Creature::CanAssistTo(Unit const* u, Unit const* enemy, bool checkfaction /
+@@ -2395,6 +2546,11 @@ bool Creature::CanAssistTo(Unit const* u, Unit const* enemy, bool checkfaction /
      if (!GetCharmerOrOwnerGUID().IsEmpty())
          return false;
  
@@ -100758,7 +100758,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      // only from same creature faction
      if (checkfaction)
      {
-@@ -2447,6 +2603,12 @@ void Creature::SaveRespawnTime(uint32 forceDelay)
+@@ -2454,6 +2610,12 @@ void Creature::SaveRespawnTime(uint32 forceDelay)
          ri.type = SPAWN_TYPE_CREATURE;
          ri.spawnId = m_spawnId;
          ri.respawnTime = m_respawnTime;
@@ -100771,7 +100771,7 @@ index cf2ee4acc5..b24ed7a6df 100644
          GetMap()->SaveRespawnInfoDB(ri);
          return;
      }
-@@ -2588,6 +2750,16 @@ void Creature::SendZoneUnderAttackMessage(Player* attacker)
+@@ -2595,6 +2757,16 @@ void Creature::SendZoneUnderAttackMessage(Player* attacker)
  
  uint32 Creature::GetShieldBlockValue() const                  //dunno mob block value
  {
@@ -100788,7 +100788,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      return (GetLevel()/2 + uint32(GetStat(STAT_STRENGTH)/20));
  }
  
-@@ -2646,6 +2818,17 @@ void Creature::UpdateMovementFlags()
+@@ -2653,6 +2825,17 @@ void Creature::UpdateMovementFlags()
      if (IsMovedByClient())
          return;
  
@@ -100806,7 +100806,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      // Creatures with CREATURE_FLAG_EXTRA_NO_MOVE_FLAGS_UPDATE should control MovementFlags in your own scripts
      if (GetCreatureTemplate()->flags_extra & CREATURE_FLAG_EXTRA_NO_MOVE_FLAGS_UPDATE)
          return;
-@@ -2696,6 +2879,11 @@ bool Creature::CanSwim() const
+@@ -2703,6 +2886,11 @@ bool Creature::CanSwim() const
      if (IsPet())
          return true;
  
@@ -100818,7 +100818,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      return false;
  }
  
-@@ -2720,6 +2908,11 @@ void Creature::RefreshCanSwimFlag(bool recheck)
+@@ -2727,6 +2915,11 @@ void Creature::RefreshCanSwimFlag(bool recheck)
  
  void Creature::AllLootRemovedFromCorpse()
  {
@@ -100830,7 +100830,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      if (loot.loot_type != LOOT_SKINNING && !IsPet() && GetCreatureTemplate()->SkinLootId && hasLootRecipient())
          if (LootTemplates_Skinning.HaveLootFor(GetCreatureTemplate()->SkinLootId))
              SetUnitFlag(UNIT_FLAG_SKINNABLE);
-@@ -3021,6 +3214,15 @@ void Creature::SetDisplayId(uint32 modelId)
+@@ -3028,6 +3221,15 @@ void Creature::SetDisplayId(uint32 modelId)
          SetBoundingRadius((IsPet() ? 1.0f : minfo->bounding_radius) * GetObjectScale());
          SetCombatReach((IsPet() ? DEFAULT_PLAYER_COMBAT_REACH : minfo->combat_reach) * GetObjectScale());
      }
@@ -100846,7 +100846,7 @@ index cf2ee4acc5..b24ed7a6df 100644
  }
  
  void Creature::SetTarget(ObjectGuid guid)
-@@ -3120,6 +3322,13 @@ void Creature::ReleaseSpellFocus(Spell const* focusSpell, bool withDelay)
+@@ -3127,6 +3329,13 @@ void Creature::ReleaseSpellFocus(Spell const* focusSpell, bool withDelay)
          if (!HasUnitFlag2(UNIT_FLAG2_CANNOT_TURN))
              ReacquireSpellFocusTarget();
      }
@@ -100860,7 +100860,7 @@ index cf2ee4acc5..b24ed7a6df 100644
      else // don't allow re-target right away to prevent visual bugs
          _spellFocusInfo.Delay = withDelay ? 1000 : 1;
  
-@@ -3295,3 +3504,388 @@ void Creature::ExitVehicle(Position const* /*exitPosition*/)
+@@ -3302,3 +3511,388 @@ void Creature::ExitVehicle(Position const* /*exitPosition*/)
      if (isInVehicle && IsAlive())
          SetHomePosition(GetPosition());
  }
@@ -107984,10 +107984,10 @@ index f1a0f3dedf..8b87edb3d1 100644
              target->UpdateEntry(ENTRY_BRITTLE_GOLEM, nullptr, false);
      }
 diff --git a/src/server/scripts/Outland/BlackTemple/boss_warlord_najentus.cpp b/src/server/scripts/Outland/BlackTemple/boss_warlord_najentus.cpp
-index 67a3cecfd9..64bd49d0f1 100644
+index b0c0ecd4b0..80fddbf153 100644
 --- a/src/server/scripts/Outland/BlackTemple/boss_warlord_najentus.cpp
 +++ b/src/server/scripts/Outland/BlackTemple/boss_warlord_najentus.cpp
-@@ -159,6 +159,22 @@ struct boss_najentus : public BossAI
+@@ -162,6 +162,22 @@ struct boss_najentus : public BossAI
                      target->SummonGameObject(GO_NAJENTUS_SPINE, *target, QuaternionData(), 30s);
                      Talk(SAY_NEEDLE);
                  }
@@ -108056,10 +108056,10 @@ index d3adc87be1..162edb6e25 100644
          if (!owner)
              return false;
 diff --git a/src/server/scripts/Spells/spell_dk.cpp b/src/server/scripts/Spells/spell_dk.cpp
-index a3f06959d5..196348deac 100644
+index bf023b9b6a..af66e8cf19 100644
 --- a/src/server/scripts/Spells/spell_dk.cpp
 +++ b/src/server/scripts/Spells/spell_dk.cpp
-@@ -360,6 +360,13 @@ private:
+@@ -361,6 +361,13 @@ private:
              return;
  
          amount = talentSpell->GetEffect(EFFECT_0).CalcValue(owner);
@@ -108073,7 +108073,7 @@ index a3f06959d5..196348deac 100644
          if (Player* player = owner->ToPlayer())
              amount += int32(2 * player->GetTotalAttackPowerValue(BASE_ATTACK));
      }
-@@ -1851,6 +1858,16 @@ private:
+@@ -1879,6 +1886,16 @@ private:
      void Absorb(AuraEffect* /*aurEff*/, DamageInfo & dmgInfo, uint32 & absorbAmount)
      {
          // You have a chance equal to your Parry chance
@@ -108195,7 +108195,7 @@ index f10de91b48..4ff08b7c0a 100644
          if (!caster)
              return false;
 diff --git a/src/server/scripts/Spells/spell_generic.cpp b/src/server/scripts/Spells/spell_generic.cpp
-index 006ccf2fb4..d3b4435189 100644
+index 213c847f06..ee576042fd 100644
 --- a/src/server/scripts/Spells/spell_generic.cpp
 +++ b/src/server/scripts/Spells/spell_generic.cpp
 @@ -248,6 +248,11 @@ class spell_gen_arena_drink : public AuraScript
@@ -108240,7 +108240,7 @@ index 006ccf2fb4..d3b4435189 100644
          // default case - not in arena
          if (!GetCaster()->ToPlayer()->InArena())
              regen->ChangeAmount(amount);
-@@ -3758,6 +3779,10 @@ class spell_gen_vehicle_scaling : public AuraScript
+@@ -3785,6 +3806,10 @@ class spell_gen_vehicle_scaling : public AuraScript
  
      bool Load() override
      {
@@ -108251,7 +108251,7 @@ index 006ccf2fb4..d3b4435189 100644
          return GetCaster() && GetCaster()->GetTypeId() == TYPEID_PLAYER;
      }
  
-@@ -3780,7 +3805,19 @@ class spell_gen_vehicle_scaling : public AuraScript
+@@ -3807,7 +3832,19 @@ class spell_gen_vehicle_scaling : public AuraScript
                  break;
          }
  
@@ -108299,7 +108299,7 @@ index e4dcf5ec4d..037ab602a9 100644
          {
              int32 baseAmount = aurEff->GetBaseAmount();
 diff --git a/src/server/scripts/Spells/spell_item.cpp b/src/server/scripts/Spells/spell_item.cpp
-index ed6ab9f3c6..780a774840 100644
+index 27eee95782..854d22dbd2 100644
 --- a/src/server/scripts/Spells/spell_item.cpp
 +++ b/src/server/scripts/Spells/spell_item.cpp
 @@ -38,6 +38,10 @@
@@ -108479,10 +108479,10 @@ index c91810158f..2bd3aec758 100644
  
          if (Unit* target = GetExplTargetUnit())
 diff --git a/src/server/scripts/Spells/spell_priest.cpp b/src/server/scripts/Spells/spell_priest.cpp
-index 781bbe1cda..edf2bf504f 100644
+index b73cbe8ad1..f8c184d7a8 100644
 --- a/src/server/scripts/Spells/spell_priest.cpp
 +++ b/src/server/scripts/Spells/spell_priest.cpp
-@@ -792,6 +792,10 @@ class spell_pri_penance : public SpellScript
+@@ -848,6 +848,10 @@ class spell_pri_penance : public SpellScript
  
      bool Load() override
      {
@@ -108493,7 +108493,7 @@ index 781bbe1cda..edf2bf504f 100644
          return GetCaster()->GetTypeId() == TYPEID_PLAYER;
      }
  
-@@ -834,6 +838,10 @@ class spell_pri_penance : public SpellScript
+@@ -890,6 +894,10 @@ class spell_pri_penance : public SpellScript
      SpellCastResult CheckCast()
      {
          Player* caster = GetCaster()->ToPlayer();
@@ -108504,7 +108504,7 @@ index 781bbe1cda..edf2bf504f 100644
          if (Unit* target = GetExplTargetUnit())
              if (!caster->IsFriendlyTo(target))
              {
-@@ -1006,6 +1014,10 @@ class spell_pri_renew : public AuraScript
+@@ -1062,6 +1070,10 @@ class spell_pri_renew : public AuraScript
  
      bool Load() override
      {
