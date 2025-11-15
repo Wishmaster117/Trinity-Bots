@@ -142,21 +142,21 @@
  .../Database/Implementation/WorldDatabase.h        |     5 +
  src/server/game/AI/CoreAI/UnitAI.cpp               |     3 +
  src/server/game/AI/NpcBots/bot_Events.h            |    80 +
- src/server/game/AI/NpcBots/bot_GridNotifiers.h     |  1423 ++
+ src/server/game/AI/NpcBots/bot_GridNotifiers.h     |  1420 ++
  src/server/game/AI/NpcBots/bot_InstanceEvents.h    |    51 +
- src/server/game/AI/NpcBots/bot_ai.cpp              | 21783 +++++++++++++++++++
- src/server/game/AI/NpcBots/bot_ai.h                |   846 +
+ src/server/game/AI/NpcBots/bot_ai.cpp              | 21796 +++++++++++++++++++
+ src/server/game/AI/NpcBots/bot_ai.h                |   847 +
  src/server/game/AI/NpcBots/bot_archmage_ai.cpp     |   397 +
  src/server/game/AI/NpcBots/bot_bm_ai.cpp           |   948 +
- src/server/game/AI/NpcBots/bot_crypt_lord_ai.cpp   |   842 +
+ src/server/game/AI/NpcBots/bot_crypt_lord_ai.cpp   |   840 +
  src/server/game/AI/NpcBots/bot_dark_ranger_ai.cpp  |   605 +
  src/server/game/AI/NpcBots/bot_death_knight_ai.cpp |  2156 ++
  src/server/game/AI/NpcBots/bot_dreadlord_ai.cpp    |   547 +
  src/server/game/AI/NpcBots/bot_druid_ai.cpp        |  2999 +++
- src/server/game/AI/NpcBots/bot_hunter_ai.cpp       |  2253 ++
+ src/server/game/AI/NpcBots/bot_hunter_ai.cpp       |  2249 ++
  src/server/game/AI/NpcBots/bot_mage_ai.cpp         |  1858 ++
  src/server/game/AI/NpcBots/bot_necromancer_ai.cpp  |   757 +
- src/server/game/AI/NpcBots/bot_paladin_ai.cpp      |  2656 +++
+ src/server/game/AI/NpcBots/bot_paladin_ai.cpp      |  2653 +++
  src/server/game/AI/NpcBots/bot_priest_ai.cpp       |  2032 ++
  src/server/game/AI/NpcBots/bot_rogue_ai.cpp        |  2064 ++
  src/server/game/AI/NpcBots/bot_sea_witch_ai.cpp    |   785 +
@@ -165,12 +165,12 @@
  src/server/game/AI/NpcBots/bot_sphynx_ai.cpp       |   569 +
  src/server/game/AI/NpcBots/bot_warlock_ai.cpp      |  2127 ++
  src/server/game/AI/NpcBots/bot_warrior_ai.cpp      |  2198 ++
- src/server/game/AI/NpcBots/botcommands.cpp         |  5061 +++++
- src/server/game/AI/NpcBots/botcommon.h             |   630 +
+ src/server/game/AI/NpcBots/botcommands.cpp         |  5064 +++++
+ src/server/game/AI/NpcBots/botcommon.h             |   638 +
  src/server/game/AI/NpcBots/botdatamgr.cpp          |  3456 +++
  src/server/game/AI/NpcBots/botdatamgr.h            |   282 +
  src/server/game/AI/NpcBots/botdefine.h             |    33 +
- src/server/game/AI/NpcBots/botdpstracker.cpp       |   133 +
+ src/server/game/AI/NpcBots/botdpstracker.cpp       |   129 +
  src/server/game/AI/NpcBots/botdpstracker.h         |    38 +
  src/server/game/AI/NpcBots/botdump.cpp             |  1024 +
  src/server/game/AI/NpcBots/botdump.h               |    51 +
@@ -180,14 +180,14 @@
  src/server/game/AI/NpcBots/botgossip.h             |   149 +
  src/server/game/AI/NpcBots/botlog.cpp              |    83 +
  src/server/game/AI/NpcBots/botlog.h                |    35 +
- src/server/game/AI/NpcBots/botmgr.cpp              |  3424 +++
+ src/server/game/AI/NpcBots/botmgr.cpp              |  3420 +++
  src/server/game/AI/NpcBots/botmgr.h                |   391 +
  src/server/game/AI/NpcBots/botspell.cpp            |  2096 ++
  src/server/game/AI/NpcBots/botspell.h              |   322 +
  src/server/game/AI/NpcBots/bottext.h               |   434 +
  src/server/game/AI/NpcBots/botwanderful.cpp        |   455 +
- src/server/game/AI/NpcBots/botwanderful.h          |   231 +
- src/server/game/AI/NpcBots/bpet_ai.cpp             |  2643 +++
+ src/server/game/AI/NpcBots/botwanderful.h          |   232 +
+ src/server/game/AI/NpcBots/bpet_ai.cpp             |  2640 +++
  src/server/game/AI/NpcBots/bpet_ai.h               |   200 +
  src/server/game/AI/NpcBots/bpet_archmage.cpp       |   151 +
  src/server/game/AI/NpcBots/bpet_crypt_lord.cpp     |   383 +
@@ -246,7 +246,7 @@
  src/server/game/Globals/ObjectMgr.cpp              |    97 +
  src/server/game/Globals/ObjectMgr.h                |    21 +
  src/server/game/Grids/Notifiers/GridNotifiers.h    |     4 +
- src/server/game/Groups/Group.cpp                   |   366 +
+ src/server/game/Groups/Group.cpp                   |   368 +-
  src/server/game/Groups/Group.h                     |    17 +
  src/server/game/Groups/GroupMgr.cpp                |     7 +
  src/server/game/Groups/GroupRefManager.h           |    11 +
@@ -303,7 +303,7 @@
  src/server/shared/DataStores/DBCfmt.h              |     4 +-
  src/server/shared/SharedDefines.h                  |     7 +
  src/server/worldserver/worldserver.conf.dist       |   721 +
- 305 files changed, 103379 insertions(+), 78 deletions(-)
+ 305 files changed, 103382 insertions(+), 80 deletions(-)
  create mode 100644 sql/Bots/1_world_bot_appearance.sql
  create mode 100644 sql/Bots/2_world_bot_extras.sql
  create mode 100644 sql/Bots/3_world_bots.sql
@@ -17404,10 +17404,10 @@ index 0000000000..779e5a6a3c
 +#endif
 diff --git a/src/server/game/AI/NpcBots/bot_GridNotifiers.h b/src/server/game/AI/NpcBots/bot_GridNotifiers.h
 new file mode 100644
-index 0000000000..f42e4b7b0a
+index 0000000000..902c51fd69
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/bot_GridNotifiers.h
-@@ -0,0 +1,1423 @@
+@@ -0,0 +1,1420 @@
 +#ifndef _BOT_GRIDNOTIFIERS_H
 +#define _BOT_GRIDNOTIFIERS_H
 +
@@ -17825,8 +17825,7 @@ index 0000000000..f42e4b7b0a
 +                return false;
 +            if (!m_ai->IsInBotParty(u->GetVictim()))
 +                return false;
-+            //Unit::GetDiminishing() should be const but it isn't
-+            if (const_cast<Unit*>(u)->GetDiminishing(DIMINISHING_FEAR) > DIMINISHING_LEVEL_3)
++            if (u->GetDiminishing(DIMINISHING_FEAR) > DIMINISHING_LEVEL_3)
 +                return false;
 +            if (u->GetReactionTo(me) > REP_NEUTRAL)
 +                return false;
@@ -18116,10 +18115,9 @@ index 0000000000..f42e4b7b0a
 +                    (u->ToCreature()->GetCreatureTemplate()->MechanicImmuneMask & (1 << (MECHANIC_INTERRUPT - 1))))
 +                    return false;
 +
-+                Spell* curSpell;
 +                for (uint8 i = CURRENT_FIRST_NON_MELEE_SPELL; i != CURRENT_AUTOREPEAT_SPELL; ++i)
 +                {
-+                    curSpell = u->GetCurrentSpell(i);
++                    Spell const* curSpell = u->GetCurrentSpell(i);
 +                    if (!curSpell)
 +                        continue;
 +
@@ -18148,10 +18146,9 @@ index 0000000000..f42e4b7b0a
 +                    (u->ToCreature()->GetCreatureTemplate()->MechanicImmuneMask & (1 << (MECHANIC_SILENCE - 1))))
 +                    return false;
 +
-+                Spell* curSpell;
 +                for (uint8 i = CURRENT_FIRST_NON_MELEE_SPELL; i != CURRENT_AUTOREPEAT_SPELL; ++i)
 +                {
-+                    curSpell = u->GetCurrentSpell(i);
++                    Spell const* curSpell = u->GetCurrentSpell(i);
 +                    if (curSpell && curSpell->GetSpellInfo()->PreventionType != SPELL_PREVENTION_TYPE_SILENCE)
 +                        return false;
 +                }
@@ -18890,10 +18887,10 @@ index 0000000000..4a7e02868b
 +#endif
 diff --git a/src/server/game/AI/NpcBots/bot_ai.cpp b/src/server/game/AI/NpcBots/bot_ai.cpp
 new file mode 100644
-index 0000000000..d762255738
+index 0000000000..09a73b6495
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/bot_ai.cpp
-@@ -0,0 +1,21783 @@
+@@ -0,0 +1,21796 @@
 +#include "Battleground.h"
 +#include "BattlegroundAB.h"
 +#include "BattlegroundAV.h"
@@ -18973,71 +18970,71 @@ index 0000000000..d762255738
 +static constexpr uint32 MAX_AMMO_LEVEL = 13;
 +static constexpr uint8 AmmoDPSForLevel[MAX_AMMO_LEVEL][2] =
 +{
-+    {  1,  1 },
-+    {  5,  2 },
-+    { 10,  3 },
-+    { 15,  4 },
-+    { 25,  7 },
-+    { 30,  8 },
-+    { 37, 12 },
-+    { 44, 15 },
-+    { 52, 17 },
-+    { 57, 26 },
-+    { 62, 43 },
++    { 80, 91 },
 +    { 72, 67 },
-+    { 80, 91 }
++    { 62, 43 },
++    { 57, 26 },
++    { 52, 17 },
++    { 44, 15 },
++    { 37, 12 },
++    { 30,  8 },
++    { 25,  7 },
++    { 15,  4 },
++    { 10,  3 },
++    {  5,  2 },
++    {  1,  1 }
 +};
 +static constexpr uint32 MAX_POTION_SPELLS = 8;
 +static constexpr uint32 MAX_FEAST_SPELLS = 11;
 +static constexpr uint32 ManaPotionSpells[MAX_POTION_SPELLS][2] =
 +{
-+    {  5,   437 },
-+    { 14,   438 },
-+    { 22,  2023 },
-+    { 31, 11903 },
-+    { 41, 17530 },
-+    { 49, 17531 },
++    { 70, 43186 },
 +    { 55, 28499 },
-+    { 70, 43186 }
++    { 49, 17531 },
++    { 41, 17530 },
++    { 31, 11903 },
++    { 22,  2023 },
++    { 14,   438 },
++    {  5,   437 }
 +};
 +static constexpr uint32 HealingPotionSpells[MAX_POTION_SPELLS][2] =
 +{
-+    {  1,   439 },
-+    {  3,   440 },
-+    { 12,   441 },
-+    { 21,  2024 },
-+    { 35,  4042 },
-+    { 45, 17534 },
++    { 70, 43185 },
 +    { 55, 28495 },
-+    { 70, 43185 }
++    { 45, 17534 },
++    { 35,  4042 },
++    { 21,  2024 },
++    { 12,   441 },
++    {  3,   440 },
++    {  1,   439 }
 +};
 +static constexpr uint32 DrinkSpells[MAX_FEAST_SPELLS][2] =
 +{
-+    {  1,   430 },
-+    {  5,   431 },
-+    { 15,   432 },
-+    { 25,  1133 },
-+    { 35,  1135 },
-+    { 45,  1137 },
-+    { 60, 34291 },
-+    { 65, 27089 },
-+    { 70, 43182 },
++    { 80, 57073 },
 +    { 75, 43183 },
-+    { 80, 57073 }
++    { 70, 43182 },
++    { 65, 27089 },
++    { 60, 34291 },
++    { 45,  1137 },
++    { 35,  1135 },
++    { 25,  1133 },
++    { 15,   432 },
++    {  5,   431 },
++    {  1,   430 }
 +};
 +static constexpr uint32 EatSpells[MAX_FEAST_SPELLS][2] =
 +{
-+    {  1,   433 },
-+    {  5,   434 },
-+    { 15,   435 },
-+    { 25,  1127 },
-+    { 35,  1129 },
-+    { 45,  1131 },
-+    { 55, 27094 },
-+    { 65, 35270 },
-+    { 70, 43180 }, //req 65 but
++    { 80, 45548 },
 +    { 75, 45548 },
-+    { 80, 45548 }
++    { 70, 43180 }, //req 65 but
++    { 65, 35270 },
++    { 55, 27094 },
++    { 45,  1131 },
++    { 35,  1129 },
++    { 25,  1127 },
++    { 15,   435 },
++    {  5,   434 },
++    {  1,   433 }
 +};
 +uint8 GroupIconsFlags[TARGET_ICONS_COUNT] =
 +{
@@ -22240,8 +22237,7 @@ index 0000000000..d762255738
 +            else if (mylevel >= 55 && GetSpec() == BOT_SPEC_PRIEST_SHADOW)
 +                value += 0.2f * totalSpi;
 +            //Shadowy Insight (Glyph of Shadow)
-+            if (mylevel >= 30 &&
-+                me->GetAuraEffect(SPELL_AURA_MOD_SPELL_DAMAGE_OF_STAT_PERCENT, SPELLFAMILY_GENERIC, 1499, 0))
++            if (me->GetAuraEffect(SPELL_AURA_MOD_SPELL_DAMAGE_OF_STAT_PERCENT, SPELLFAMILY_GENERIC, 1499, 0))
 +                value += 0.3f * totalSpi;
 +        }
 +        if (_botclass == BOT_CLASS_SHAMAN && mylevel >= 50 && GetSpec() == BOT_SPEC_SHAMAN_ENHANCEMENT)
@@ -24145,6 +24141,42 @@ index 0000000000..d762255738
 +                spots.emplace_back(*c, radius);
 +        }
 +    }
++    // The Blood Furnace - Proximity Bombs
++    else if (unit->GetMapId() == 542)
++    {
++        std::list<GameObject*> proximityBombList;
++        static const std::array<uint32, 2> ProximityBombIds = { GAMEOBJECT_PROXIMITY_BOMB_N, GAMEOBJECT_PROXIMITY_BOMB_N };
++        auto bomb_check = [](GameObject const* go) { return go && std::ranges::find(ProximityBombIds, go->GetEntry()) != ProximityBombIds.cend(); };
++        Bcore::GameObjectListSearcher bombSearcher(unit, proximityBombList, bomb_check);
++        Cell::VisitAllObjects(unit, bombSearcher, 40.f);
++
++        if (!proximityBombList.empty())
++        {
++            for (GameObject const* go : proximityBombList)
++            {
++                float radius = 10.0f + DEFAULT_PLAYER_BOUNDING_RADIUS * go->GetObjectScale() + DEFAULT_PLAYER_COMBAT_REACH * 1.5f;
++                spots.emplace_back(*go, radius);
++            }
++        }
++    }
++    // Hellfire Ramparts - Liquid Fire puddles
++    if (unit->GetMapId() == 543) // Hellfire Ramparts
++    {
++        std::list<GameObject*> liquidFireList;
++        static const std::array<uint32, 3> LiquidFireIds = { GAMEOBJECT_LIQUID_FIRE_1, GAMEOBJECT_LIQUID_FIRE_2, GAMEOBJECT_LIQUID_FIRE_3 };
++        auto fire_check = [](GameObject const* go) { return go && std::ranges::find(LiquidFireIds, go->GetEntry()) != LiquidFireIds.cend(); };
++        Bcore::GameObjectListSearcher fireSearcher(unit, liquidFireList, fire_check);
++        Cell::VisitAllObjects(unit, fireSearcher, 40.f);
++
++        if (!liquidFireList.empty())
++        {
++            for (GameObject const* go : liquidFireList)
++            {
++                float radius = 10.0f + DEFAULT_PLAYER_BOUNDING_RADIUS * go->GetObjectScale() + DEFAULT_PLAYER_COMBAT_REACH * 1.5f;
++                spots.emplace_back(*go, radius);
++            }
++        }
++    }
 +    //Aucheai Crypts
 +    else if (unit->GetMapId() == 558)
 +    {
@@ -24271,20 +24303,18 @@ index 0000000000..d762255738
 +    if (!GetAoeSpots().empty())
 +    {
 +        //find 200 safe spots
-+        Position ppos;
-+        float distdelta = maxdist / 200.f;
-+        float angledelta = float(M_PI) / 12.5f;
++        const float distdelta = maxdist / 200.f;
++        const float angledelta = float(M_PI) / 12.5f;
 +        float aoedist = 0.f;
-+        float aoeangle;
 +        for (uint8 i = 0; i < 8; ++i)
 +        {
-+            aoeangle = 0.0f;
++            float aoeangle = 0.0f;
 +            for (uint8 j = 0; j < 25; ++j)
 +            {
 +                aoedist += distdelta;
 +                aoeangle += angledelta;
 +
-+                ppos = target->GetFirstCollisionPosition(aoedist, Position::NormalizeOrientation(aoeangle - target->GetOrientation()));
++                Position ppos = target->GetFirstCollisionPosition(aoedist, Position::NormalizeOrientation(aoeangle - target->GetOrientation()));
 +                bool toofaraway = master->GetDistance(ppos) > maxdist;
 +
 +                if (!toofaraway && !IsWithinAoERadius(ppos))
@@ -25260,7 +25290,7 @@ index 0000000000..d762255738
 +}
 +uint32 bot_ai::GetRation(bool drink) const
 +{
-+    for (int8 i = MAX_FEAST_SPELLS - 1; i >= 0; --i)
++    for (uint32 i = 0; i < MAX_FEAST_SPELLS; ++i)
 +        if (me->GetLevel() >= (drink ? DrinkSpells[i][0] : EatSpells[i][0]))
 +            return (drink ? DrinkSpells[i][1] : EatSpells[i][1]);
 +
@@ -25280,7 +25310,7 @@ index 0000000000..d762255738
 +}
 +uint32 bot_ai::GetPotion(bool mana) const
 +{
-+    for (int8 i = MAX_POTION_SPELLS - 1; i >= 0; --i)
++    for (uint32 i = 0; i < MAX_POTION_SPELLS; ++i)
 +        if (me->GetLevel() >= (mana ? ManaPotionSpells[i][0] : HealingPotionSpells[i][0]))
 +            return (mana ? ManaPotionSpells[i][1] : HealingPotionSpells[i][1]);
 +
@@ -26136,10 +26166,7 @@ index 0000000000..d762255738
 +//Including health calcs, set
 +void bot_ai::_OnHealthUpdate() const
 +{
-+    uint8 myclass = _botclass;
 +    uint8 mylevel = master->GetLevel();
-+    if (myclass == BOT_CLASS_DRUID && GetBotStance() != BOT_STANCE_NONE)
-+        myclass = GetBotStance();
 +    //BOT_LOG_ERROR("entities.player", "_OnHealthUpdate(): updating bot {}", me->GetName());
 +    bool fullhp = me->GetHealth() == me->GetMaxHealth();
 +    float pct = fullhp ? 100.f : me->GetHealthPct(); // needs for regeneration
@@ -26190,10 +26217,7 @@ index 0000000000..d762255738
 +    if (me->GetMaxPower(POWER_MANA) <= 1)
 +        return;
 +
-+    uint8 myclass = _botclass;
 +    uint8 mylevel = master->GetLevel();
-+    if (myclass == BOT_CLASS_DRUID && GetBotStance() != BOT_STANCE_NONE)
-+        myclass = GetBotStance();
 +
 +    //BOT_LOG_ERROR("entities.player", "_OnManaUpdate(): updating bot {}", me->GetName());
 +    bool fullmana = me->GetPower(POWER_MANA) == me->GetMaxPower(POWER_MANA);
@@ -30268,7 +30292,6 @@ index 0000000000..d762255738
 +                    ChatHandler ch(player->GetSession());
 +                    ch.PSendSysMessage("%s's Spells:", me->GetName());
 +                    uint32 counter = 0;
-+                    SpellInfo const* spellInfo;
 +                    BotSpellMap const& myspells = GetSpellMap();
 +                    for (BotSpellMap::const_iterator itr = myspells.begin(); itr != myspells.end(); ++itr)
 +                    {
@@ -30277,7 +30300,7 @@ index 0000000000..d762255738
 +
 +                        ++counter;
 +                        std::ostringstream sstr;
-+                        spellInfo = sSpellMgr->GetSpellInfo(itr->first); //always valid
++                        SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(itr->first); //always valid
 +                        _AddSpellLink(player, spellInfo, sstr);
 +                        sstr << " id: " <<  itr->second->spellId << ", base: " << itr->first
 +                            << ", cd: " << itr->second->cooldown << ", base: " << std::max<uint32>(spellInfo->RecoveryTime, spellInfo->CategoryRecoveryTime);
@@ -30795,7 +30818,7 @@ index 0000000000..d762255738
 +            case 7: gold *= 0.750f; break;
 +            default:                break;
 +        }
-+        gold = std::min<float>(std::max<float>(gold + _killsCount * gold * 0.04f - _deathsCount * gold * 0.4f, gold), gold * 10.0f) / float(DEFAULT_MAX_LEVEL) * lvl;
++        loot.gold = std::min<float>(std::max<float>(gold + _killsCount * gold * 0.04f - _deathsCount * gold * 0.4f, gold), gold * 10.0f) / float(DEFAULT_MAX_LEVEL) * lvl;
 +    }
 +
 +    if (maxitems)
@@ -31980,6 +32003,230 @@ index 0000000000..d762255738
 +
 +    return false;
 +}
++
++bool bot_ai::_isItemFitForWanderingBot(uint8 slot, ItemTemplate const* proto) const
++{
++    if (!_canEquip(proto, slot, true))
++        return false;
++
++    auto item_stat_check = [](_ItemStat const& stat, uint32 wanted_stat) { return stat.ItemStatType == wanted_stat && stat.ItemStatValue > 0; };
++    auto item_has_stat = [&item_stat_check](ItemTemplate const* itemProto, uint32 wanted_stat) {
++        return std::ranges::any_of(itemProto->ItemStat, [=, &item_stat_check](_ItemStat const& stat) { return item_stat_check(stat, wanted_stat); });
++    };
++
++    if (me->GetLevel() >= DEFAULT_MAX_LEVEL && me->GetMap()->IsBattlegroundOrArena() && Rand() < 50)
++    {
++        if (Rand() < 20 && proto->ItemLevel < 245)
++            return false;
++        if (Rand() < 10 && proto->ItemLevel < 264)
++            return false;
++
++        switch (slot)
++        {
++            case BOT_SLOT_HEAD:
++            case BOT_SLOT_SHOULDERS:
++            case BOT_SLOT_CHEST:
++            case BOT_SLOT_WAIST:
++            case BOT_SLOT_LEGS:
++            case BOT_SLOT_FEET:
++            case BOT_SLOT_WRIST:
++            case BOT_SLOT_HANDS:
++                if (!item_has_stat(proto, ITEM_MOD_RESILIENCE_RATING))
++                    return false;
++                break;
++            default:
++                break;
++        }
++    }
++
++    switch (GetSpec())
++    {
++        case BOT_SPEC_WARRIOR_ARMS:
++            switch (slot)
++            {
++                case BOT_SLOT_MAINHAND:
++                    return proto->InventoryType == INVTYPE_2HWEAPON;
++                default:
++                    break;
++            }
++            break;
++        case BOT_SPEC_WARRIOR_FURY:
++            switch (slot)
++            {
++                case BOT_SLOT_MAINHAND:
++                    return (me->GetLevel() < 60) ? (proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONMAINHAND) :
++                        (proto->InventoryType == INVTYPE_2HWEAPON);
++                case BOT_SLOT_OFFHAND:
++                    return (me->GetLevel() < 60) ? (proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONOFFHAND) :
++                        (proto->InventoryType == INVTYPE_2HWEAPON);
++                default:
++                    break;
++            }
++            break;
++        case BOT_SPEC_WARRIOR_PROTECTION:
++            switch (slot)
++            {
++                case BOT_SLOT_MAINHAND:
++                    return proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONMAINHAND;
++                case BOT_SLOT_OFFHAND:
++                    return proto->InventoryType == INVTYPE_SHIELD;
++                default:
++                    break;
++            }
++            break;
++        case BOT_SPEC_PALADIN_PROTECTION:
++            switch (slot)
++            {
++                case BOT_SLOT_MAINHAND:
++                    if (!(proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONMAINHAND))
++                        return false;
++                    if (me->GetLevel() < 70)
++                        break;
++                    return !item_has_stat(proto, ITEM_MOD_INTELLECT);
++                case BOT_SLOT_OFFHAND:
++                    if (!(proto->InventoryType == INVTYPE_SHIELD))
++                        return false;
++                    if (me->GetLevel() < 70)
++                        break;
++                    return !item_has_stat(proto, ITEM_MOD_INTELLECT);
++                default:
++                    break;
++            }
++            break;
++        case BOT_SPEC_PALADIN_HOLY:
++        case BOT_SPEC_SHAMAN_ELEMENTAL:
++        case BOT_SPEC_SHAMAN_RESTORATION:
++            switch (slot)
++            {
++                case BOT_SLOT_MAINHAND:
++                    if (!(proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONMAINHAND))
++                        return false;
++                    if (me->GetLevel() < 70)
++                        break;
++                    return item_has_stat(proto, ITEM_MOD_INTELLECT);
++                case BOT_SLOT_OFFHAND:
++                    if (!(proto->InventoryType == INVTYPE_SHIELD))
++                        return false;
++                    if (me->GetLevel() < 70)
++                        break;
++                    return item_has_stat(proto, ITEM_MOD_INTELLECT);
++                default:
++                    if (me->GetLevel() < 70)
++                        break;
++                    return item_has_stat(proto, ITEM_MOD_INTELLECT);
++            }
++            break;
++        case BOT_SPEC_PALADIN_RETRIBUTION:
++            switch (slot)
++            {
++                case BOT_SLOT_MAINHAND:
++                    return proto->InventoryType == INVTYPE_2HWEAPON;
++                default:
++                    break;
++            }
++            break;
++        case BOT_SPEC_HUNTER_BEASTMASTERY:
++        case BOT_SPEC_HUNTER_MARKSMANSHIP:
++        case BOT_SPEC_HUNTER_SURVIVAL:
++            switch (slot)
++            {
++                case BOT_SLOT_TRINKET1: case BOT_SLOT_TRINKET2:
++                    break;
++                default:
++                    if (me->GetLevel() < 70)
++                        break;
++                    return item_has_stat(proto, ITEM_MOD_AGILITY);
++                    break;
++            }
++            break;
++        case BOT_SPEC_ROGUE_ASSASINATION:
++            switch (slot)
++            {
++                case BOT_SLOT_MAINHAND: case BOT_SLOT_OFFHAND:
++                    return proto->SubClass == ITEM_SUBCLASS_WEAPON_DAGGER;
++                case BOT_SLOT_RANGED:
++                    return me->GetLevel() < 64 || proto->SubClass == ITEM_SUBCLASS_WEAPON_THROWN;
++                default:
++                    break;
++            }
++            break;
++        case BOT_SPEC_ROGUE_COMBAT:
++            switch (slot)
++            {
++                case BOT_SLOT_MAINHAND: case BOT_SLOT_OFFHAND:
++                    return proto->SubClass == ITEM_SUBCLASS_WEAPON_SWORD || proto->SubClass == ITEM_SUBCLASS_WEAPON_AXE;
++                case BOT_SLOT_RANGED:
++                    return me->GetLevel() < 64 || proto->SubClass == ITEM_SUBCLASS_WEAPON_THROWN;
++                default:
++                    break;
++            }
++            break;
++        case BOT_SPEC_ROGUE_SUBTLETY:
++            switch (slot)
++            {
++                case BOT_SLOT_MAINHAND: case BOT_SLOT_OFFHAND:
++                    return proto->SubClass == ITEM_SUBCLASS_WEAPON_MACE;
++                case BOT_SLOT_RANGED:
++                    return me->GetLevel() < 64 || proto->SubClass == ITEM_SUBCLASS_WEAPON_THROWN;
++                default:
++                    break;
++            }
++            break;
++        case BOT_SPEC_DK_FROST:
++            switch (slot)
++            {
++                case BOT_SLOT_MAINHAND:
++                    return me->GetLevel() < 61 || proto->InventoryType == INVTYPE_2HWEAPON;
++                default:
++                    break;
++            }
++            break;
++        case BOT_SPEC_SHAMAN_ENHANCEMENT:
++            switch (slot)
++            {
++                case BOT_SLOT_OFFHAND:
++                    return proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONOFFHAND;
++                case BOT_SLOT_TRINKET1: case BOT_SLOT_TRINKET2:
++                    break;
++                default:
++                    if (me->GetLevel() < 70)
++                        break;
++                    return item_has_stat(proto, ITEM_MOD_AGILITY);
++            }
++            break;
++        case BOT_SPEC_DRUID_FERAL:
++            switch (slot)
++            {
++                case BOT_SLOT_TRINKET1: case BOT_SLOT_TRINKET2:
++                    break;
++                case BOT_SLOT_MAINHAND:
++                    if (proto->InventoryType != INVTYPE_2HWEAPON)
++                        return false;
++                [[fallthrough]];
++                default:
++                    if (me->GetLevel() < 70)
++                        break;
++                    return item_has_stat(proto, ITEM_MOD_AGILITY);
++            }
++            break;
++        case BOT_SPEC_DRUID_BALANCE:
++            switch (slot)
++            {
++                case BOT_SLOT_TRINKET1: case BOT_SLOT_TRINKET2:
++                    break;
++                default:
++                    if (me->GetLevel() < 70)
++                        break;
++                    return item_has_stat(proto, ITEM_MOD_INTELLECT);
++            }
++            break;
++        default:
++            break;
++    }
++
++    return true;
++}
++
 +
 +void bot_ai::_removeEquipment(uint8 slot)
 +{
@@ -33237,7 +33484,7 @@ index 0000000000..d762255738
 +
 +    //BOT_LOG_ERROR("scripts", "_getItemGearScore for {} - {}", proto->ItemId, proto->Name1);
 +
-+    ItemStatBonus istats = {};
++    ItemStatBonus istats{};
 +    //for (uint8 i = 0; i != MAX_BOT_ITEM_MOD; ++i)
 +    //    BOT_LOG_ERROR("scripts", "_getItemGearScore at {} {}", uint32(i), istats[i]);
 +
@@ -34282,6 +34529,8 @@ index 0000000000..d762255738
 +
 +    if (IsWanderer())
 +    {
++        auto fit_check = [this](uint8 slot, ItemTemplate const* proto) { return _isItemFitForWanderingBot(slot, proto); };
++
 +        GenerateRand();
 +        uint8 lvl = me->GetLevel();
 +        std::ostringstream gss;
@@ -34295,243 +34544,7 @@ index 0000000000..d762255738
 +            if ((i == BOT_SLOT_TRINKET1 || i == BOT_SLOT_TRINKET2 || i == BOT_SLOT_HEAD) && lvl < 30)
 +                continue;
 +
-+            Item* item = BotDataMgr::GenerateWanderingBotItem(i, _botclass, lvl, [this, lslot = i](ItemTemplate const* proto) {
-+                if (!_canEquip(proto, lslot, true))
-+                    return false;
-+
-+                if (me->GetLevel() >= DEFAULT_MAX_LEVEL && me->GetMap()->IsBattlegroundOrArena() && Rand() < 50)
-+                {
-+                    if (Rand() < 20 && proto->ItemLevel < 245)
-+                        return false;
-+                    if (Rand() < 10 && proto->ItemLevel < 264)
-+                        return false;
-+
-+                    switch (lslot)
-+                    {
-+                        case BOT_SLOT_HEAD:
-+                        case BOT_SLOT_SHOULDERS:
-+                        case BOT_SLOT_CHEST:
-+                        case BOT_SLOT_WAIST:
-+                        case BOT_SLOT_LEGS:
-+                        case BOT_SLOT_FEET:
-+                        case BOT_SLOT_WRIST:
-+                        case BOT_SLOT_HANDS:
-+                            if (!std::any_of(proto->ItemStat.cbegin(), proto->ItemStat.cend(), [](_ItemStat const& stat) {
-+                                return stat.ItemStatType == ITEM_MOD_RESILIENCE_RATING && stat.ItemStatValue > 0;
-+                            }))
-+                                return false;
-+                            break;
-+                        default:
-+                            break;
-+                    }
-+                }
-+
-+                switch (GetSpec())
-+                {
-+                    case BOT_SPEC_WARRIOR_ARMS:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_MAINHAND:
-+                                return proto->InventoryType == INVTYPE_2HWEAPON;
-+                            default:
-+                                break;
-+                        }
-+                        break;
-+                    case BOT_SPEC_WARRIOR_FURY:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_MAINHAND:
-+                                return (me->GetLevel() < 60) ? (proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONMAINHAND) :
-+                                    (proto->InventoryType == INVTYPE_2HWEAPON);
-+                            case BOT_SLOT_OFFHAND:
-+                                return (me->GetLevel() < 60) ? (proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONOFFHAND) :
-+                                    (proto->InventoryType == INVTYPE_2HWEAPON);
-+                            default:
-+                                break;
-+                        }
-+                        break;
-+                    case BOT_SPEC_WARRIOR_PROTECTION:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_MAINHAND:
-+                                return proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONMAINHAND;
-+                            case BOT_SLOT_OFFHAND:
-+                                return proto->InventoryType == INVTYPE_SHIELD;
-+                            default:
-+                                break;
-+                        }
-+                        break;
-+                    case BOT_SPEC_PALADIN_PROTECTION:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_MAINHAND:
-+                                if (!(proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONMAINHAND))
-+                                    return false;
-+                                if (me->GetLevel() < 70)
-+                                    break;
-+                                return !std::any_of(proto->ItemStat.cbegin(), proto->ItemStat.cend(), [](_ItemStat const& stat) {
-+                                    return stat.ItemStatType == ITEM_MOD_INTELLECT && stat.ItemStatValue > 0;
-+                                });
-+                            case BOT_SLOT_OFFHAND:
-+                                if (!(proto->InventoryType == INVTYPE_SHIELD))
-+                                    return false;
-+                                if (me->GetLevel() < 70)
-+                                    break;
-+                                return !std::any_of(proto->ItemStat.cbegin(), proto->ItemStat.cend(), [](_ItemStat const& stat) {
-+                                    return stat.ItemStatType == ITEM_MOD_INTELLECT && stat.ItemStatValue > 0;
-+                                });
-+                            default:
-+                                break;
-+                        }
-+                        break;
-+                    case BOT_SPEC_PALADIN_HOLY:
-+                    case BOT_SPEC_SHAMAN_ELEMENTAL:
-+                    case BOT_SPEC_SHAMAN_RESTORATION:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_MAINHAND:
-+                                if (!(proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONMAINHAND))
-+                                    return false;
-+                                if (me->GetLevel() < 70)
-+                                    break;
-+                                return std::any_of(proto->ItemStat.cbegin(), proto->ItemStat.cend(), [](_ItemStat const& stat) {
-+                                    return stat.ItemStatType == ITEM_MOD_INTELLECT && stat.ItemStatValue > 0;
-+                                });
-+                            case BOT_SLOT_OFFHAND:
-+                                if (!(proto->InventoryType == INVTYPE_SHIELD))
-+                                    return false;
-+                                if (me->GetLevel() < 70)
-+                                    break;
-+                                return std::any_of(proto->ItemStat.cbegin(), proto->ItemStat.cend(), [](_ItemStat const& stat) {
-+                                    return stat.ItemStatType == ITEM_MOD_INTELLECT && stat.ItemStatValue > 0;
-+                                });
-+                            default:
-+                                if (me->GetLevel() < 70)
-+                                    break;
-+                                return std::any_of(proto->ItemStat.cbegin(), proto->ItemStat.cend(), [](_ItemStat const& stat) {
-+                                    return stat.ItemStatType == ITEM_MOD_INTELLECT && stat.ItemStatValue > 0;
-+                                });
-+                        }
-+                        break;
-+                    case BOT_SPEC_PALADIN_RETRIBUTION:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_MAINHAND:
-+                                return proto->InventoryType == INVTYPE_2HWEAPON;
-+                            default:
-+                                break;
-+                        }
-+                        break;
-+                    case BOT_SPEC_HUNTER_BEASTMASTERY:
-+                    case BOT_SPEC_HUNTER_MARKSMANSHIP:
-+                    case BOT_SPEC_HUNTER_SURVIVAL:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_TRINKET1: case BOT_SLOT_TRINKET2:
-+                                break;
-+                            default:
-+                                if (me->GetLevel() < 70)
-+                                    break;
-+                                return std::any_of(proto->ItemStat.cbegin(), proto->ItemStat.cend(), [](_ItemStat const& stat) {
-+                                    return stat.ItemStatType == ITEM_MOD_AGILITY && stat.ItemStatValue > 0;
-+                                });
-+                                break;
-+                        }
-+                        break;
-+                    case BOT_SPEC_ROGUE_ASSASINATION:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_MAINHAND: case BOT_SLOT_OFFHAND:
-+                                return proto->SubClass == ITEM_SUBCLASS_WEAPON_DAGGER;
-+                            case BOT_SLOT_RANGED:
-+                                return me->GetLevel() < 64 || proto->SubClass == ITEM_SUBCLASS_WEAPON_THROWN;
-+                            default:
-+                                break;
-+                        }
-+                        break;
-+                    case BOT_SPEC_ROGUE_COMBAT:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_MAINHAND: case BOT_SLOT_OFFHAND:
-+                                return proto->SubClass == ITEM_SUBCLASS_WEAPON_SWORD || proto->SubClass == ITEM_SUBCLASS_WEAPON_AXE;
-+                            case BOT_SLOT_RANGED:
-+                                return me->GetLevel() < 64 || proto->SubClass == ITEM_SUBCLASS_WEAPON_THROWN;
-+                            default:
-+                                break;
-+                        }
-+                        break;
-+                    case BOT_SPEC_ROGUE_SUBTLETY:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_MAINHAND: case BOT_SLOT_OFFHAND:
-+                                return proto->SubClass == ITEM_SUBCLASS_WEAPON_MACE;
-+                            case BOT_SLOT_RANGED:
-+                                return me->GetLevel() < 64 || proto->SubClass == ITEM_SUBCLASS_WEAPON_THROWN;
-+                            default:
-+                                break;
-+                        }
-+                        break;
-+                    case BOT_SPEC_DK_FROST:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_MAINHAND:
-+                                return me->GetLevel() < 61 || proto->InventoryType == INVTYPE_2HWEAPON;
-+                            default:
-+                                break;
-+                        }
-+                        break;
-+                    case BOT_SPEC_SHAMAN_ENHANCEMENT:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_OFFHAND:
-+                                return proto->InventoryType == INVTYPE_WEAPON || proto->InventoryType == INVTYPE_WEAPONOFFHAND;
-+                            case BOT_SLOT_TRINKET1: case BOT_SLOT_TRINKET2:
-+                                break;
-+                            default:
-+                                if (me->GetLevel() < 70)
-+                                    break;
-+                                return std::any_of(proto->ItemStat.cbegin(), proto->ItemStat.cend(), [](_ItemStat const& stat) {
-+                                    return stat.ItemStatType == ITEM_MOD_AGILITY && stat.ItemStatValue > 0;
-+                                });
-+                        }
-+                        break;
-+                    case BOT_SPEC_DRUID_FERAL:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_TRINKET1: case BOT_SLOT_TRINKET2:
-+                                break;
-+                            case BOT_SLOT_MAINHAND:
-+                                if (proto->InventoryType != INVTYPE_2HWEAPON)
-+                                    return false;
-+                            [[fallthrough]];
-+                            default:
-+                                if (me->GetLevel() < 70)
-+                                    break;
-+                                return std::any_of(proto->ItemStat.cbegin(), proto->ItemStat.cend(), [](_ItemStat const& stat) {
-+                                    return stat.ItemStatType == ITEM_MOD_AGILITY && stat.ItemStatValue > 0;
-+                                });
-+                        }
-+                        break;
-+                    case BOT_SPEC_DRUID_BALANCE:
-+                        switch (lslot)
-+                        {
-+                            case BOT_SLOT_TRINKET1: case BOT_SLOT_TRINKET2:
-+                                break;
-+                            default:
-+                                if (me->GetLevel() < 70)
-+                                    break;
-+                                return std::any_of(proto->ItemStat.cbegin(), proto->ItemStat.cend(), [](_ItemStat const& stat) {
-+                                    return stat.ItemStatType == ITEM_MOD_INTELLECT && stat.ItemStatValue > 0;
-+                                });
-+                        }
-+                        break;
-+                    default:
-+                        break;
-+                }
-+
-+                return true;
-+            });
-+
++            Item* item = BotDataMgr::GenerateWanderingBotItem(i, _botclass, lvl, fit_check);
 +            if (!item)
 +            {
 +                if (i <= BOT_SLOT_RANGED && einfo->ItemEntry[i] != 0)
@@ -35586,11 +35599,9 @@ index 0000000000..d762255738
 +
 +void bot_ai::OnBotSpellInterrupted(SpellSchoolMask schoolMask, uint32 unTimeMs)
 +{
-+    SpellInfo const* info;
-+
 +    for (BotSpellMap::const_iterator itr = _spells.begin(); itr != _spells.end(); ++itr)
 +    {
-+        info = sSpellMgr->GetSpellInfo(itr->second->spellId);
++        SpellInfo const* info = sSpellMgr->GetSpellInfo(itr->second->spellId);
 +        if (!info || !(info->GetSchoolMask() & schoolMask)) continue;
 +        if (info->IsCooldownStartedOnEvent()) continue;
 +        if (info->PreventionType != SPELL_PREVENTION_TYPE_SILENCE) continue;
@@ -37037,11 +37048,10 @@ index 0000000000..d762255738
 +    //Check current cast state: interrupt casts that became pointless
 +    if (me->HasUnitState(UNIT_STATE_CASTING) && !HasBotCommandState(BOT_COMMAND_ISSUED_ORDER) && urand(1,100) <= 75)
 +    {
-+        bool interrupt;
-+        Unit const* target;
 +        for (uint8 i = CURRENT_FIRST_NON_MELEE_SPELL; i != CURRENT_MAX_SPELL; ++i)
 +        {
-+            interrupt = false;
++            bool interrupt = false;
++            Unit const* target = nullptr;
 +            Spell* spell = me->GetCurrentSpell(CurrentSpellTypes(i));
 +            if (!spell)
 +                continue;
@@ -38050,7 +38060,7 @@ index 0000000000..d762255738
 +    mypos.m_positionX += movedist * std::cos(me->ToAbsoluteAngle(base_angle));
 +    mypos.m_positionY += movedist * std::sin(me->ToAbsoluteAngle(base_angle));
 +    Bcore::NormalizeMapCoord(mypos.m_positionX);
-+    Bcore::NormalizeMapCoord(pos.m_positionY);
++    Bcore::NormalizeMapCoord(mypos.m_positionY);
 +
 +    ground = me->GetMapHeight(mypos.m_positionX, mypos.m_positionY, MAX_HEIGHT, true, MAX_FALL_DISTANCE);
 +    floor = me->GetMapHeight(mypos.m_positionX, mypos.m_positionY, mypos.m_positionZ);
@@ -40152,7 +40162,7 @@ index 0000000000..d762255738
 +{
 +    if (CanUseAmmo())
 +    {
-+        for (int8 i = MAX_AMMO_LEVEL - 1; i >= 0; --i)
++        for (uint32 i = 0; i < MAX_AMMO_LEVEL; ++i)
 +            if (me->GetLevel() >= AmmoDPSForLevel[i][0])
 +                return float(AmmoDPSForLevel[i][1]);
 +
@@ -40690,10 +40700,10 @@ index 0000000000..d762255738
 +#endif
 diff --git a/src/server/game/AI/NpcBots/bot_ai.h b/src/server/game/AI/NpcBots/bot_ai.h
 new file mode 100644
-index 0000000000..383afe4e93
+index 0000000000..16a6213bb6
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/bot_ai.h
-@@ -0,0 +1,846 @@
+@@ -0,0 +1,847 @@
 +#ifndef _BOT_AI_H
 +#define _BOT_AI_H
 +
@@ -40888,7 +40898,7 @@ index 0000000000..383afe4e93
 +        void OnBotEnterBattleground();
 +
 +        Group* GetGroup() { return _group.getTarget(); }
-+        Group const* GetGroup() const { return const_cast<Group const*>(_group.getTarget()); }
++        Group const* GetGroup() const { return _group.getTarget(); }
 +        void SetGroup(Group* group, int8 subgroup);
 +        uint8 GetSubGroup() const { return _group.getSubGroup(); }
 +        void SetSubGroup(uint8 subgroup) { _group.setSubGroup(subgroup); }
@@ -41347,6 +41357,7 @@ index 0000000000..383afe4e93
 +        bool _canCombineWeapons(ItemTemplate const* mh, ItemTemplate const* oh) const;
 +        bool _canEquip(ItemTemplate const* newProto, uint8 slot, bool ignoreItemLevel, Item const* newItem = nullptr, bool ignore_combine = false) const;
 +        void _removeEquipment(uint8 slot);
++        bool _isItemFitForWanderingBot(uint8 slot, ItemTemplate const* proto) const;
 +        [[nodiscard]] BotEquipResult _unequip(uint8 slot, ObjectGuid receiver, bool store_to_bank, bool on_equip_from_bank = false);
 +        [[nodiscard]] BotEquipResult _equip(uint8 slot, Item* newItem, ObjectGuid receiver, bool store_to_bank, bool from_bank = false);
 +        [[nodiscard]] BotEquipResult _resetEquipment(uint8 slot, ObjectGuid receiver, bool store_to_bank);
@@ -42899,10 +42910,10 @@ index 0000000000..b1d5592892
 +}
 diff --git a/src/server/game/AI/NpcBots/bot_crypt_lord_ai.cpp b/src/server/game/AI/NpcBots/bot_crypt_lord_ai.cpp
 new file mode 100644
-index 0000000000..b11496edd8
+index 0000000000..a08dbaa471
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/bot_crypt_lord_ai.cpp
-@@ -0,0 +1,842 @@
+@@ -0,0 +1,840 @@
 +#include "bot_ai.h"
 +#include "botdatamgr.h"
 +#include "botspell.h"
@@ -43052,8 +43063,6 @@ index 0000000000..b11496edd8
 +            me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_HORROR, true);
 +            me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_TURN, true);
 +            me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_SLEEP, true);
-+
-+            _locusts.resize(MAX_LOCUSTS_MAXLEVEL, ObjectGuid::Empty);
 +        }
 +
 +        bool doCast(Unit* victim, uint32 spellId)
@@ -43566,8 +43575,8 @@ index 0000000000..b11496edd8
 +                _minions.erase(summon);
 +            else
 +            {
-+                Swarm::iterator it = std::find(std::begin(_locusts), std::end(_locusts), summon->GetGUID());
-+                if (it != std::end(_locusts))
++                Swarm::iterator it = std::ranges::find(_locusts, summon->GetGUID());
++                if (it != _locusts.end())
 +                    *it = ObjectGuid::Empty;
 +            }
 +        }
@@ -43732,8 +43741,8 @@ index 0000000000..b11496edd8
 +
 +        typedef std::set<Creature*> Summons;
 +        Summons _minions;
-+        typedef std::vector<ObjectGuid> Swarm;
-+        Swarm _locusts;
++        typedef std::array<ObjectGuid, MAX_LOCUSTS_MAXLEVEL> Swarm;
++        Swarm _locusts{};
 +    };
 +};
 +
@@ -50078,10 +50087,10 @@ index 0000000000..5de83ca052
 +}
 diff --git a/src/server/game/AI/NpcBots/bot_hunter_ai.cpp b/src/server/game/AI/NpcBots/bot_hunter_ai.cpp
 new file mode 100644
-index 0000000000..2e024e7ecc
+index 0000000000..75b13c3a4a
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/bot_hunter_ai.cpp
-@@ -0,0 +1,2253 @@
+@@ -0,0 +1,2249 @@
 +#include "bot_ai.h"
 +#include "botmgr.h"
 +#include "botspell.h"
@@ -50700,16 +50709,14 @@ index 0000000000..2e024e7ecc
 +                if (mtar && me->GetDistance(mtar) > 5 && me->GetDistance(mtar) < CalcSpellMaxRange(TRANQ_SHOT_1) &&
 +                    !mtar->IsImmunedToSpell(sSpellMgr->GetSpellInfo(TRANQ_SHOT_1), me))
 +                {
-+                    AuraApplication const* aurApp;
-+                    SpellInfo const* spellInfo;
 +                    Unit::AuraMap const& auras = mtar->GetOwnedAuras();
 +                    for (Unit::AuraMap::const_iterator itr = auras.begin(); itr != auras.end(); ++itr)
 +                    {
-+                        spellInfo = itr->second->GetSpellInfo();
++                        SpellInfo const* spellInfo = itr->second->GetSpellInfo();
 +                        if (spellInfo->Dispel != DISPEL_MAGIC && spellInfo->Dispel != DISPEL_ENRAGE) continue;
 +                        if (spellInfo->Attributes & (SPELL_ATTR0_PASSIVE | SPELL_ATTR0_HIDDEN_CLIENTSIDE)) continue;
 +                        //if (spellInfo->AttributesEx & SPELL_ATTR1_DONT_DISPLAY_IN_AURA_BAR) continue;
-+                        aurApp = itr->second->GetApplicationOfTarget(mtar->GetGUID());
++                        AuraApplication const* aurApp = itr->second->GetApplicationOfTarget(mtar->GetGUID());
 +                        if (aurApp && aurApp->IsPositive())
 +                        {
 +                            if (doCast(mtar, GetSpell(TRANQ_SHOT_1)))
@@ -51045,7 +51052,7 @@ index 0000000000..2e024e7ecc
 +            {
 +                uint32 STING = 0;
 +                AuraEffect const* sting = nullptr;
-+                if (!STING && GetSpell(SCORPID_STING_1) && mytar->GetTypeId() == TYPEID_UNIT &&
++                if (GetSpell(SCORPID_STING_1) && mytar->GetTypeId() == TYPEID_UNIT &&
 +                    mytar->ToCreature()->GetCreatureTemplate()->rank != CREATURE_ELITE_NORMAL)
 +                {
 +                    sting = mytar->GetAuraEffect(SPELL_AURA_MOD_HIT_CHANCE, SPELLFAMILY_HUNTER, 0x8000, 0x0, 0x0);
@@ -52280,13 +52287,11 @@ index 0000000000..2e024e7ecc
 +        {
 +            uint32 mask = 0;
 +
-+            uint32 baseId;
-+            bool isAspect;
 +            Unit::AuraApplicationMap const& aurapps = me->GetAppliedAuras();
 +            for (Unit::AuraApplicationMap::const_iterator itr = aurapps.begin(); itr != aurapps.end(); ++itr)
 +            {
-+                isAspect = true;
-+                baseId = itr->second->GetBase()->GetSpellInfo()->GetFirstRankSpell()->Id;
++                bool isAspect = true;
++                uint32 baseId = itr->second->GetBase()->GetSpellInfo()->GetFirstRankSpell()->Id;
 +                switch (baseId)
 +                {
 +                    //case ASPECT_OF_THE_MONKEY_1:
@@ -54964,10 +54969,10 @@ index 0000000000..0161ea7777
 +}
 diff --git a/src/server/game/AI/NpcBots/bot_paladin_ai.cpp b/src/server/game/AI/NpcBots/bot_paladin_ai.cpp
 new file mode 100644
-index 0000000000..8768bda464
+index 0000000000..7c2d04e77d
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/bot_paladin_ai.cpp
-@@ -0,0 +1,2656 @@
+@@ -0,0 +1,2653 @@
 +#include "bot_ai.h"
 +#include "botmgr.h"
 +#include "bottext.h"
@@ -57529,11 +57534,10 @@ index 0000000000..8768bda464
 +        {
 +            uint32 mask = 0;
 +
-+            bool blessing;
 +            Unit::AuraApplicationMap const& aurapps = target->GetAppliedAuras();
 +            for (Unit::AuraApplicationMap::const_iterator itr = aurapps.begin(); itr != aurapps.end(); ++itr)
 +            {
-+                blessing = true;
++                bool blessing = true;
 +                switch (itr->second->GetBase()->GetSpellInfo()->GetFirstRankSpell()->Id)
 +                {
 +                    case BLESSING_OF_WISDOM_1:
@@ -57572,13 +57576,11 @@ index 0000000000..8768bda464
 +        {
 +            uint32 mask = 0;
 +
-+            uint32 baseId;
-+            bool isAura;
 +            Unit::AuraApplicationMap const& aurapps = me->GetAppliedAuras();
 +            for (Unit::AuraApplicationMap::const_iterator itr = aurapps.begin(); itr != aurapps.end(); ++itr)
 +            {
-+                isAura = true;
-+                baseId = itr->second->GetBase()->GetSpellInfo()->GetFirstRankSpell()->Id;
++                bool isAura = true;
++                uint32 baseId = itr->second->GetBase()->GetSpellInfo()->GetFirstRankSpell()->Id;
 +                switch (baseId)
 +                {
 +                    case DEVOTION_AURA_1:
@@ -61734,7 +61736,7 @@ index 0000000000..981106a2fa
 +}
 diff --git a/src/server/game/AI/NpcBots/bot_sea_witch_ai.cpp b/src/server/game/AI/NpcBots/bot_sea_witch_ai.cpp
 new file mode 100644
-index 0000000000..c91f7187ee
+index 0000000000..b38d33cce4
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/bot_sea_witch_ai.cpp
 @@ -0,0 +1,785 @@
@@ -62513,7 +62515,7 @@ index 0000000000..c91f7187ee
 +                case 3: return 1.f /   2.50f;
 +                case 2: return 1.f /   1.67f;
 +                case 1: return 1.f /   1.25f;
-+                default:return 1.f /   1.00f;
++                default:return         1.00f;
 +            }
 +        }
 +    };
@@ -70945,10 +70947,10 @@ index 0000000000..c6c5e9645c
 +}
 diff --git a/src/server/game/AI/NpcBots/botcommands.cpp b/src/server/game/AI/NpcBots/botcommands.cpp
 new file mode 100644
-index 0000000000..9d262e8777
+index 0000000000..75da55654b
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/botcommands.cpp
-@@ -0,0 +1,5061 @@
+@@ -0,0 +1,5064 @@
 +#include "Bag.h"
 +#include "bot_ai.h"
 +#include "botdatamgr.h"
@@ -71358,10 +71360,13 @@ index 0000000000..9d262e8777
 +
 +    struct BotInfo
 +    {
-+        explicit BotInfo(uint32 Id, std::string&& Name, uint8 Race) : id(Id), name(std::move(Name)), race(Race) {}
++        BotInfo(uint32 Id, std::string&& Name, uint8 Race) : id(Id), name(std::move(Name)), race(Race) {}
 +        uint32 id;
 +        std::string name;
 +        uint8 race;
++
++        inline constexpr bool operator==(BotInfo const& other) const noexcept { return id == other.id; }
++        inline constexpr std::strong_ordering operator<=>(BotInfo const& other) const noexcept { return id <=> other.id; }
 +    };
 +public:
 +    script_bot_commands() : CommandScript("script_bot_commands") { }
@@ -71950,7 +71955,7 @@ index 0000000000..9d262e8777
 +        {
 +            if (!wps_relinks.empty())
 +            {
-+                std::sort(wps_relinks.begin(), wps_relinks.end(), [](WanderNodeLink const* wlp1, WanderNodeLink const* wlp2) { return wlp1->Id() < wlp2->Id(); });
++                std::ranges::sort(wps_relinks, [](WanderNodeLink const* wlp1, WanderNodeLink const* wlp2) { return wlp1->Id() < wlp2->Id(); });
 +                for (WanderNodeLink const* wlp : wps_relinks)
 +                {
 +                    handler->PSendSysMessage("Adding link %u->%u (w=%u)...", wp->GetWPId(), wlp->Id(), wlp->weight);
@@ -72588,7 +72593,7 @@ index 0000000000..9d262e8777
 +        std::vector<WanderNode*> wander_nodes_copy;
 +        wander_nodes_copy.reserve(WanderNode::GetAllWPsCount());
 +        WanderNode::DoForAllWPs([&wander_nodes_copy](WanderNode* wp) { wander_nodes_copy.push_back(wp); });
-+        std::sort(std::begin(wander_nodes_copy), std::end(wander_nodes_copy), [](WanderNode const* wp1, WanderNode const* wp2) { return wp1->GetWPId() < wp2->GetWPId(); });
++        std::ranges::sort(wander_nodes_copy, [](WanderNode const* wp1, WanderNode const* wp2) { return wp1->GetWPId() < wp2->GetWPId(); });
 +
 +        uint32 startid = *start_id;
 +        uint32 endid = end_id.value_or(wander_nodes_copy.back()->GetWPId());
@@ -74333,7 +74338,7 @@ index 0000000000..9d262e8777
 +            return false;
 +        }
 +
-+        std::sort(botlist.begin(), botlist.end(), [](BotInfo const& bi1, BotInfo const& bi2) { return bi1.id < bi2.id; });
++        std::ranges::sort(botlist);
 +
 +        for (BotList::const_iterator itr = botlist.begin(); itr != botlist.end(); ++itr)
 +        {
@@ -76012,10 +76017,10 @@ index 0000000000..9d262e8777
 +#endif
 diff --git a/src/server/game/AI/NpcBots/botcommon.h b/src/server/game/AI/NpcBots/botcommon.h
 new file mode 100644
-index 0000000000..a4ec7e3270
+index 0000000000..fe0f42a33c
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/botcommon.h
-@@ -0,0 +1,630 @@
+@@ -0,0 +1,638 @@
 +#ifndef _BOTCOMMON_H
 +#define _BOTCOMMON_H
 +
@@ -76112,6 +76117,8 @@ index 0000000000..a4ec7e3270
 +    CREATURE_ICC_MUTATED_ABOMINATION8   = 38787,
 +    CREATURE_GEARGRINDERS_JUMPBOT       = 31784,
 +//COMMON AOE TRIGGERS
++    CREATURE_MUTATING_BUG_1             = 15316,
++    CREATURE_MUTATING_BUG_2             = 15317,
 +    CREATURE_FOCUS_FIRE_N               = 18374,
 +    CREATURE_FOCUS_FIRE_H               = 20308,
 +    CREATURE_MT_PHOENIX                 = 24674,
@@ -76123,6 +76130,12 @@ index 0000000000..a4ec7e3270
 +    CREATURE_EOE_STATIC_FIELD           = 30592,
 +    CREATURE_ICC_OOZE_PUDDLE            = 37690,
 +    GAMEOBJECT_HOT_COAL                 = 178164,
++    GAMEOBJECT_SAND_TRAP                = 180647,
++    GAMEOBJECT_LIQUID_FIRE_1            = 180125,
++    GAMEOBJECT_LIQUID_FIRE_2            = 181890,
++    GAMEOBJECT_LIQUID_FIRE_3            = 182533,
++    GAMEOBJECT_PROXIMITY_BOMB_N         = 181877,
++    GAMEOBJECT_PROXIMITY_BOMB_H         = 182607,
 +//COMMON ENEMY CREATURES
 +    CREATURE_BOSS_EREGOS_N              = 27656,
 +    CREATURE_BOSS_EREGOS_H              = 31561,
@@ -76648,7 +76661,7 @@ index 0000000000..a4ec7e3270
 +#endif
 diff --git a/src/server/game/AI/NpcBots/botdatamgr.cpp b/src/server/game/AI/NpcBots/botdatamgr.cpp
 new file mode 100644
-index 0000000000..74227b342f
+index 0000000000..030bb32d43
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/botdatamgr.cpp
 @@ -0,0 +1,3456 @@
@@ -78985,7 +78998,7 @@ index 0000000000..74227b342f
 +    BOT_LOG_INFO("server.loading", ">> Sorted wandering bots gear in {} ms", GetMSTimeDiffToNow(oldMSTime));
 +}
 +
-+Item* BotDataMgr::GenerateWanderingBotItem(uint8 slot, uint8 botclass, uint8 level, std::function<bool(ItemTemplate const*)>&& check)
++Item* BotDataMgr::GenerateWanderingBotItem(uint8 slot, uint8 botclass, uint8 level, std::function<bool(uint8, ItemTemplate const*)> const& check)
 +{
 +    ASSERT(slot < BOT_INVENTORY_SIZE);
 +    ASSERT(botclass < BOT_CLASS_END);
@@ -79013,7 +79026,7 @@ index 0000000000..74227b342f
 +            for (uint32 iid : *itemIdVec)
 +            {
 +                ItemTemplate const* proto = sObjectMgr->GetItemTemplate(iid);
-+                if ((!maxLvl || proto->ItemLevel <= maxLvl) && check(proto))
++                if ((!maxLvl || proto->ItemLevel <= maxLvl) && check(slot, proto))
 +                    validVec.push_back(iid);
 +            }
 +        }
@@ -80110,7 +80123,7 @@ index 0000000000..74227b342f
 +#endif
 diff --git a/src/server/game/AI/NpcBots/botdatamgr.h b/src/server/game/AI/NpcBots/botdatamgr.h
 new file mode 100644
-index 0000000000..3ec1ddfe4a
+index 0000000000..998f292271
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/botdatamgr.h
 @@ -0,0 +1,282 @@
@@ -80353,7 +80366,7 @@ index 0000000000..3ec1ddfe4a
 +        static bool GenerateBattlegroundBots(Player const* groupLeader, Group const* group, BattlegroundQueue* queue, PvPDifficultyEntry const* bracketEntry, GroupQueueInfo const* gqinfo);
 +        static void CreateWanderingBotsSortedGear();
 +        static ItemPerBotClassMap const& GetWanderingBotsSortedGearMap();
-+        static Item* GenerateWanderingBotItem(uint8 slot, uint8 botclass, uint8 level, std::function<bool(ItemTemplate const*)>&& check);
++        static Item* GenerateWanderingBotItem(uint8 slot, uint8 botclass, uint8 level, std::function<bool(uint8, ItemTemplate const*)> const& check);
 +        static bool GenerateWanderingBotItemEnchants(Item* item, uint8 slot, uint8 spec);
 +        static CreatureTemplate const* GetBotExtraCreatureTemplate(uint32 entry);
 +        static EquipmentInfo const* GetBotEquipmentInfo(uint32 entry);
@@ -80437,10 +80450,10 @@ index 0000000000..fdcaf1df14
 +#endif
 diff --git a/src/server/game/AI/NpcBots/botdpstracker.cpp b/src/server/game/AI/NpcBots/botdpstracker.cpp
 new file mode 100644
-index 0000000000..b1ed618715
+index 0000000000..5a271b9eb2
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/botdpstracker.cpp
-@@ -0,0 +1,133 @@
+@@ -0,0 +1,129 @@
 +#include "botdpstracker.h"
 +#include "Unit.h"
 +
@@ -80462,10 +80475,6 @@ index 0000000000..b1ed618715
 +
 +DPSTracker::DPSTracker()
 +{
-+    _updateTimer = 0;
-+    _inactiveTimer = 0;
-+    _trackTimer = 0;
-+    _active = false;
 +}
 +
 +DPSTracker::~DPSTracker()
@@ -80576,7 +80585,7 @@ index 0000000000..b1ed618715
 +}
 diff --git a/src/server/game/AI/NpcBots/botdpstracker.h b/src/server/game/AI/NpcBots/botdpstracker.h
 new file mode 100644
-index 0000000000..c061ff5d1a
+index 0000000000..f9533f08c0
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/botdpstracker.h
 @@ -0,0 +1,38 @@
@@ -80611,16 +80620,16 @@ index 0000000000..c061ff5d1a
 +        DamageTakenMap _damages;
 +        DPSTakenMap _DPSes;
 +
-+        uint32 _updateTimer;
-+        uint32 _inactiveTimer;
-+        uint32 _trackTimer;
-+        bool _active;
++        uint32 _updateTimer{};
++        uint32 _inactiveTimer{};
++        uint32 _trackTimer{};
++        bool _active{};
 +};
 +
 +#endif
 diff --git a/src/server/game/AI/NpcBots/botdump.cpp b/src/server/game/AI/NpcBots/botdump.cpp
 new file mode 100644
-index 0000000000..213bd741c2
+index 0000000000..f334cb2925
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/botdump.cpp
 @@ -0,0 +1,1024 @@
@@ -80796,13 +80805,13 @@ index 0000000000..213bd741c2
 +}
 +
 +template<typename T>
-+bool ExtractValueFromString(std::string const& line, T& v, size_t offset, std::string const sep = "'")
++bool ExtractValueFromString(std::string const& line, T& v, size_t offset)
 +{
 +    uint32 sepNum = 0;
 +
 +    size_t begin_pos = 0, end_pos = 0;
 +
-+    size_t pos = line.find(sep);
++    size_t pos = line.find('\'');
 +    while (pos != std::string::npos)
 +    {
 +        ++sepNum;
@@ -80820,7 +80829,7 @@ index 0000000000..213bd741c2
 +        if (begin_pos && end_pos)
 +            break;
 +
-+        pos = line.find(sep, pos + 1);
++        pos = line.find('\'', pos + 1);
 +    }
 +
 +    if (begin_pos && end_pos)
@@ -82471,10 +82480,10 @@ index 0000000000..1b1cb0c6a4
 +#endif //BOTLOG_H_
 diff --git a/src/server/game/AI/NpcBots/botmgr.cpp b/src/server/game/AI/NpcBots/botmgr.cpp
 new file mode 100644
-index 0000000000..af682a2cc5
+index 0000000000..164832abae
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/botmgr.cpp
-@@ -0,0 +1,3424 @@
+@@ -0,0 +1,3420 @@
 +#include "Battleground.h"
 +#include "BattlegroundMgr.h"
 +#include "bot_ai.h"
@@ -83676,8 +83685,6 @@ index 0000000000..af682a2cc5
 +        return;
 +
 +    //ObjectGuid guid;
-+    Creature* bot;
-+    bot_ai* ai;
 +    bool partyCombat = IsPartyInCombat(false);
 +    bool restrictBots = RestrictBots(_bots.begin()->second, false);
 +
@@ -83690,8 +83697,8 @@ index 0000000000..af682a2cc5
 +    for (BotMap::const_iterator itr = _bots.begin(); itr != _bots.end(); ++itr)
 +    {
 +        //guid = itr->first;
-+        bot = itr->second;
-+        ai = bot->GetBotAI();
++        Creature* bot = itr->second;
++        bot_ai* ai = bot->GetBotAI();
 +
 +        if (ai->IAmFree())
 +            continue;
@@ -84054,13 +84061,11 @@ index 0000000000..af682a2cc5
 +void BotMgr::OnTeleportFar(uint32 mapId, float x, float y, float z, float ori)
 +{
 +    Map* newMap = sMapMgr->CreateBaseMap(mapId);
-+    Creature* bot;
-+    Position pos;
-+    pos.Relocate(x, y, z, ori);
++    Position pos{ x, y, z, ori };
 +
 +    for (BotMap::const_iterator itr = _bots.begin(); itr != _bots.end(); ++itr)
 +    {
-+        bot = itr->second;
++        Creature* bot = itr->second;
 +
 +        if (bot->IsTempBot())
 +            continue;
@@ -89629,10 +89634,10 @@ index 0000000000..7e8d920fa7
 +#endif
 diff --git a/src/server/game/AI/NpcBots/botwanderful.h b/src/server/game/AI/NpcBots/botwanderful.h
 new file mode 100644
-index 0000000000..fd3a3efa5b
+index 0000000000..a4004ba5ae
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/botwanderful.h
-@@ -0,0 +1,231 @@
+@@ -0,0 +1,232 @@
 +#ifndef BOTWANDERFUL_H_
 +#define BOTWANDERFUL_H_
 +
@@ -89712,9 +89717,10 @@ index 0000000000..fd3a3efa5b
 +        WanderNode* wp;
 +        uint32 weight;
 +
-+        inline uint32 Id() const { return wp ? wp->GetWPId() : 0; }
++        inline constexpr uint32 Id() const noexcept { return wp ? wp->GetWPId() : 0; }
 +
-+        inline constexpr std::strong_ordering operator<=>(WanderNodeLink const& other) const noexcept = default;
++        inline constexpr bool operator==(WanderNodeLink const& other) const noexcept { return Id() == other.Id(); }
++        inline constexpr std::strong_ordering operator<=>(WanderNodeLink const& other) const noexcept { return Id() <=> other.Id(); }
 +
 +        struct WeightExtractor {
 +            inline constexpr uint32 operator()(WanderNodeLink const& wpl) const noexcept { return wpl.weight; }
@@ -89866,10 +89872,10 @@ index 0000000000..fd3a3efa5b
 +#endif //BOTWANDERFUL_H_
 diff --git a/src/server/game/AI/NpcBots/bpet_ai.cpp b/src/server/game/AI/NpcBots/bpet_ai.cpp
 new file mode 100644
-index 0000000000..4e20acea81
+index 0000000000..6826b847a2
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/bpet_ai.cpp
-@@ -0,0 +1,2643 @@
+@@ -0,0 +1,2640 @@
 +#include "bpet_ai.h"
 +#include "bot_GridNotifiers.h"
 +#include "botmgr.h"
@@ -91414,7 +91420,7 @@ index 0000000000..4e20acea81
 +        foldist = std::max<float>(foldist, spelldist + 4.f);
 +    }
 +    bool dropTarget = false;
-+    if (!dropTarget && mytar)
++    if (mytar)
 +    {
 +        dropTarget = IAmFree() ?
 +            petOwner->GetDistance(mytar) > foldist :
@@ -92199,11 +92205,9 @@ index 0000000000..4e20acea81
 +
 +void bot_pet_ai::OnBotPetSpellInterrupted(SpellSchoolMask schoolMask, uint32 unTimeMs)
 +{
-+    SpellInfo const* info;
-+
 +    for (BotPetSpellMap::iterator itr = _spells.begin(); itr != _spells.end(); ++itr)
 +    {
-+        info = sSpellMgr->GetSpellInfo(itr->second->spellId);
++        SpellInfo const* info = sSpellMgr->GetSpellInfo(itr->second->spellId);
 +        if (!info || !(info->GetSchoolMask() & schoolMask)) continue;
 +        if (info->IsCooldownStartedOnEvent()) continue;
 +        if (info->PreventionType != SPELL_PREVENTION_TYPE_SILENCE) continue;
@@ -92256,10 +92260,9 @@ index 0000000000..4e20acea81
 +    //Check current cast state: interrupt casts that became pointless
 +    if (me->HasUnitState(UNIT_STATE_CASTING) && urand(1,100) <= 75)
 +    {
-+        bool interrupt;
 +        for (uint8 i = CURRENT_FIRST_NON_MELEE_SPELL; i != CURRENT_AUTOREPEAT_SPELL; ++i)
 +        {
-+            interrupt = false;
++            bool interrupt = false;
 +            Spell* spell = me->GetCurrentSpell(CurrentSpellTypes(i));
 +            if (!spell)
 +                continue;
@@ -104365,7 +104368,7 @@ index f22c050002..1ab62277b3 100644
          explicit Unit (bool isWorldObject);
  
 diff --git a/src/server/game/Entities/Vehicle/Vehicle.cpp b/src/server/game/Entities/Vehicle/Vehicle.cpp
-index 14ec0f18a8..cfe3fa9f4b 100755
+index e746cc0faf..2fafc2dbcc 100755
 --- a/src/server/game/Entities/Vehicle/Vehicle.cpp
 +++ b/src/server/game/Entities/Vehicle/Vehicle.cpp
 @@ -33,6 +33,10 @@
@@ -104418,8 +104421,8 @@ index 14ec0f18a8..cfe3fa9f4b 100755
      }
  
      Passenger->InterruptNonMeleeSpells(false);
-@@ -853,6 +878,14 @@ bool VehicleJoinEvent::Execute(uint64, uint32)
-             player->UnsummonPetTemporaryIfAny();
+@@ -856,6 +881,14 @@ bool VehicleJoinEvent::Execute(uint64, uint32)
+         player->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_NOT_SEATED);
      }
  
 +    //npcbot
@@ -104433,7 +104436,7 @@ index 14ec0f18a8..cfe3fa9f4b 100755
      if (veSeat->HasFlag(VEHICLE_SEAT_FLAG_PASSENGER_NOT_SELECTABLE))
          Passenger->SetUnitFlag(UNIT_FLAG_UNINTERACTIBLE);
  
-@@ -867,6 +900,11 @@ bool VehicleJoinEvent::Execute(uint64, uint32)
+@@ -870,6 +903,11 @@ bool VehicleJoinEvent::Execute(uint64, uint32)
      Passenger->m_movementInfo.transport.seat = Seat->first;
      Passenger->m_movementInfo.transport.guid = Target->GetBase()->GetGUID();
  
@@ -104445,7 +104448,7 @@ index 14ec0f18a8..cfe3fa9f4b 100755
      if (Target->GetBase()->GetTypeId() == TYPEID_UNIT && Passenger->GetTypeId() == TYPEID_PLAYER &&
          veSeat->HasFlag(VEHICLE_SEAT_FLAG_CAN_CONTROL))
      {
-@@ -877,6 +915,10 @@ bool VehicleJoinEvent::Execute(uint64, uint32)
+@@ -880,6 +918,10 @@ bool VehicleJoinEvent::Execute(uint64, uint32)
              Abort(0);
              return true;
          }
@@ -104654,7 +104657,7 @@ index 3a2cf3d2d8..a46c0f8a08 100644
                  if (!player)
                      return false;
 diff --git a/src/server/game/Groups/Group.cpp b/src/server/game/Groups/Group.cpp
-index c9993f95f4..d780c40782 100644
+index c9993f95f4..99e59b4072 100644
 --- a/src/server/game/Groups/Group.cpp
 +++ b/src/server/game/Groups/Group.cpp
 @@ -42,6 +42,11 @@
@@ -105040,7 +105043,7 @@ index c9993f95f4..d780c40782 100644
          data << citr->name;
          data << citr->guid;                             // guid
          data << uint8(onlineState);                     // online-state
-@@ -1788,6 +2073,25 @@ void Group::SendOriginalGroupUpdateToPlayer(Player const* player) const
+@@ -1788,6 +2073,24 @@ void Group::SendOriginalGroupUpdateToPlayer(Player const* player) const
      player->SendDirectMessage(&data);
  }
  
@@ -105053,10 +105056,9 @@ index c9993f95f4..d780c40782 100644
 +    WorldPacket data;
 +    BotMgr::BuildBotPartyMemberStatsChangedPacket(creature, &data);
 +
-+    Player* member;
 +    for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
 +    {
-+        member = itr->GetSource();
++        Player const*member = itr->GetSource();
 +        if (member/* && (!member->IsInMap(creature) || !member->IsWithinDist(creature, member->GetSightRange(), false))*/)
 +            member->SendDirectMessage(&data);
 +    }
@@ -105066,7 +105068,19 @@ index c9993f95f4..d780c40782 100644
  void Group::UpdatePlayerOutOfRange(Player* player)
  {
      if (!player || !player->IsInWorld())
-@@ -1915,6 +2219,24 @@ void Group::ChangeMembersGroup(ObjectGuid guid, uint8 group)
+@@ -1796,10 +2099,9 @@ void Group::UpdatePlayerOutOfRange(Player* player)
+     WorldPacket data;
+     player->GetSession()->BuildPartyMemberStatsChangedPacket(player, &data);
+ 
+-    Player* member;
+     for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
+     {
+-        member = itr->GetSource();
++        Player const* member = itr->GetSource();
+         if (member && member != player && (!member->IsInMap(player) || !member->IsWithinDist(player, member->GetSightRange(), false)))
+             member->SendDirectMessage(&data);
+     }
+@@ -1915,6 +2217,24 @@ void Group::ChangeMembersGroup(ObjectGuid guid, uint8 group)
          CharacterDatabase.Execute(stmt);
      }
  
@@ -105091,7 +105105,7 @@ index c9993f95f4..d780c40782 100644
      // In case the moved player is online, update the player object with the new sub group references
      if (Player* player = ObjectAccessor::FindConnectedPlayer(guid))
      {
-@@ -2084,6 +2406,14 @@ GroupJoinBattlegroundResult Group::CanJoinBattlegroundQueue(Battleground const*
+@@ -2084,6 +2404,14 @@ GroupJoinBattlegroundResult Group::CanJoinBattlegroundQueue(Battleground const*
  
      errorGuid = ObjectGuid::Empty;
  
@@ -105106,7 +105120,7 @@ index c9993f95f4..d780c40782 100644
      // only check for MinPlayerCount since MinPlayerCount == MaxPlayerCount for arenas...
      if (bgOrTemplate->isArena() && memberscount != MinPlayerCount)
          return ERR_ARENA_TEAM_PARTY_SIZE;
-@@ -2597,12 +2927,26 @@ void Group::SetGroupMemberFlag(ObjectGuid guid, bool apply, GroupMemberFlags fla
+@@ -2597,12 +2925,26 @@ void Group::SetGroupMemberFlag(ObjectGuid guid, bool apply, GroupMemberFlags fla
      ToggleGroupMemberFlag(slot, flag, apply);
  
      // Preserve the new setting in the db
@@ -105133,7 +105147,7 @@ index c9993f95f4..d780c40782 100644
  
      // Broadcast the changes to the group
      SendUpdate();
-@@ -2657,6 +3001,28 @@ void Group::DelinkMember(ObjectGuid guid)
+@@ -2657,6 +2999,28 @@ void Group::DelinkMember(ObjectGuid guid)
      }
  }
  
@@ -106204,7 +106218,7 @@ index 42ffefbf7f..f390dda119 100644
      @todo Add more script type classes.
  
 diff --git a/src/server/game/Server/WorldSession.cpp b/src/server/game/Server/WorldSession.cpp
-index 7adf4ccbac..d515113ed3 100644
+index 2514d31607..ec2b2d516a 100644
 --- a/src/server/game/Server/WorldSession.cpp
 +++ b/src/server/game/Server/WorldSession.cpp
 @@ -58,6 +58,10 @@
@@ -106229,7 +106243,7 @@ index 7adf4ccbac..d515113ed3 100644
      if (_player)
      {
          ObjectGuid lguid = _player->GetLootGUID();
-@@ -1716,6 +1724,16 @@ uint32 WorldSession::DosProtection::GetMaxPacketCounterAllowed(uint16 opcode) co
+@@ -1714,6 +1722,16 @@ uint32 WorldSession::DosProtection::GetMaxPacketCounterAllowed(uint16 opcode) co
              maxPacketCounterAllowed = PLAYER_SLOTS_COUNT;
              break;
          }
