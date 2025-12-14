@@ -165,7 +165,7 @@
  src/server/game/AI/NpcBots/bot_sphynx_ai.cpp       |   569 +
  src/server/game/AI/NpcBots/bot_warlock_ai.cpp      |  2127 ++
  src/server/game/AI/NpcBots/bot_warrior_ai.cpp      |  2198 ++
- src/server/game/AI/NpcBots/botcommands.cpp         |  5064 +++++
+ src/server/game/AI/NpcBots/botcommands.cpp         |  4966 +++++
  src/server/game/AI/NpcBots/botcommon.h             |   638 +
  src/server/game/AI/NpcBots/botdatamgr.cpp          |  3456 +++
  src/server/game/AI/NpcBots/botdatamgr.h            |   282 +
@@ -299,11 +299,11 @@
  src/server/scripts/Spells/spell_shaman.cpp         |   127 +
  src/server/scripts/Spells/spell_warlock.cpp        |     9 +
  src/server/scripts/Spells/spell_warrior.cpp        |     9 +
- src/server/shared/DataStores/DBCStructure.h        |    15 +-
- src/server/shared/DataStores/DBCfmt.h              |     4 +-
+ src/server/shared/DataStores/DBCStructure.h        |     9 +-
+ src/server/shared/DataStores/DBCfmt.h              |     2 +-
  src/server/shared/SharedDefines.h                  |     7 +
  src/server/worldserver/worldserver.conf.dist       |   721 +
- 305 files changed, 103382 insertions(+), 80 deletions(-)
+ 305 files changed, 103279 insertions(+), 77 deletions(-)
  create mode 100644 sql/Bots/1_world_bot_appearance.sql
  create mode 100644 sql/Bots/2_world_bot_extras.sql
  create mode 100644 sql/Bots/3_world_bots.sql
@@ -568,11 +568,11 @@ index 1f6ade7000..2becfb5fa7 100644
    build:
      runs-on: ubuntu-22.04
 diff --git a/README.md b/README.md
-index 789e2ebd99..0bebaba9e9 100644
+index 99a4cce683..6ccb683011 100644
 --- a/README.md
 +++ b/README.md
 @@ -1,7 +1,5 @@
- # ![logo](https://community.trinitycore.org/public/style_images/1_trinitycore.png) TrinityCore (3.3.5)
+ # ![logo](https://trinitycore.org/images/logo2.png) TrinityCore (3.3.5)
  
 -[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/TrinityCore/TrinityCore.svg)](https://isitmaintained.com/project/TrinityCore/TrinityCore "Average time to resolve an issue") [![Percentage of issues still open](https://isitmaintained.com/badge/open/TrinityCore/TrinityCore.svg)](https://isitmaintained.com/project/TrinityCore/TrinityCore "Percentage of issues still open")
 -
@@ -17271,10 +17271,10 @@ index 2ac4b706bd..4b94298b5d 100644
  };
  
 diff --git a/src/server/database/Database/Implementation/WorldDatabase.cpp b/src/server/database/Database/Implementation/WorldDatabase.cpp
-index 9f866ebf8d..ae342927dc 100644
+index b0b6580dda..c1a82e699c 100644
 --- a/src/server/database/Database/Implementation/WorldDatabase.cpp
 +++ b/src/server/database/Database/Implementation/WorldDatabase.cpp
-@@ -95,6 +95,11 @@ void WorldDatabaseConnection::DoPrepareStatements()
+@@ -94,6 +94,11 @@ void WorldDatabaseConnection::DoPrepareStatements()
      PrepareStatement(WORLD_UPD_GAMEOBJECT_ZONE_AREA_DATA, "UPDATE gameobject SET zoneId = ?, areaId = ? WHERE guid = ?", CONNECTION_ASYNC);
      PrepareStatement(WORLD_DEL_SPAWNGROUP_MEMBER, "DELETE FROM spawn_group WHERE spawnType = ? AND spawnId = ?", CONNECTION_ASYNC);
      PrepareStatement(WORLD_DEL_GAMEOBJECT_ADDON, "DELETE FROM gameobject_addon WHERE guid = ?", CONNECTION_ASYNC);
@@ -17287,10 +17287,10 @@ index 9f866ebf8d..ae342927dc 100644
  
  WorldDatabaseConnection::WorldDatabaseConnection(MySQLConnectionInfo& connInfo) : MySQLConnection(connInfo)
 diff --git a/src/server/database/Database/Implementation/WorldDatabase.h b/src/server/database/Database/Implementation/WorldDatabase.h
-index d1b865aa9b..bad12d6be5 100644
+index 7f7db1df65..9d3b1de9a4 100644
 --- a/src/server/database/Database/Implementation/WorldDatabase.h
 +++ b/src/server/database/Database/Implementation/WorldDatabase.h
-@@ -102,6 +102,11 @@ enum WorldDatabaseStatements : uint32
+@@ -101,6 +101,11 @@ enum WorldDatabaseStatements : uint32
      WORLD_DEL_SPAWNGROUP_MEMBER,
      WORLD_DEL_GAMEOBJECT_ADDON,
  
@@ -70947,10 +70947,10 @@ index 0000000000..c6c5e9645c
 +}
 diff --git a/src/server/game/AI/NpcBots/botcommands.cpp b/src/server/game/AI/NpcBots/botcommands.cpp
 new file mode 100644
-index 0000000000..75da55654b
+index 0000000000..353f4a58bd
 --- /dev/null
 +++ b/src/server/game/AI/NpcBots/botcommands.cpp
-@@ -0,0 +1,5064 @@
+@@ -0,0 +1,4966 @@
 +#include "Bag.h"
 +#include "bot_ai.h"
 +#include "botdatamgr.h"
@@ -71404,7 +71404,6 @@ index 0000000000..75da55654b
 +
 +        static ChatCommandTable npcbotWPCommandTable =
 +        {
-+            //{ "generate",   HandleNpcBotWPGenerateCommand,          rbac::RBAC_PERM_COMMAND_NPCBOT_SPAWN,              Console::Yes },
 +            { "spawnall",   HandleNpcBotWPSpawnAllCommand,          rbac::RBAC_PERM_COMMAND_NPCBOT_SPAWN,              Console::No  },
 +            { "move",       HandleNpcBotWPMoveCommand,              rbac::RBAC_PERM_COMMAND_NPCBOT_SPAWN,              Console::No  },
 +            { "add",        HandleNpcBotWPAddCommand,               rbac::RBAC_PERM_COMMAND_NPCBOT_SPAWN,              Console::No  },
@@ -71653,103 +71652,6 @@ index 0000000000..75da55654b
 +        wp->SetupLinkFromAura();
 +        wp->SetupLinkToAura();
 +        return wpc;
-+    }
-+
-+    static bool HandleNpcBotWPGenerateCommand(ChatHandler* handler, Optional<bool> save)
-+    {
-+        using WanderNodeLink = WanderNode::WanderNodeLink;
-+
-+        WanderNode::RemoveAllWPs();
-+
-+        handler->SendSysMessage("Generating wander nodes from POIs. No levels or flags will be set");
-+
-+        uint32 poiId_start = 0;
-+        for (AreaPOIEntry const* aProto : sAreaPOIStore)
-+        {
-+            if (aProto->ContinentID != 0 && aProto->ContinentID != 1/* && aProto->ContinentID != 530 && aProto->ContinentID != 571*/)
-+                continue;
-+
-+            uint32 poiId = ++poiId_start;
-+            std::string poiName = aProto->Name;
-+            if (strlen(aProto->Description) > 0)
-+            {
-+                poiName += " - ";
-+                poiName += aProto->Description;
-+            }
-+            poiName.erase(std::remove_if(std::begin(poiName), std::end(poiName), [](char c) { return c == '\''; }), poiName.end());
-+            uint32 poiMapId = aProto->ContinentID;
-+            float x = aProto->Pos.X;
-+            float y = aProto->Pos.Y;
-+            float z = aProto->Pos.Z;
-+            float o = frand(0.001f, float(M_PI + M_PI) - 0.001f);
-+            float ground_z = sMapMgr->CreateBaseMap(poiMapId)->GetHeight(PHASEMASK_NORMAL, x, y, z);
-+            if (ground_z > INVALID_HEIGHT)
-+                z = ground_z;
-+            uint32 poiZoneId, poiAreaId;
-+            sMapMgr->GetZoneAndAreaId(PHASEMASK_NORMAL, poiZoneId, poiAreaId, poiMapId, x, y, z);
-+
-+            poiZoneId = GetZoneIdOverride(poiZoneId);
-+            if (IsNoWPZone(poiZoneId))
-+            {
-+                --poiId_start;
-+                continue;
-+            }
-+
-+            WanderNode* wp = new WanderNode(poiId, poiMapId, x, y, z, o, poiZoneId, poiAreaId, poiName);
-+            auto [minl, maxl] = GetZoneLevels(poiZoneId);
-+            wp->SetLevels(minl, maxl);
-+            BotWPFlags flags = BotWPFlags::BOTWP_FLAG_NONE;
-+            wp->SetFlags(flags);
-+            WanderNode::DoForAllMapWPs(poiMapId, [wp = wp](WanderNode const* mwp) {
-+                if (mwp->GetWPId() != wp->GetWPId() && mwp->GetExactDist2d(wp) < MAX_VISIBILITY_DISTANCE)
-+                    wp->Link(WanderNodeLink{ .wp = const_cast<WanderNode*>(mwp), .weight = 0 });
-+            });
-+
-+            handler->SendSysMessage(wp->ToString());
-+        }
-+
-+        handler->PSendSysMessage("Generating wander nodes completed with %u nodes", uint32(WanderNode::GetAllWPsCount()));
-+
-+        if (!(save && *save))
-+            return true;
-+
-+        WorldDatabaseTransaction trans = WorldDatabase.BeginTransaction();
-+        trans->Append("DROP TABLE IF EXISTS creature_wander_nodes_");
-+        trans->Append(
-+            "CREATE TABLE creature_wander_nodes_ ("
-+            "  `id` int(10) unsigned NOT NULL,"
-+            "  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'RENAME_ME',"
-+            "  `mapid` smallint(5) unsigned NOT NULL DEFAULT '0',"
-+            "  `zoneid` int(10) unsigned NOT NULL DEFAULT '0',"
-+            "  `areaid` int(10) unsigned NOT NULL DEFAULT '0',"
-+            "  `minlevel` tinyint(3) unsigned NOT NULL DEFAULT '0',"
-+            "  `maxlevel` tinyint(3) unsigned NOT NULL DEFAULT '0',"
-+            "  `flags` int(10) unsigned NOT NULL DEFAULT '0',"
-+            "  `x` float NOT NULL DEFAULT '0',"
-+            "  `y` float NOT NULL DEFAULT '0',"
-+            "  `z` float NOT NULL DEFAULT '0',"
-+            "  `o` float NOT NULL DEFAULT '0',"
-+            "  `links` mediumtext COLLATE utf8mb4_unicode_ci,"
-+            "  PRIMARY KEY (`id`)"
-+            ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Bot Wander Map'"
-+        );
-+        std::ostringstream ss;
-+        ss << "INSERT INTO creature_wander_nodes_ (id,mapid,x,y,z,o,zoneId,areaId,minlevel,maxlevel,flags,name,links) VALUES ";
-+        WanderNode::DoForAllWPs([&ss](WanderNode const* wp) {
-+            auto [minl, maxl] = wp->GetLevels();
-+            ss << '(' << wp->GetWPId() << ',' << wp->GetMapId()
-+                << ',' << wp->GetPositionX() << ',' << wp->GetPositionY() << ',' << wp->GetPositionZ() << ',' << wp->GetOrientation()
-+                << ',' << wp->GetZoneId() << ',' << wp->GetAreaId() << ',' << uint32(minl) << ',' << uint32(maxl)
-+                << ',' << wp->GetFlags() << ",'" << wp->GetName() << "','" << wp->FormatLinks() << "'),";
-+        });
-+        std::string val_str = ss.str();
-+        val_str.resize(val_str.size() - 1u);
-+        trans->Append(val_str.c_str());
-+        WorldDatabase.CommitTransaction(trans);
-+
-+        handler->SendSysMessage("Saved.");
-+
-+        return true;
 +    }
 +
 +    static bool HandleNpcBotWPSpawnAllCommand(ChatHandler* handler)
@@ -96667,10 +96569,10 @@ index 0000000000..ef600eba41
 +
 +#endif
 diff --git a/src/server/game/AI/SmartScripts/SmartScript.cpp b/src/server/game/AI/SmartScripts/SmartScript.cpp
-index 2709ba65e2..fd76f6b528 100644
+index 9aa10aa893..9dcea0babb 100644
 --- a/src/server/game/AI/SmartScripts/SmartScript.cpp
 +++ b/src/server/game/AI/SmartScripts/SmartScript.cpp
-@@ -293,6 +293,9 @@ void SmartScript::ProcessAction(SmartScriptHolder& e, Unit* unit, uint32 var0, u
+@@ -294,6 +294,9 @@ void SmartScript::ProcessAction(SmartScriptHolder& e, Unit* unit, uint32 var0, u
                          talkTarget = target->ToCreature();
                      }
                      else
@@ -100158,10 +100060,10 @@ index 37ec438856..46d1f48d38 100644
                  condMeets = player->HasSpell(ConditionValue1);
              break;
 diff --git a/src/server/game/DataStores/DBCStores.cpp b/src/server/game/DataStores/DBCStores.cpp
-index cddb7a3c2c..d9e0fca9e9 100644
+index 70cb052952..634a909556 100644
 --- a/src/server/game/DataStores/DBCStores.cpp
 +++ b/src/server/game/DataStores/DBCStores.cpp
-@@ -115,7 +115,7 @@ DBCStorage <HolidaysEntry>                sHolidaysStore(Holidaysfmt);
+@@ -114,7 +114,7 @@ DBCStorage <HolidaysEntry>                sHolidaysStore(Holidaysfmt);
  DBCStorage <ItemEntry>                    sItemStore(Itemfmt);
  DBCStorage <ItemBagFamilyEntry>           sItemBagFamilyStore(ItemBagFamilyfmt);
  //DBCStorage <ItemCondExtCostsEntry> sItemCondExtCostsStore(ItemCondExtCostsEntryfmt);
@@ -100170,7 +100072,7 @@ index cddb7a3c2c..d9e0fca9e9 100644
  DBCStorage <ItemExtendedCostEntry> sItemExtendedCostStore(ItemExtendedCostEntryfmt);
  DBCStorage <ItemLimitCategoryEntry> sItemLimitCategoryStore(ItemLimitCategoryEntryfmt);
  DBCStorage <ItemRandomPropertiesEntry> sItemRandomPropertiesStore(ItemRandomPropertiesfmt);
-@@ -339,7 +339,7 @@ void LoadDBCStores(const std::string& dataPath)
+@@ -337,7 +337,7 @@ void LoadDBCStores(const std::string& dataPath)
      LOAD_DBC(sHolidaysStore,                      "Holidays.dbc");
      LOAD_DBC(sItemStore,                          "Item.dbc");
      LOAD_DBC(sItemBagFamilyStore,                 "ItemBagFamily.dbc");
@@ -100180,10 +100082,10 @@ index cddb7a3c2c..d9e0fca9e9 100644
      LOAD_DBC(sItemExtendedCostStore,              "ItemExtendedCost.dbc");
      LOAD_DBC(sItemLimitCategoryStore,             "ItemLimitCategory.dbc");
 diff --git a/src/server/game/DataStores/DBCStores.h b/src/server/game/DataStores/DBCStores.h
-index c1635c4715..6eb95ba1d8 100644
+index 15760817a8..bf782a5ea7 100644
 --- a/src/server/game/DataStores/DBCStores.h
 +++ b/src/server/game/DataStores/DBCStores.h
-@@ -145,7 +145,7 @@ TC_GAME_API extern DBCStorage <GtRegenMPPerSptEntry>         sGtRegenMPPerSptSto
+@@ -144,7 +144,7 @@ TC_GAME_API extern DBCStorage <GtRegenMPPerSptEntry>         sGtRegenMPPerSptSto
  TC_GAME_API extern DBCStorage <HolidaysEntry>                sHolidaysStore;
  TC_GAME_API extern DBCStorage <ItemEntry>                    sItemStore;
  TC_GAME_API extern DBCStorage <ItemBagFamilyEntry>           sItemBagFamilyStore;
@@ -102182,7 +102084,7 @@ index 65b9fffc0f..458f769707 100644
          player->GiveXP(xp, _victim, _groupRate);
          if (Pet* pet = player->GetPet())
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index afb6a1f770..3cdb6104ce 100644
+index 398650d8ae..ce38b783d6 100644
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -107,6 +107,11 @@
@@ -102379,7 +102281,7 @@ index afb6a1f770..3cdb6104ce 100644
              break;
          }
          // The character gets unlinked from the account, the name gets freed up and appears as deleted ingame
-@@ -6605,6 +6715,49 @@ bool Player::RewardHonor(Unit* victim, uint32 groupsize, int32 honor, bool pvpto
+@@ -6586,6 +6696,49 @@ bool Player::RewardHonor(Unit* victim, uint32 groupsize, int32 honor, bool pvpto
              UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_HONORABLE_KILL, 1, 0, victim);
              UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_SPECIAL_PVP_KILL, 1, 0, victim);
          }
@@ -102429,7 +102331,7 @@ index afb6a1f770..3cdb6104ce 100644
          else
          {
              if (!victim->ToCreature()->IsRacialLeader())
-@@ -8235,6 +8388,14 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type)
+@@ -8216,6 +8369,14 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type)
                  if (GameObjectTemplateAddon const* addon = go->GetTemplateAddon())
                      loot->generateMoneyLoot(addon->Mingold, addon->Maxgold);
  
@@ -102444,7 +102346,7 @@ index afb6a1f770..3cdb6104ce 100644
              if (loot_type == LOOT_FISHING)
                  go->getFishLoot(loot, this);
              else if (loot_type == LOOT_FISHING_JUNK)
-@@ -17659,6 +17820,10 @@ bool Player::LoadFromDB(ObjectGuid guid, CharacterDatabaseQueryHolder const& hol
+@@ -17640,6 +17801,10 @@ bool Player::LoadFromDB(ObjectGuid guid, CharacterDatabaseQueryHolder const& hol
  
      _LoadEquipmentSets(holder.GetPreparedResult(PLAYER_LOGIN_QUERY_LOAD_EQUIPMENT_SETS));
  
@@ -102455,7 +102357,7 @@ index afb6a1f770..3cdb6104ce 100644
      return true;
  }
  
-@@ -19366,6 +19531,12 @@ void Player::SaveToDB(CharacterDatabaseTransaction trans, bool create /* = false
+@@ -19347,6 +19512,12 @@ void Player::SaveToDB(CharacterDatabaseTransaction trans, bool create /* = false
      // save pet (hunter pet level and experience and all type pets health/mana).
      if (Pet* pet = GetPet())
          pet->SavePetToDB(PET_SAVE_AS_CURRENT);
@@ -102468,7 +102370,7 @@ index afb6a1f770..3cdb6104ce 100644
  }
  
  // fast save function for item/money cheating preventing - save only inventory and money state
-@@ -21498,6 +21669,18 @@ bool Player::BuyItemFromVendorSlot(ObjectGuid vendorguid, uint32 vendorslot, uin
+@@ -21479,6 +21650,18 @@ bool Player::BuyItemFromVendorSlot(ObjectGuid vendorguid, uint32 vendorslot, uin
          return false;
      }
  
@@ -102487,7 +102389,7 @@ index afb6a1f770..3cdb6104ce 100644
      if (!(pProto->AllowableClass & GetClassMask()) && pProto->Bonding == BIND_WHEN_PICKED_UP && !IsGameMaster())
      {
          SendBuyError(BUY_ERR_CANT_FIND_ITEM, nullptr, item, 0);
-@@ -21772,6 +21955,10 @@ void Player::UpdatePvP(bool state, bool _override)
+@@ -21753,6 +21936,10 @@ void Player::UpdatePvP(bool state, bool _override)
          pvpInfo.EndTimer = GameTime::GetGameTime();
          SetPvP(state);
      }
@@ -102498,7 +102400,7 @@ index afb6a1f770..3cdb6104ce 100644
  }
  
  void Player::UpdatePotionCooldown(Spell* spell)
-@@ -23667,6 +23854,11 @@ bool Player::isHonorOrXPTarget(Unit const* victim) const
+@@ -23648,6 +23835,11 @@ bool Player::isHonorOrXPTarget(Unit const* victim) const
  
      if (Creature const* creature = victim->ToCreature())
      {
@@ -106574,7 +106476,7 @@ index 7452c0e60b..dfb8f8431e 100644
      if (!procEntry)
          return 0;
 diff --git a/src/server/game/Spells/Spell.cpp b/src/server/game/Spells/Spell.cpp
-index 5f024a813e..3d4f72acd0 100644
+index e523ce7c11..2e5588da9e 100644
 --- a/src/server/game/Spells/Spell.cpp
 +++ b/src/server/game/Spells/Spell.cpp
 @@ -65,6 +65,10 @@
@@ -106682,7 +106584,7 @@ index 5f024a813e..3d4f72acd0 100644
      if (m_spellInfo->HasAttribute(SPELL_ATTR3_ONLY_TARGET_GHOSTS))
          retMask &= GRID_MAP_TYPE_MASK_PLAYER;
  
-@@ -2393,6 +2439,10 @@ void Spell::TargetInfo::PreprocessTarget(Spell* spell)
+@@ -2417,6 +2463,10 @@ void Spell::TargetInfo::PreprocessTarget(Spell* spell)
          // but respect current pvp rules (buffing/healing npcs flagged for pvp only flags you if they are in combat)
          if (unit->IsPvP() && (unit->IsInCombat() || unit->IsCharmedOwnedByPlayerOrPlayer()) && spell->m_caster->GetTypeId() == TYPEID_PLAYER)
              _enablePVP = true; // Decide on PvP flagging now, but act on it later.
@@ -106693,7 +106595,7 @@ index 5f024a813e..3d4f72acd0 100644
  
          SpellMissInfo missInfo = spell->PreprocessSpellHit(_spellHitTarget, ScaleAura, *this);
          if (missInfo != SPELL_MISS_NONE)
-@@ -2623,6 +2673,13 @@ void Spell::TargetInfo::DoDamageAndTriggers(Spell* spell)
+@@ -2647,6 +2697,13 @@ void Spell::TargetInfo::DoDamageAndTriggers(Spell* spell)
                      if (!spell->m_spellInfo->HasAttribute(SPELL_ATTR0_STOP_ATTACK_TARGET) && !spell->m_spellInfo->HasAttribute(SPELL_ATTR4_CANT_TRIGGER_ITEM_SPELLS))
                          caster->ToPlayer()->CastItemCombatSpell(*spellDamageInfo);
              }
@@ -106707,7 +106609,7 @@ index 5f024a813e..3d4f72acd0 100644
          }
  
          // set hitmask for finish procs
-@@ -2659,6 +2716,15 @@ void Spell::TargetInfo::DoDamageAndTriggers(Spell* spell)
+@@ -2683,6 +2740,15 @@ void Spell::TargetInfo::DoDamageAndTriggers(Spell* spell)
          else if (spell->m_caster->GetTypeId() == TYPEID_GAMEOBJECT && spell->m_caster->ToGameObject()->AI())
              spell->m_caster->ToGameObject()->AI()->SpellHitTarget(_spellHitTarget, spell->m_spellInfo);
  
@@ -106723,7 +106625,7 @@ index 5f024a813e..3d4f72acd0 100644
          if (HitAura)
          {
              if (AuraApplication* aurApp = HitAura->GetApplicationOfTarget(_spellHitTarget->GetGUID()))
-@@ -2777,6 +2843,27 @@ SpellMissInfo Spell::PreprocessSpellHit(Unit* unit, bool scaleAura, TargetInfo&
+@@ -2801,6 +2867,27 @@ SpellMissInfo Spell::PreprocessSpellHit(Unit* unit, bool scaleAura, TargetInfo&
              // assisting case, healing and resurrection
              if (unit->HasUnitState(UNIT_STATE_ATTACK_PLAYER))
              {
@@ -106751,7 +106653,7 @@ index 5f024a813e..3d4f72acd0 100644
                  if (Player* playerOwner = m_caster->GetCharmerOrOwnerPlayerOrPlayerItself())
                  {
                      playerOwner->SetContestedPvP();
-@@ -2788,6 +2875,10 @@ SpellMissInfo Spell::PreprocessSpellHit(Unit* unit, bool scaleAura, TargetInfo&
+@@ -2812,6 +2899,10 @@ SpellMissInfo Spell::PreprocessSpellHit(Unit* unit, bool scaleAura, TargetInfo&
              {
                  if (m_originalCaster->HasUnitFlag(UNIT_FLAG_PLAYER_CONTROLLED)) // only do explicit combat forwarding for PvP enabled units
                      m_originalCaster->GetCombatManager().InheritCombatStatesFrom(unit);    // for creature v creature combat, the threat forward does it for us
@@ -106762,7 +106664,7 @@ index 5f024a813e..3d4f72acd0 100644
                  unit->GetThreatManager().ForwardThreatForAssistingMe(m_originalCaster, 0.0f, nullptr, true);
              }
          }
-@@ -3006,6 +3097,11 @@ bool Spell::UpdateChanneledTargetList()
+@@ -3030,6 +3121,11 @@ bool Spell::UpdateChanneledTargetList()
          if (Player* modOwner = m_caster->GetSpellModOwner())
              modOwner->ApplySpellMod(m_spellInfo->Id, SPELLMOD_RANGE, range, this);
  
@@ -106774,7 +106676,7 @@ index 5f024a813e..3d4f72acd0 100644
          // add little tolerance level
          range += std::min(MAX_SPELL_RANGE_TOLERANCE, range*0.1f); // 10% but no more than MAX_SPELL_RANGE_TOLERANCE
      }
-@@ -3369,6 +3465,11 @@ void Spell::_cast(bool skipCheck)
+@@ -3393,6 +3489,11 @@ void Spell::_cast(bool skipCheck)
              SendCastResult(res, p1, p2);
              SendInterrupted(res);
  
@@ -106786,7 +106688,7 @@ index 5f024a813e..3d4f72acd0 100644
              if (modOwner)
                  modOwner->SetSpellModTakingSpell(this, false);
  
-@@ -3524,6 +3625,17 @@ void Spell::_cast(bool skipCheck)
+@@ -3548,6 +3649,17 @@ void Spell::_cast(bool skipCheck)
          handle_immediate();
      }
  
@@ -106804,7 +106706,7 @@ index 5f024a813e..3d4f72acd0 100644
      CallScriptAfterCastHandlers();
  
      if (std::vector<int32> const* spell_triggered = sSpellMgr->GetSpellLinked(m_spellInfo->Id))
-@@ -3803,6 +3915,11 @@ void Spell::SendSpellCooldown()
+@@ -3827,6 +3939,11 @@ void Spell::SendSpellCooldown()
      if (m_caster->GetTypeId() == TYPEID_GAMEOBJECT)
          return;
  
@@ -106816,7 +106718,7 @@ index 5f024a813e..3d4f72acd0 100644
      m_caster->ToUnit()->GetSpellHistory()->HandleCooldowns(m_spellInfo, m_CastItem, this);
  }
  
-@@ -3878,6 +3995,10 @@ void Spell::update(uint32 difftime)
+@@ -3902,6 +4019,10 @@ void Spell::update(uint32 difftime)
                  if (Creature* creatureCaster = m_caster->ToCreature())
                      if (creatureCaster->IsAIEnabled())
                          creatureCaster->AI()->OnChannelFinished(m_spellInfo);
@@ -106827,7 +106729,7 @@ index 5f024a813e..3d4f72acd0 100644
              }
              break;
          }
-@@ -3918,6 +4039,11 @@ void Spell::finish(bool ok)
+@@ -3942,6 +4063,11 @@ void Spell::finish(bool ok)
      if (Creature* creatureCaster = unitCaster->ToCreature())
          creatureCaster->ReleaseSpellFocus(this);
  
@@ -106839,7 +106741,7 @@ index 5f024a813e..3d4f72acd0 100644
      if (!ok)
          return;
  
-@@ -3968,6 +4094,9 @@ void Spell::finish(bool ok)
+@@ -3992,6 +4118,9 @@ void Spell::finish(bool ok)
  
      // Stop Attack for some spells
      if (m_spellInfo->HasAttribute(SPELL_ATTR0_STOP_ATTACK_TARGET))
@@ -106849,7 +106751,7 @@ index 5f024a813e..3d4f72acd0 100644
          unitCaster->AttackStop();
  }
  
-@@ -4826,9 +4955,38 @@ void Spell::TakePower()
+@@ -4850,9 +4979,38 @@ void Spell::TakePower()
          }
      }
  
@@ -106888,7 +106790,7 @@ index 5f024a813e..3d4f72acd0 100644
          return;
      }
  
-@@ -5185,6 +5343,17 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
+@@ -5209,6 +5367,17 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
              else
                  return SPELL_FAILED_NOT_READY;
          }
@@ -106906,7 +106808,7 @@ index 5f024a813e..3d4f72acd0 100644
      }
  
      if (m_spellInfo->HasAttribute(SPELL_ATTR7_IS_CHEAT_SPELL) && m_caster->IsUnit() && !m_caster->ToUnit()->HasUnitFlag2(UNIT_FLAG2_ALLOW_CHEAT_SPELLS))
-@@ -5387,6 +5556,11 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
+@@ -5411,6 +5580,11 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
          {
              if (spellEffectInfo.TargetA.GetTarget() == TARGET_UNIT_PET)
              {
@@ -106918,7 +106820,7 @@ index 5f024a813e..3d4f72acd0 100644
                  if (!unitCaster->GetGuardianPet())
                  {
                      if (m_triggeredByAuraSpell)              // not report pet not existence for triggered spells
-@@ -5414,6 +5588,11 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
+@@ -5438,6 +5612,11 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
          }
  
      // zone check
@@ -106930,7 +106832,7 @@ index 5f024a813e..3d4f72acd0 100644
      if (m_caster->GetTypeId() != TYPEID_PLAYER || !m_caster->ToPlayer()->IsGameMaster())
      {
          uint32 zone, area;
-@@ -5697,6 +5876,15 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
+@@ -5721,6 +5900,15 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
                      spellEffectInfo.TargetA.GetTarget() != TARGET_GAMEOBJECT_ITEM_TARGET)
                      break;
  
@@ -106946,7 +106848,7 @@ index 5f024a813e..3d4f72acd0 100644
                  if (m_caster->GetTypeId() != TYPEID_PLAYER  // only players can open locks, gather etc.
                      // we need a go target in case of TARGET_GAMEOBJECT_TARGET
                      || (spellEffectInfo.TargetA.GetTarget() == TARGET_GAMEOBJECT_TARGET && !m_targets.GetGOTarget()))
-@@ -6038,6 +6226,13 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
+@@ -6062,6 +6250,13 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
  
                      if (!target->GetCharmerGUID().IsEmpty())
                          return SPELL_FAILED_CANT_BE_CHARMED;
@@ -106960,7 +106862,7 @@ index 5f024a813e..3d4f72acd0 100644
  
                      if (target->GetOwner() && target->GetOwner()->GetTypeId() == TYPEID_PLAYER)
                          return SPELL_FAILED_TARGET_IS_PLAYER_CONTROLLED;
-@@ -6152,6 +6347,14 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
+@@ -6176,6 +6371,14 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
      {
          if (Unit* unitCaster = m_caster->ToUnit())
          {
@@ -106975,7 +106877,7 @@ index 5f024a813e..3d4f72acd0 100644
              if (m_spellInfo->NeedsExplicitUnitTarget())
              {
                  if (!unitCaster->GetComboPoints(m_targets.GetUnitTarget()))
-@@ -6520,6 +6723,11 @@ SpellCastResult Spell::CheckRange(bool strict) const
+@@ -6544,6 +6747,11 @@ SpellCastResult Spell::CheckRange(bool strict) const
      float minRange, maxRange;
      std::tie(minRange, maxRange) = GetMinMaxRange(strict);
  
@@ -106987,7 +106889,7 @@ index 5f024a813e..3d4f72acd0 100644
      // dont check max_range to strictly after cast
      if (m_spellInfo->RangeEntry && m_spellInfo->RangeEntry->Flags != SPELL_RANGE_MELEE && !strict)
          maxRange += std::min(MAX_SPELL_RANGE_TOLERANCE, maxRange*0.1f); // 10% but no more than MAX_SPELL_RANGE_TOLERANCE
-@@ -6544,6 +6752,14 @@ SpellCastResult Spell::CheckRange(bool strict) const
+@@ -6568,6 +6776,14 @@ SpellCastResult Spell::CheckRange(bool strict) const
  
      if (GameObject* goTarget = m_targets.GetGOTarget())
      {
@@ -107002,7 +106904,7 @@ index 5f024a813e..3d4f72acd0 100644
          if (!goTarget->IsAtInteractDistance(m_caster->ToPlayer(), m_spellInfo))
              return SPELL_FAILED_OUT_OF_RANGE;
      }
-@@ -7235,6 +7451,37 @@ SpellCastResult Spell::CheckItems(uint32* param1 /*= nullptr*/, uint32* param2 /
+@@ -7259,6 +7475,37 @@ SpellCastResult Spell::CheckItems(uint32* param1 /*= nullptr*/, uint32* param2 /
  
  void Spell::Delayed() // only called in DealDamage()
  {
@@ -107040,7 +106942,7 @@ index 5f024a813e..3d4f72acd0 100644
      Player* playerCaster = m_caster->ToPlayer();
      if (!playerCaster)
          return;
-@@ -7274,6 +7521,43 @@ void Spell::Delayed() // only called in DealDamage()
+@@ -7298,6 +7545,43 @@ void Spell::Delayed() // only called in DealDamage()
  
  void Spell::DelayedChannel()
  {
@@ -107084,7 +106986,7 @@ index 5f024a813e..3d4f72acd0 100644
      Player* playerCaster = m_caster->ToPlayer();
      if (!playerCaster)
          return;
-@@ -7845,6 +8129,13 @@ SpellCastResult Spell::CanOpenLock(SpellEffectInfo const& spellEffectInfo, uint3
+@@ -7869,6 +8153,13 @@ SpellCastResult Spell::CanOpenLock(SpellEffectInfo const& spellEffectInfo, uint3
                      skillValue = m_CastItem || m_caster->GetTypeId() != TYPEID_PLAYER ?
                          0 : m_caster->ToPlayer()->GetSkillValue(skillId);
  
@@ -107098,7 +107000,7 @@ index 5f024a813e..3d4f72acd0 100644
                      // skill bonus provided by casting spell (mostly item spells)
                      // add the effect base points modifier from the spell cast (cheat lock / skeleton key etc.)
                      if (spellEffectInfo.TargetA.GetTarget() == TARGET_GAMEOBJECT_ITEM_TARGET || spellEffectInfo.TargetB.GetTarget() == TARGET_GAMEOBJECT_ITEM_TARGET)
-@@ -8417,6 +8708,11 @@ WorldObjectSpellNearbyTargetCheck::WorldObjectSpellNearbyTargetCheck(float range
+@@ -8441,6 +8732,11 @@ WorldObjectSpellNearbyTargetCheck::WorldObjectSpellNearbyTargetCheck(float range
  
  bool WorldObjectSpellNearbyTargetCheck::operator()(WorldObject* target)
  {
@@ -107110,7 +107012,7 @@ index 5f024a813e..3d4f72acd0 100644
      float dist = target->GetDistance(*_position);
      if (dist < _range && WorldObjectSpellTargetCheck::operator ()(target))
      {
-@@ -8441,6 +8737,11 @@ bool WorldObjectSpellAreaTargetCheck::operator()(WorldObject* target) const
+@@ -8465,6 +8761,11 @@ bool WorldObjectSpellAreaTargetCheck::operator()(WorldObject* target) const
      }
      else
      {
@@ -107123,7 +107025,7 @@ index 5f024a813e..3d4f72acd0 100644
          if (!isInsideCylinder)
              return false;
 diff --git a/src/server/game/Spells/Spell.h b/src/server/game/Spells/Spell.h
-index fe8b1a5467..11d160a44a 100644
+index f14e83c167..ec87c4eafa 100644
 --- a/src/server/game/Spells/Spell.h
 +++ b/src/server/game/Spells/Spell.h
 @@ -417,6 +417,9 @@ class TC_GAME_API Spell
@@ -107137,10 +107039,10 @@ index fe8b1a5467..11d160a44a 100644
          bool IsAutoRepeat() const { return m_autoRepeat; }
          void SetAutoRepeat(bool rep) { m_autoRepeat = rep; }
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index 6b4192efae..0f1e7c0d07 100644
+index 77387b1779..31367c43b5 100644
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
-@@ -498,6 +498,17 @@ void Spell::EffectSchoolDMG()
+@@ -488,6 +488,17 @@ void Spell::EffectSchoolDMG()
                      damage += int32(energy * multiple);
                      damage += int32(CalculatePct(unitCaster->ToPlayer()->GetComboPoints() * ap, 7));
                  }
@@ -107158,7 +107060,7 @@ index 6b4192efae..0f1e7c0d07 100644
                  // Wrath
                  else if (m_spellInfo->SpellFamilyFlags[0] & 0x00000001)
                  {
-@@ -560,6 +571,52 @@ void Spell::EffectSchoolDMG()
+@@ -550,6 +561,52 @@ void Spell::EffectSchoolDMG()
                                  damage += combo * 40;
                          }
                      }
@@ -107211,7 +107113,7 @@ index 6b4192efae..0f1e7c0d07 100644
                  }
                  // Eviscerate
                  else if (m_spellInfo->SpellFamilyFlags[0] & 0x00020000)
-@@ -576,6 +633,20 @@ void Spell::EffectSchoolDMG()
+@@ -566,6 +623,20 @@ void Spell::EffectSchoolDMG()
                                  damage += combo*40;
                          }
                      }
@@ -107232,7 +107134,7 @@ index 6b4192efae..0f1e7c0d07 100644
                  }
                  break;
              }
-@@ -626,6 +697,27 @@ void Spell::EffectSchoolDMG()
+@@ -616,6 +687,27 @@ void Spell::EffectSchoolDMG()
                              damage += irand(int32(dmg_min), int32(dmg_max));
                          damage += int32(caster->GetAmmoDPS() * caster->GetAttackTime(RANGED_ATTACK) * 0.001f);
                      }
@@ -107260,7 +107162,7 @@ index 6b4192efae..0f1e7c0d07 100644
                  }
                  break;
              }
-@@ -731,6 +823,60 @@ void Spell::EffectTriggerSpell()
+@@ -721,6 +813,60 @@ void Spell::EffectTriggerSpell()
          // special cases
          switch (triggered_spell_id)
          {
@@ -107321,7 +107223,7 @@ index 6b4192efae..0f1e7c0d07 100644
              // Mirror Image
              case 58832:
              {
-@@ -794,6 +940,10 @@ void Spell::EffectTriggerSpell()
+@@ -784,6 +930,10 @@ void Spell::EffectTriggerSpell()
          return;
      }
  
@@ -107332,7 +107234,7 @@ index 6b4192efae..0f1e7c0d07 100644
      SpellCastTargets targets;
      if (effectHandleMode == SPELL_EFFECT_HANDLE_LAUNCH_TARGET)
      {
-@@ -851,6 +1001,10 @@ void Spell::EffectTriggerMissileSpell()
+@@ -841,6 +991,10 @@ void Spell::EffectTriggerMissileSpell()
          return;
      }
  
@@ -107343,7 +107245,7 @@ index 6b4192efae..0f1e7c0d07 100644
      SpellCastTargets targets;
      if (effectHandleMode == SPELL_EFFECT_HANDLE_HIT_TARGET)
      {
-@@ -1125,6 +1279,11 @@ void Spell::EffectPowerDrain()
+@@ -1115,6 +1269,11 @@ void Spell::EffectPowerDrain()
      if (powerType == POWER_MANA)
          power -= unitTarget->GetSpellCritDamageReduction(power);
  
@@ -107355,7 +107257,7 @@ index 6b4192efae..0f1e7c0d07 100644
      int32 newDamage = -(unitTarget->ModifyPower(powerType, -int32(power)));
  
      // Don't restore from self drain
-@@ -1783,6 +1942,48 @@ void Spell::EffectOpenLock()
+@@ -1773,6 +1932,48 @@ void Spell::EffectOpenLock()
      if (effectHandleMode != SPELL_EFFECT_HANDLE_HIT_TARGET)
          return;
  
@@ -107404,7 +107306,7 @@ index 6b4192efae..0f1e7c0d07 100644
      if (m_caster->GetTypeId() != TYPEID_PLAYER)
      {
          TC_LOG_DEBUG("spells", "WORLD: Open Lock - No Player Caster!");
-@@ -3075,6 +3276,14 @@ void Spell::EffectWeaponDmg()
+@@ -3065,6 +3266,14 @@ void Spell::EffectWeaponDmg()
                      if (Item* item = unitCaster->ToPlayer()->GetWeaponForAttack(m_attackType, true))
                          if (item->GetTemplate()->SubClass == ITEM_SUBCLASS_WEAPON_DAGGER)
                              totalDamagePercentMod *= 1.5f;
@@ -107419,7 +107321,7 @@ index 6b4192efae..0f1e7c0d07 100644
              }
              // Mutilate (for each hand)
              else if (m_spellInfo->SpellFamilyFlags[1] & 0x6)
-@@ -3418,6 +3627,14 @@ void Spell::EffectSummonObjectWild()
+@@ -3408,6 +3617,14 @@ void Spell::EffectSummonObjectWild()
              if (Battleground* bg = player->GetBattleground())
                  bg->SetDroppedFlagGUID(pGameObj->GetGUID(), player->GetTeam() == ALLIANCE ? TEAM_HORDE: TEAM_ALLIANCE);
  
@@ -107434,7 +107336,7 @@ index 6b4192efae..0f1e7c0d07 100644
      if (GameObject* linkedTrap = pGameObj->GetLinkedTrap())
      {
          linkedTrap->SetRespawnTime(duration > 0 ? duration / IN_MILLISECONDS : 0);
-@@ -3589,6 +3806,10 @@ void Spell::EffectSanctuary()
+@@ -3579,6 +3796,10 @@ void Spell::EffectSanctuary()
          // stop all pve combat for players outside dungeons, suppress pvp combat
          unitTarget->CombatStop(false, false);
      }
@@ -107445,7 +107347,7 @@ index 6b4192efae..0f1e7c0d07 100644
      else
      {
          // in dungeons (or for nonplayers), reset this unit on all enemies' threat lists
-@@ -5245,6 +5466,21 @@ void Spell::SummonGuardian(SpellEffectInfo const& spellEffectInfo, uint32 entry,
+@@ -5235,6 +5456,21 @@ void Spell::SummonGuardian(SpellEffectInfo const& spellEffectInfo, uint32 entry,
      if (Player* modOwner = unitCaster->GetSpellModOwner())
          modOwner->ApplySpellMod(m_spellInfo->Id, SPELLMOD_DURATION, duration);
  
@@ -107467,7 +107369,7 @@ index 6b4192efae..0f1e7c0d07 100644
      //TempSummonType summonType = (duration == 0) ? TEMPSUMMON_DEAD_DESPAWN : TEMPSUMMON_TIMED_DESPAWN;
      Map* map = unitCaster->GetMap();
      for (uint32 count = 0; count < numGuardians; ++count)
-@@ -5271,6 +5507,19 @@ void Spell::SummonGuardian(SpellEffectInfo const& spellEffectInfo, uint32 entry,
+@@ -5261,6 +5497,19 @@ void Spell::SummonGuardian(SpellEffectInfo const& spellEffectInfo, uint32 entry,
  
          if (summon->GetEntry() == 27893)
          {
@@ -108859,24 +108761,10 @@ index d9b4014a7a..621a2a052f 100644
      }
  
 diff --git a/src/server/shared/DataStores/DBCStructure.h b/src/server/shared/DataStores/DBCStructure.h
-index 53ef620bcd..bbd8a84892 100644
+index 082a0397b6..aba410cf86 100644
 --- a/src/server/shared/DataStores/DBCStructure.h
 +++ b/src/server/shared/DataStores/DBCStructure.h
-@@ -233,9 +233,11 @@ struct AreaPOIEntry
-     uint32 ContinentID;                                     // 15
-     //uint32 Flags;                                         // 16
-     uint32 AreaID;                                          // 17
--    //char const* Name[16];                                 // 18-33
-+    char const* Name;                                       // 18
-+    //char const* Name[15];                                 // 19-33
-     //uint32 Name_lang_mask;                                // 34
--    //char const* Description[16];                          // 35-50
-+    char const* Description;                                // 35
-+    //char const* Description[15];                          // 36-50
-     //uint32 Description_lang_mask;                         // 51
-     uint32 WorldStateID;                                    // 52
-     //uint32 WorldMapLink;                                  // 53
-@@ -896,13 +898,14 @@ struct ItemBagFamilyEntry
+@@ -878,13 +878,14 @@ struct ItemBagFamilyEntry
      //uint32 Name_lang_mask;                                // 17
  };
  
@@ -108894,7 +108782,7 @@ index 53ef620bcd..bbd8a84892 100644
      uint32 GeosetGroup[3];                                  // 7-9
      uint32 Flags;                                           // 10
      uint32 SpellVisualID;                                   // 11
-@@ -911,8 +914,8 @@ struct ItemDisplayInfoEntry
+@@ -893,8 +894,8 @@ struct ItemDisplayInfoEntry
      char const* Texture[8];                                 // 15-22
      int32 ItemVisual;                                       // 23
      uint32 ParticleColorID;                                 // 24
@@ -108905,19 +108793,10 @@ index 53ef620bcd..bbd8a84892 100644
  /*
  struct ItemCondExtCostsEntry
 diff --git a/src/server/shared/DataStores/DBCfmt.h b/src/server/shared/DataStores/DBCfmt.h
-index da8e920df9..ae85a9de4e 100644
+index e19ce793b2..3121748ccd 100644
 --- a/src/server/shared/DataStores/DBCfmt.h
 +++ b/src/server/shared/DataStores/DBCfmt.h
-@@ -24,7 +24,7 @@ char constexpr CustomAchievementIndex[] = "ID";
- char constexpr AchievementCriteriafmt[] = "niiiiiiiixxxxxxxxxxxxxxxxxiiiix";
- char constexpr AreaTableEntryfmt[] = "niiiixxxxxissssssssssssssssxiiiiixxx";
- char constexpr AreaGroupEntryfmt[] = "niiiiiii";
--char constexpr AreaPOIEntryfmt[] = "niiiiiiiiiiifffixixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxix";
-+char constexpr AreaPOIEntryfmt[] = "niiiiiiiiiiifffixisxxxxxxxxxxxxxxxxsxxxxxxxxxxxxxxxxix";
- char constexpr AreaTriggerEntryfmt[] = "niffffffff";
- char constexpr AuctionHouseEntryfmt[] = "niiixxxxxxxxxxxxxxxxx";
- char constexpr BankBagSlotPricesEntryfmt[] = "ni";
-@@ -76,7 +76,7 @@ char constexpr GtRegenMPPerSptfmt[] = "f";
+@@ -75,7 +75,7 @@ char constexpr GtRegenMPPerSptfmt[] = "f";
  char constexpr Holidaysfmt[] = "niiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiixxsiix";
  char constexpr Itemfmt[] = "niiiiiii";
  char constexpr ItemBagFamilyfmt[] = "nxxxxxxxxxxxxxxxxx";
