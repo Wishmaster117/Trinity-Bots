@@ -96828,7 +96828,7 @@ index 0000000000..ef600eba41
 +
 +#endif
 diff --git a/src/server/game/AI/SmartScripts/SmartScript.cpp b/src/server/game/AI/SmartScripts/SmartScript.cpp
-index 2d18bd7503..cef997b7a2 100644
+index 24bfbf5d7b..d181da7e35 100644
 --- a/src/server/game/AI/SmartScripts/SmartScript.cpp
 +++ b/src/server/game/AI/SmartScripts/SmartScript.cpp
 @@ -211,6 +211,9 @@ void SmartScript::ProcessAction(SmartScriptHolder& e, Unit* unit, uint32 var0, u
@@ -96999,7 +96999,7 @@ index 75fe9c2269..c1ad6c589c 100644
  
      void HandleKillPlayer(Player* player, Player* killer) override;
 diff --git a/src/server/game/Battlegrounds/Battleground.cpp b/src/server/game/Battlegrounds/Battleground.cpp
-index 70b8a90670..6d6f88cbc7 100644
+index 326caf426f..6fc6142991 100644
 --- a/src/server/game/Battlegrounds/Battleground.cpp
 +++ b/src/server/game/Battlegrounds/Battleground.cpp
 @@ -48,6 +48,12 @@
@@ -97179,7 +97179,7 @@ index 70b8a90670..6d6f88cbc7 100644
      for (auto const& [playerGuid, player] : m_Players)
      {
          TeamId bgTeamId = player->GetBgTeamId();
-@@ -1043,6 +1150,15 @@ void Battleground::RemovePlayerAtLeave(Player* player)
+@@ -1070,6 +1177,15 @@ void Battleground::RemovePlayerAtLeave(Player* player)
          player->SpawnCorpseBones();
      }
  
@@ -97195,7 +97195,7 @@ index 70b8a90670..6d6f88cbc7 100644
      player->RemoveAurasByType(SPELL_AURA_MOUNTED);
  
      // GetStatus might be changed in RemovePlayer - define it here
-@@ -1071,9 +1187,13 @@ void Battleground::RemovePlayerAtLeave(Player* player)
+@@ -1098,9 +1214,13 @@ void Battleground::RemovePlayerAtLeave(Player* player)
  
          // remove from raid group if player is member
          if (Group* group = GetBgRaid(teamId))
@@ -97209,7 +97209,7 @@ index 70b8a90670..6d6f88cbc7 100644
  
          // let others know
          sBattlegroundMgr->BuildPlayerLeftBattlegroundPacket(&data, player->GetGUID());
-@@ -1106,6 +1226,83 @@ void Battleground::RemovePlayerAtLeave(Player* player)
+@@ -1133,6 +1253,83 @@ void Battleground::RemovePlayerAtLeave(Player* player)
      sScriptMgr->OnBattlegroundRemovePlayerAtLeave(this, player);
  }
  
@@ -97293,7 +97293,7 @@ index 70b8a90670..6d6f88cbc7 100644
  // this method is called when creating bg
  void Battleground::Init()
  {
-@@ -1128,12 +1325,19 @@ void Battleground::Init()
+@@ -1155,12 +1352,19 @@ void Battleground::Init()
      _InBGFreeSlotQueue = false;
  
      m_Players.clear();
@@ -97313,7 +97313,7 @@ index 70b8a90670..6d6f88cbc7 100644
      for (auto& itr : _arenaTeamScores)
          itr.Reset();
  
-@@ -1174,6 +1378,19 @@ void Battleground::AddPlayer(Player* player)
+@@ -1201,6 +1405,19 @@ void Battleground::AddPlayer(Player* player)
  
      UpdatePlayersCountByTeam(teamId, false);                  // +1 player
  
@@ -97333,7 +97333,7 @@ index 70b8a90670..6d6f88cbc7 100644
      WorldPacket data;
      sBattlegroundMgr->BuildPlayerJoinedBattlegroundPacket(&data, player);
      SendPacketToTeam(teamId, &data, player, false);
-@@ -1220,6 +1437,30 @@ void Battleground::AddPlayer(Player* player)
+@@ -1247,6 +1464,30 @@ void Battleground::AddPlayer(Player* player)
      LOG_DEBUG("bg.battleground", "BATTLEGROUND: Player {} joined the battle.", player->GetName());
  }
  
@@ -97364,7 +97364,7 @@ index 70b8a90670..6d6f88cbc7 100644
  // this method adds player to his team's bg group, or sets his correct group if player is already in bg group
  void Battleground::AddOrSetPlayerToCorrectBgGroup(Player* player, TeamId teamId)
  {
-@@ -1256,6 +1497,31 @@ void Battleground::AddOrSetPlayerToCorrectBgGroup(Player* player, TeamId teamId)
+@@ -1283,6 +1524,31 @@ void Battleground::AddOrSetPlayerToCorrectBgGroup(Player* player, TeamId teamId)
      }
  }
  
@@ -97396,7 +97396,7 @@ index 70b8a90670..6d6f88cbc7 100644
  // This method should be called only once ... it adds pointer to queue
  void Battleground::AddToBGFreeSlotQueue()
  {
-@@ -1364,7 +1630,12 @@ void Battleground::BuildPvPLogDataPacket(WorldPacket& data)
+@@ -1391,7 +1657,12 @@ void Battleground::BuildPvPLogDataPacket(WorldPacket& data)
  {
      uint8 type = (isArena() ? 1 : 0);
  
@@ -97409,7 +97409,7 @@ index 70b8a90670..6d6f88cbc7 100644
      data << uint8(type); // type (battleground = 0 / arena = 1)
  
      if (type) // arena
-@@ -1384,7 +1655,14 @@ void Battleground::BuildPvPLogDataPacket(WorldPacket& data)
+@@ -1411,7 +1682,14 @@ void Battleground::BuildPvPLogDataPacket(WorldPacket& data)
      else
          data << uint8(0);                      // bg not ended
  
@@ -97424,7 +97424,7 @@ index 70b8a90670..6d6f88cbc7 100644
  
      for (auto const& score : PlayerScores)
          score.second->AppendToPacket(data);
-@@ -1404,6 +1682,18 @@ bool Battleground::UpdatePlayerScore(Player* player, uint32 type, uint32 value,
+@@ -1431,6 +1709,18 @@ bool Battleground::UpdatePlayerScore(Player* player, uint32 type, uint32 value,
      return true;
  }
  
@@ -97443,7 +97443,7 @@ index 70b8a90670..6d6f88cbc7 100644
  void Battleground::AddPlayerToResurrectQueue(ObjectGuid npc_guid, ObjectGuid player_guid)
  {
      m_ReviveQueue[npc_guid].push_back(player_guid);
-@@ -1427,6 +1717,23 @@ void Battleground::RemovePlayerFromResurrectQueue(Player* player)
+@@ -1454,6 +1744,23 @@ void Battleground::RemovePlayerFromResurrectQueue(Player* player)
              }
  }
  
@@ -97467,7 +97467,7 @@ index 70b8a90670..6d6f88cbc7 100644
  void Battleground::RelocateDeadPlayers(ObjectGuid queueIndex)
  {
      // Those who are waiting to resurrect at this node are taken to the closest own node's graveyard
-@@ -1434,8 +1741,25 @@ void Battleground::RelocateDeadPlayers(ObjectGuid queueIndex)
+@@ -1461,8 +1768,25 @@ void Battleground::RelocateDeadPlayers(ObjectGuid queueIndex)
      if (!ghostList.empty())
      {
          GraveyardStruct const* closestGrave = nullptr;
@@ -97493,7 +97493,7 @@ index 70b8a90670..6d6f88cbc7 100644
              Player* player = ObjectAccessor::FindPlayer(guid);
              if (!player)
                  continue;
-@@ -1781,6 +2105,18 @@ void Battleground::HandleKillPlayer(Player* victim, Player* killer)
+@@ -1808,6 +2132,18 @@ void Battleground::HandleKillPlayer(Player* victim, Player* killer)
              if (creditedPlayer->GetBgTeamId() == killer->GetBgTeamId() && (creditedPlayer == killer || creditedPlayer->IsAtGroupRewardDistance(victim)))
                  UpdatePlayerScore(creditedPlayer, SCORE_HONORABLE_KILLS, 1);
          }
@@ -97512,7 +97512,7 @@ index 70b8a90670..6d6f88cbc7 100644
      }
  
      if (!isArena())
-@@ -1791,6 +2127,117 @@ void Battleground::HandleKillPlayer(Player* victim, Player* killer)
+@@ -1818,6 +2154,117 @@ void Battleground::HandleKillPlayer(Player* victim, Player* killer)
      }
  }
  
@@ -97630,7 +97630,7 @@ index 70b8a90670..6d6f88cbc7 100644
  TeamId Battleground::GetOtherTeamId(TeamId teamId)
  {
      return teamId != TEAM_NEUTRAL ? (teamId == TEAM_ALLIANCE ? TEAM_HORDE : TEAM_ALLIANCE) : TEAM_NEUTRAL;
-@@ -1798,6 +2245,14 @@ TeamId Battleground::GetOtherTeamId(TeamId teamId)
+@@ -1825,6 +2272,14 @@ TeamId Battleground::GetOtherTeamId(TeamId teamId)
  
  bool Battleground::IsPlayerInBattleground(ObjectGuid guid) const
  {
@@ -97645,7 +97645,7 @@ index 70b8a90670..6d6f88cbc7 100644
      BattlegroundPlayerMap::const_iterator itr = m_Players.find(guid);
      if (itr != m_Players.end())
          return true;
-@@ -1822,6 +2277,17 @@ void Battleground::PlayerAddedToBGCheckIfBGIsRunning(Player* player)
+@@ -1849,6 +2304,17 @@ void Battleground::PlayerAddedToBGCheckIfBGIsRunning(Player* player)
  uint32 Battleground::GetAlivePlayersCountByTeam(TeamId teamId) const
  {
      uint32 count = 0;
@@ -97663,7 +97663,7 @@ index 70b8a90670..6d6f88cbc7 100644
      for (BattlegroundPlayerMap::const_iterator itr = m_Players.begin(); itr != m_Players.end(); ++itr)
          if (itr->second->IsAlive() && !itr->second->HasByteFlag(UNIT_FIELD_BYTES_2, 3, FORM_SPIRITOFREDEMPTION) && itr->second->GetBgTeamId() == teamId)
              ++count;
-@@ -1861,6 +2327,13 @@ GraveyardStruct const* Battleground::GetClosestGraveyard(Player* player)
+@@ -1888,6 +2354,13 @@ GraveyardStruct const* Battleground::GetClosestGraveyard(Player* player)
      return sGraveyard->GetClosestGraveyard(player, player->GetBgTeamId());
  }
  
@@ -97677,7 +97677,7 @@ index 70b8a90670..6d6f88cbc7 100644
  void Battleground::SetBracket(PvPDifficultyEntry const* bracketEntry)
  {
      m_IsTemplate = false;
-@@ -1874,6 +2347,74 @@ void Battleground::StartTimedAchievement(AchievementCriteriaTimedTypes type, uin
+@@ -1901,6 +2374,74 @@ void Battleground::StartTimedAchievement(AchievementCriteriaTimedTypes type, uin
          itr->second->StartTimedAchievement(type, entry);
  }
  
@@ -106864,7 +106864,7 @@ index 254328b809..479b3ba5bb 100644
      {
          //! Call script hook before other logout events
 diff --git a/src/server/game/Spells/Auras/SpellAuraEffects.cpp b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
-index 7ffb4065f8..435d5899f1 100644
+index f0d54d7e0d..8b76ab0b4e 100644
 --- a/src/server/game/Spells/Auras/SpellAuraEffects.cpp
 +++ b/src/server/game/Spells/Auras/SpellAuraEffects.cpp
 @@ -40,6 +40,10 @@
@@ -109039,10 +109039,10 @@ index 85a12610da..0ddad0b4bf 100644
          {
              targets.clear();
 diff --git a/src/server/scripts/Spells/spell_generic.cpp b/src/server/scripts/Spells/spell_generic.cpp
-index 38f669693f..97eccbce11 100644
+index 8a1a963570..09f60568ca 100644
 --- a/src/server/scripts/Spells/spell_generic.cpp
 +++ b/src/server/scripts/Spells/spell_generic.cpp
-@@ -2475,6 +2475,10 @@ class spell_gen_vehicle_scaling_aura: public AuraScript
+@@ -2476,6 +2476,10 @@ class spell_gen_vehicle_scaling_aura: public AuraScript
  
      bool Load() override
      {
@@ -109053,7 +109053,7 @@ index 38f669693f..97eccbce11 100644
          return GetCaster() && GetCaster()->IsPlayer() && GetOwner()->IsCreature();
      }
  
-@@ -2497,7 +2501,19 @@ class spell_gen_vehicle_scaling_aura: public AuraScript
+@@ -2498,7 +2502,19 @@ class spell_gen_vehicle_scaling_aura: public AuraScript
                  break;
          }
  
@@ -109073,7 +109073,7 @@ index 38f669693f..97eccbce11 100644
          if (avgILvl < baseItemLevel)
              return;                     /// @todo Research possibility of scaling down
  
-@@ -3605,6 +3621,11 @@ class spell_gen_tournament_pennant : public AuraScript
+@@ -3606,6 +3622,11 @@ class spell_gen_tournament_pennant : public AuraScript
  
      bool Load() override
      {
