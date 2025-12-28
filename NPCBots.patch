@@ -99948,7 +99948,7 @@ index 6852b79242..3fca416761 100644
  
      // modifiers by effect school
 diff --git a/src/server/game/Conditions/ConditionMgr.cpp b/src/server/game/Conditions/ConditionMgr.cpp
-index 37ec438856..46d1f48d38 100644
+index 6e0a288daa..53e56efb50 100644
 --- a/src/server/game/Conditions/ConditionMgr.cpp
 +++ b/src/server/game/Conditions/ConditionMgr.cpp
 @@ -34,6 +34,10 @@
@@ -99962,7 +99962,7 @@ index 37ec438856..46d1f48d38 100644
  char const* const ConditionMgr::StaticSourceTypeData[CONDITION_SOURCE_TYPE_MAX] =
  {
      "None",
-@@ -148,6 +152,11 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
+@@ -155,6 +159,11 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
          }
          case CONDITION_ITEM:
          {
@@ -99974,7 +99974,7 @@ index 37ec438856..46d1f48d38 100644
              if (Player* player = object->ToPlayer())
              {
                  // don't allow 0 items (it's checked during table load)
-@@ -159,6 +168,11 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
+@@ -166,6 +175,11 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
          }
          case CONDITION_ITEM_EQUIPPED:
          {
@@ -99986,7 +99986,7 @@ index 37ec438856..46d1f48d38 100644
              if (Player* player = object->ToPlayer())
                  condMeets = player->HasItemOrGemWithIdEquipped(ConditionValue1, 1);
              break;
-@@ -168,6 +182,14 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
+@@ -175,6 +189,14 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
              break;
          case CONDITION_REPUTATION_RANK:
          {
@@ -100001,7 +100001,7 @@ index 37ec438856..46d1f48d38 100644
              if (Player* player = object->ToPlayer())
              {
                  if (FactionEntry const* faction = sFactionStore.LookupEntry(ConditionValue1))
-@@ -177,12 +199,22 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
+@@ -184,12 +206,22 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
          }
          case CONDITION_ACHIEVEMENT:
          {
@@ -100024,7 +100024,7 @@ index 37ec438856..46d1f48d38 100644
              if (Player* player = object->ToPlayer())
                  condMeets = player->GetTeam() == ConditionValue1;
              break;
-@@ -201,12 +233,22 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
+@@ -208,12 +240,22 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
          }
          case CONDITION_GENDER:
          {
@@ -100047,7 +100047,7 @@ index 37ec438856..46d1f48d38 100644
              if (Player* player = object->ToPlayer())
                  condMeets = player->HasSkill(ConditionValue1) && player->GetBaseSkillValue(ConditionValue1) >= ConditionValue2;
              break;
-@@ -281,6 +323,11 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
+@@ -288,6 +330,11 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
              break;
          case CONDITION_SPELL:
          {
@@ -102084,7 +102084,7 @@ index 65b9fffc0f..458f769707 100644
          player->GiveXP(xp, _victim, _groupRate);
          if (Pet* pet = player->GetPet())
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 398650d8ae..ce38b783d6 100644
+index a38e7b4279..6f4dc79933 100644
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -107,6 +107,11 @@
@@ -102331,7 +102331,7 @@ index 398650d8ae..ce38b783d6 100644
          else
          {
              if (!victim->ToCreature()->IsRacialLeader())
-@@ -8216,6 +8369,14 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type)
+@@ -8174,6 +8327,14 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type)
                  if (GameObjectTemplateAddon const* addon = go->GetTemplateAddon())
                      loot->generateMoneyLoot(addon->Mingold, addon->Maxgold);
  
@@ -102346,7 +102346,7 @@ index 398650d8ae..ce38b783d6 100644
              if (loot_type == LOOT_FISHING)
                  go->getFishLoot(loot, this);
              else if (loot_type == LOOT_FISHING_JUNK)
-@@ -17640,6 +17801,10 @@ bool Player::LoadFromDB(ObjectGuid guid, CharacterDatabaseQueryHolder const& hol
+@@ -17607,6 +17768,10 @@ bool Player::LoadFromDB(ObjectGuid guid, CharacterDatabaseQueryHolder const& hol
  
      _LoadEquipmentSets(holder.GetPreparedResult(PLAYER_LOGIN_QUERY_LOAD_EQUIPMENT_SETS));
  
@@ -102357,7 +102357,7 @@ index 398650d8ae..ce38b783d6 100644
      return true;
  }
  
-@@ -19347,6 +19512,12 @@ void Player::SaveToDB(CharacterDatabaseTransaction trans, bool create /* = false
+@@ -19314,6 +19479,12 @@ void Player::SaveToDB(CharacterDatabaseTransaction trans, bool create /* = false
      // save pet (hunter pet level and experience and all type pets health/mana).
      if (Pet* pet = GetPet())
          pet->SavePetToDB(PET_SAVE_AS_CURRENT);
@@ -102370,7 +102370,7 @@ index 398650d8ae..ce38b783d6 100644
  }
  
  // fast save function for item/money cheating preventing - save only inventory and money state
-@@ -21479,6 +21650,18 @@ bool Player::BuyItemFromVendorSlot(ObjectGuid vendorguid, uint32 vendorslot, uin
+@@ -21446,6 +21617,18 @@ bool Player::BuyItemFromVendorSlot(ObjectGuid vendorguid, uint32 vendorslot, uin
          return false;
      }
  
@@ -102389,7 +102389,7 @@ index 398650d8ae..ce38b783d6 100644
      if (!(pProto->AllowableClass & GetClassMask()) && pProto->Bonding == BIND_WHEN_PICKED_UP && !IsGameMaster())
      {
          SendBuyError(BUY_ERR_CANT_FIND_ITEM, nullptr, item, 0);
-@@ -21753,6 +21936,10 @@ void Player::UpdatePvP(bool state, bool _override)
+@@ -21720,6 +21903,10 @@ void Player::UpdatePvP(bool state, bool _override)
          pvpInfo.EndTimer = GameTime::GetGameTime();
          SetPvP(state);
      }
@@ -102400,7 +102400,7 @@ index 398650d8ae..ce38b783d6 100644
  }
  
  void Player::UpdatePotionCooldown(Spell* spell)
-@@ -23648,6 +23835,11 @@ bool Player::isHonorOrXPTarget(Unit const* victim) const
+@@ -23615,6 +23802,11 @@ bool Player::isHonorOrXPTarget(Unit const* victim) const
  
      if (Creature const* creature = victim->ToCreature())
      {
@@ -102413,7 +102413,7 @@ index 398650d8ae..ce38b783d6 100644
              return false;
      }
 diff --git a/src/server/game/Entities/Player/Player.h b/src/server/game/Entities/Player/Player.h
-index 4d8b0d01f2..6191294db5 100644
+index ed5cdd3563..ab3f92f3ce 100644
 --- a/src/server/game/Entities/Player/Player.h
 +++ b/src/server/game/Entities/Player/Player.h
 @@ -82,6 +82,10 @@ enum ItemClass : uint8;
@@ -104362,7 +104362,7 @@ index e746cc0faf..2fafc2dbcc 100755
  
      Passenger->SendClearTarget();                            // SMSG_BREAK_TARGET
 diff --git a/src/server/game/Globals/ObjectMgr.cpp b/src/server/game/Globals/ObjectMgr.cpp
-index 634e597ed8..06823afeb0 100644
+index b738e885f3..ffe87573c3 100644
 --- a/src/server/game/Globals/ObjectMgr.cpp
 +++ b/src/server/game/Globals/ObjectMgr.cpp
 @@ -57,6 +57,10 @@
@@ -104388,7 +104388,7 @@ index 634e597ed8..06823afeb0 100644
      if (uint32 badFlags = (cInfo->flags_extra & ~CREATURE_FLAG_EXTRA_DB_ALLOWED))
      {
          TC_LOG_ERROR("sql.sql", "Table `creature_template` lists creature (Entry: {}) with disallowed `flags_extra` {}, removing incorrect flag.", cInfo->Entry, badFlags);
-@@ -9051,6 +9060,82 @@ SkillRangeType GetSkillRangeType(SkillRaceClassInfoEntry const* rcEntry)
+@@ -8978,6 +8987,82 @@ SkillRangeType GetSkillRangeType(SkillRaceClassInfoEntry const* rcEntry)
      return SKILL_RANGE_LEVEL;
  }
  
@@ -104471,7 +104471,7 @@ index 634e597ed8..06823afeb0 100644
  void ObjectMgr::LoadGameTele()
  {
      uint32 oldMSTime = getMSTime();
-@@ -10310,6 +10395,18 @@ GameObjectOverride const* ObjectMgr::GetGameObjectOverride(ObjectGuid::LowType s
+@@ -10237,6 +10322,18 @@ GameObjectOverride const* ObjectMgr::GetGameObjectOverride(ObjectGuid::LowType s
  
  CreatureTemplate const* ObjectMgr::GetCreatureTemplate(uint32 entry) const
  {
@@ -105630,7 +105630,7 @@ index 6e9db0a3c7..511813a4ad 100644
      CharacterCacheEntry const* nameData = sCharacterCache->GetCharacterCacheByGuid(guid);
  
 diff --git a/src/server/game/Handlers/SpellHandler.cpp b/src/server/game/Handlers/SpellHandler.cpp
-index c532bfc695..a6f9defe79 100644
+index a09b37ff57..483d87f139 100644
 --- a/src/server/game/Handlers/SpellHandler.cpp
 +++ b/src/server/game/Handlers/SpellHandler.cpp
 @@ -39,6 +39,12 @@
@@ -106081,7 +106081,7 @@ index 204b98869e..e23f5c981c 100644
      float maxDiff = m_maxSpeed * diff;
  
 diff --git a/src/server/game/Scripting/ScriptMgr.cpp b/src/server/game/Scripting/ScriptMgr.cpp
-index 4f22049223..3c178f20af 100644
+index 7761e1bbef..3672b0f140 100644
 --- a/src/server/game/Scripting/ScriptMgr.cpp
 +++ b/src/server/game/Scripting/ScriptMgr.cpp
 @@ -43,6 +43,10 @@
@@ -107039,7 +107039,7 @@ index f14e83c167..ec87c4eafa 100644
          bool IsAutoRepeat() const { return m_autoRepeat; }
          void SetAutoRepeat(bool rep) { m_autoRepeat = rep; }
 diff --git a/src/server/game/Spells/SpellEffects.cpp b/src/server/game/Spells/SpellEffects.cpp
-index 77387b1779..31367c43b5 100644
+index d367f02698..3835bd4ffb 100644
 --- a/src/server/game/Spells/SpellEffects.cpp
 +++ b/src/server/game/Spells/SpellEffects.cpp
 @@ -488,6 +488,17 @@ void Spell::EffectSchoolDMG()
@@ -107306,7 +107306,7 @@ index 77387b1779..31367c43b5 100644
      if (m_caster->GetTypeId() != TYPEID_PLAYER)
      {
          TC_LOG_DEBUG("spells", "WORLD: Open Lock - No Player Caster!");
-@@ -3065,6 +3266,14 @@ void Spell::EffectWeaponDmg()
+@@ -3077,6 +3278,14 @@ void Spell::EffectWeaponDmg()
                      if (Item* item = unitCaster->ToPlayer()->GetWeaponForAttack(m_attackType, true))
                          if (item->GetTemplate()->SubClass == ITEM_SUBCLASS_WEAPON_DAGGER)
                              totalDamagePercentMod *= 1.5f;
@@ -107321,7 +107321,7 @@ index 77387b1779..31367c43b5 100644
              }
              // Mutilate (for each hand)
              else if (m_spellInfo->SpellFamilyFlags[1] & 0x6)
-@@ -3408,6 +3617,14 @@ void Spell::EffectSummonObjectWild()
+@@ -3420,6 +3629,14 @@ void Spell::EffectSummonObjectWild()
              if (Battleground* bg = player->GetBattleground())
                  bg->SetDroppedFlagGUID(pGameObj->GetGUID(), player->GetTeam() == ALLIANCE ? TEAM_HORDE: TEAM_ALLIANCE);
  
@@ -107336,7 +107336,7 @@ index 77387b1779..31367c43b5 100644
      if (GameObject* linkedTrap = pGameObj->GetLinkedTrap())
      {
          linkedTrap->SetRespawnTime(duration > 0 ? duration / IN_MILLISECONDS : 0);
-@@ -3579,6 +3796,10 @@ void Spell::EffectSanctuary()
+@@ -3591,6 +3808,10 @@ void Spell::EffectSanctuary()
          // stop all pve combat for players outside dungeons, suppress pvp combat
          unitTarget->CombatStop(false, false);
      }
@@ -107347,7 +107347,7 @@ index 77387b1779..31367c43b5 100644
      else
      {
          // in dungeons (or for nonplayers), reset this unit on all enemies' threat lists
-@@ -5235,6 +5456,21 @@ void Spell::SummonGuardian(SpellEffectInfo const& spellEffectInfo, uint32 entry,
+@@ -5247,6 +5468,21 @@ void Spell::SummonGuardian(SpellEffectInfo const& spellEffectInfo, uint32 entry,
      if (Player* modOwner = unitCaster->GetSpellModOwner())
          modOwner->ApplySpellMod(m_spellInfo->Id, SPELLMOD_DURATION, duration);
  
@@ -107369,7 +107369,7 @@ index 77387b1779..31367c43b5 100644
      //TempSummonType summonType = (duration == 0) ? TEMPSUMMON_DEAD_DESPAWN : TEMPSUMMON_TIMED_DESPAWN;
      Map* map = unitCaster->GetMap();
      for (uint32 count = 0; count < numGuardians; ++count)
-@@ -5261,6 +5497,19 @@ void Spell::SummonGuardian(SpellEffectInfo const& spellEffectInfo, uint32 entry,
+@@ -5273,6 +5509,19 @@ void Spell::SummonGuardian(SpellEffectInfo const& spellEffectInfo, uint32 entry,
  
          if (summon->GetEntry() == 27893)
          {
@@ -107658,10 +107658,10 @@ index 32b34a9832..15ff3255d8 100644
          sObjectMgr->RemoveCreatureFromGrid(lowguid, data);
          const_cast<CreatureData*>(data)->spawnPoint.Relocate(*player);
 diff --git a/src/server/scripts/Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjalAI.cpp b/src/server/scripts/Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjalAI.cpp
-index 5f37408660..4e3ba10af4 100644
+index b226144307..7a31cef313 100644
 --- a/src/server/scripts/Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjalAI.cpp
 +++ b/src/server/scripts/Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjalAI.cpp
-@@ -994,6 +994,11 @@ void hyjalAI::DoOverrun(uint32 faction, const uint32 diff)
+@@ -993,6 +993,11 @@ void hyjalAI::DoOverrun(uint32 faction, const uint32 diff)
              {
                  for (std::list<Creature*>::const_iterator itr = creatures.begin(); itr != creatures.end(); ++itr)
                  {
@@ -107674,7 +107674,7 @@ index 5f37408660..4e3ba10af4 100644
                      {
                          (*itr)->CastSpell(*itr, SPELL_TELEPORT_VISUAL, true);
 diff --git a/src/server/scripts/Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjal_trash.cpp b/src/server/scripts/Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjal_trash.cpp
-index 38511e9ea4..0baa1fd487 100644
+index 5b0636f3d8..11560c0dfa 100644
 --- a/src/server/scripts/Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjal_trash.cpp
 +++ b/src/server/scripts/Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjal_trash.cpp
 @@ -200,6 +200,14 @@ hyjal_trashAI::hyjal_trashAI(Creature* creature) : EscortAI(creature)

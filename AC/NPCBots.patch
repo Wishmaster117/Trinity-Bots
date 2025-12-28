@@ -16575,7 +16575,7 @@ index 644c2b643b..78e85624c1 100644
      private:
          void SetAborted();
 diff --git a/src/server/apps/worldserver/worldserver.conf.dist b/src/server/apps/worldserver/worldserver.conf.dist
-index fd9c61cfed..90ea89bbf7 100644
+index 92ed0e3afd..3f10106c71 100644
 --- a/src/server/apps/worldserver/worldserver.conf.dist
 +++ b/src/server/apps/worldserver/worldserver.conf.dist
 @@ -680,6 +680,7 @@ Appender.Server=2,5,0,Server.log,w
@@ -101632,7 +101632,7 @@ index 78d24b4dbc..abb41d3a76 100644
          sScriptMgr->OnPlayerGiveXP(player, xp, _victim, PlayerXPSource::XPSOURCE_KILL);
          player->GiveXP(xp, _victim, _groupRate);
 diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
-index 70e03af3c6..6c9ffed232 100644
+index c73eeeb358..581d80f492 100644
 --- a/src/server/game/Entities/Player/Player.cpp
 +++ b/src/server/game/Entities/Player/Player.cpp
 @@ -101,6 +101,11 @@
@@ -101912,7 +101912,7 @@ index 70e03af3c6..6c9ffed232 100644
  
      return true;
 diff --git a/src/server/game/Entities/Player/Player.h b/src/server/game/Entities/Player/Player.h
-index 4e29cd5f5e..e318ae8f71 100644
+index aa65f7dea8..f7219f4c50 100644
 --- a/src/server/game/Entities/Player/Player.h
 +++ b/src/server/game/Entities/Player/Player.h
 @@ -65,6 +65,10 @@ class PlayerSocial;
@@ -101961,7 +101961,7 @@ index 4e29cd5f5e..e318ae8f71 100644
      InventoryResult CanStoreItem_InSpecificSlot(uint8 bag, uint8 slot, ItemPosCountVec& dest, ItemTemplate const* pProto, uint32& count, bool swap, Item* pSrcItem) const;
      InventoryResult CanStoreItem_InBag(uint8 bag, ItemPosCountVec& dest, ItemTemplate const* pProto, uint32& count, bool merge, bool non_specialized, Item* pSrcItem, uint8 skip_bag, uint8 skip_slot) const;
 diff --git a/src/server/game/Entities/Player/PlayerStorage.cpp b/src/server/game/Entities/Player/PlayerStorage.cpp
-index 46d964e819..7718a820a0 100644
+index 5e85b1e10a..07dd37bb14 100644
 --- a/src/server/game/Entities/Player/PlayerStorage.cpp
 +++ b/src/server/game/Entities/Player/PlayerStorage.cpp
 @@ -72,6 +72,11 @@
@@ -101976,7 +101976,7 @@ index 46d964e819..7718a820a0 100644
  /*********************************************************/
  /***                    STORAGE SYSTEM                 ***/
  /*********************************************************/
-@@ -5600,6 +5605,11 @@ bool Player::LoadFromDB(ObjectGuid playerGuid, CharacterDatabaseQueryHolder cons
+@@ -5605,6 +5610,11 @@ bool Player::LoadFromDB(ObjectGuid playerGuid, CharacterDatabaseQueryHolder cons
          if (!HasAuraState((AuraStateType)m_spellInfo->CasterAuraState))
              aura->HandleAllEffects(itr->second, AURA_EFFECT_HANDLE_REAL, false);
      }
@@ -101988,7 +101988,7 @@ index 46d964e819..7718a820a0 100644
      return true;
  }
  
-@@ -7108,6 +7118,12 @@ void Player::SaveToDB(CharacterDatabaseTransaction trans, bool create, bool logo
+@@ -7113,6 +7123,12 @@ void Player::SaveToDB(CharacterDatabaseTransaction trans, bool create, bool logo
      // save pet (hunter pet level and experience and all type pets health/mana).
      if (Pet* pet = GetPet())
          pet->SavePetToDB(PET_SAVE_AS_CURRENT);
@@ -108316,7 +108316,7 @@ index 50b6d88d40..366ad780d1 100644
      void _InitializeExplicitTargetMask();
      bool _IsPositiveEffect(uint8 effIndex, bool deep) const;
 diff --git a/src/server/game/Spells/SpellInfoCorrections.cpp b/src/server/game/Spells/SpellInfoCorrections.cpp
-index 0615f39c00..c5fad49e68 100644
+index c5dd83f018..4b5466f047 100644
 --- a/src/server/game/Spells/SpellInfoCorrections.cpp
 +++ b/src/server/game/Spells/SpellInfoCorrections.cpp
 @@ -40,6 +40,68 @@ void SpellMgr::LoadSpellInfoCorrections()
@@ -108626,10 +108626,10 @@ index ddcc19954b..aef7ec9b3f 100644
      }
  };
 diff --git a/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp b/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
-index 862bd3d5c6..0e77c6b019 100644
+index cf0c22a64e..cc4752a555 100644
 --- a/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
 +++ b/src/server/scripts/Northrend/IcecrownCitadel/boss_the_lich_king.cpp
-@@ -2690,6 +2690,9 @@ class spell_the_lich_king_valkyr_target_search : public SpellScript
+@@ -2691,6 +2691,9 @@ class spell_the_lich_king_valkyr_target_search : public SpellScript
              targets.clear();
              return;
          }
@@ -109039,7 +109039,7 @@ index 85a12610da..0ddad0b4bf 100644
          {
              targets.clear();
 diff --git a/src/server/scripts/Spells/spell_generic.cpp b/src/server/scripts/Spells/spell_generic.cpp
-index 8a1a963570..09f60568ca 100644
+index f5ff6e9680..c23db0e705 100644
 --- a/src/server/scripts/Spells/spell_generic.cpp
 +++ b/src/server/scripts/Spells/spell_generic.cpp
 @@ -2476,6 +2476,10 @@ class spell_gen_vehicle_scaling_aura: public AuraScript
